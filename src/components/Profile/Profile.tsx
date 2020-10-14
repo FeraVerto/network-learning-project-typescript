@@ -1,11 +1,11 @@
 import React from "react";
+import s from "./Profile.module.css";
 
 export const Profile = () => {
     return (
-        <main className='main'>
-            <div>
-                <img className='main-img'
-                     src="https://www.meme-arsenal.com/memes/0e09ef79001e05420d2cf37ae1f246c3.jpg" alt="Инженер"/>
+        <main className={s.main}>
+            <div className={s.img_block}>
+                <img src="https://avatars.mds.yandex.net/get-zen_doc/1574327/pub_5e0459a9e6cb9b00b1dc0e68_5e047b6998930900b256b17c/scale_1200" alt="Инженер"/>
             </div>
             <div>
                 ava + descriptions
