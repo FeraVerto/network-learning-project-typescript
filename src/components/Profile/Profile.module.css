@@ -1,0 +1,14 @@
+.main {
+    grid-area: m;
+    background-color: gainsboro;
+    border: 2px solid black;
+}
+
+.img_block {
+
+}
+
+.img_block img {
+    width: 100%;
+}
+
