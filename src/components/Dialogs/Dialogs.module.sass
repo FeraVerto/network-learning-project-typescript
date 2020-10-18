@@ -1,0 +1,39 @@
+
+.list
+  margin: 0
+  padding: 0
+  width: 100%
+  list-style: none
+
+  .item
+    padding-top: 10px
+    padding-bottom: 10px
+    margin-left: 10px
+    width: 100%
+    border-bottom: 2px solid gray
+    display: flex
+
+    .user_avatar
+      width: 80px
+      height: 80px
+      position: relative
+      overflow: hidden
+      border-radius: 50%
+
+      img
+        width: 80px
+        height: 80px
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        object-fit: cover
+    .message
+      margin-left: 20px
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+
+a
+  text-decoration: none
+
