@@ -1,8 +1,9 @@
 import React from "react";
-import s from "./Profile.module.css";
+import s from "./Profile.module.sass";
 import MyPosts from "./MyPosts/MyPosts";
 
-export const Profile = () => {
+
+const Profile = () => {
     return (
         <main className={s.main}>
             <div className={s.img_block}>
