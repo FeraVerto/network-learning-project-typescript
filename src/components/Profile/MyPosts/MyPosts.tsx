@@ -1,8 +1,13 @@
 import React from "react";
 import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.css";
+import {MyPostsPropsType} from "../../../App";
 
-export const MyPosts = () => {
+
+export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+
+    let newPosts = props.posts.map(p => <MyPost message={p.message} like={p.like}/>)
+
     return (
         <div>
             My posts
@@ -12,8 +17,7 @@ export const MyPosts = () => {
                 <button>Delete post</button>
             </div>
             <div>
-                <MyPost message='Hi' like={15}/>
-                <MyPost message='Bye' like={25}/>
+                {newPosts}
             </div>
         </div>
     )

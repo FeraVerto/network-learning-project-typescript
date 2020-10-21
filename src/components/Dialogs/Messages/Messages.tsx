@@ -1,7 +1,11 @@
 import React from "react";
 import s from "./Messages.module.sass";
+import {MessagesPropsType} from "../../../App";
 
-const Messages = () => {
+const Messages: React.FC<MessagesPropsType> = (props) => {
+
+    let newMessages = props.messages.map(m=> <div>{m.textMessage}</div>)
+
     return (
         <div className={s.dialog_window}>
             <div className={s.dialog_header}>
@@ -9,8 +13,7 @@ const Messages = () => {
                 <div>Avatar + name</div>
             </div>
             <div className={s.dialog_body}>
-                <div>My message</div>
-                <div>Her message</div>
+                {newMessages}
             </div>
             <div className={s.dialog_footer}>
                 <textarea></textarea>
