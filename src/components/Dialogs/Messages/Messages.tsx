@@ -1,23 +1,49 @@
 import React from "react";
 import s from "./Messages.module.sass";
-import {MessagesPropsType} from "../../../App";
+import {NavLink} from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import {MessageType} from "../../../redux/state";
 
-const Messages: React.FC<MessagesPropsType> = (props) => {
+type MessagesType = {
+    messages: Array<MessageType>
+    addMessage: (newMessage: string) => void
 
-    let newMessages = props.messages.map(m=> <div>{m.textMessage}</div>)
+}
+
+const Messages: React.FC<MessagesType> = (props) => {
+    let newMessages = props.messages.map(m => <div key={m.id} className={s.dialog_body}>
+        {/*Не охота верстать, сделать потом*/}
+        <div className={s.message_one}>
+            <div>{m.name1}</div>
+            <div>{m.textMessage1}</div>
+        </div>
+        <div className={s.message_two}>
+            <div>{m.name2}</div>
+            <div>{m.textMessage2}</div>
+        </div>
+    </div>)
+
+    let newElement = React.createRef<HTMLTextAreaElement>();
+
+    const addMessage = () => {
+        if(newElement.current) {
+            let message = newElement.current.value
+            props.addMessage(message);
+        }
+    }
 
     return (
         <div className={s.dialog_window}>
             <div className={s.dialog_header}>
-                <button>Exit</button>
+                <NavLink to="/dialogs">
+                    <Button variant="contained" color="primary">Exit</Button>
+                </NavLink>
                 <div>Avatar + name</div>
             </div>
-            <div className={s.dialog_body}>
-                {newMessages}
-            </div>
+            {newMessages}
             <div className={s.dialog_footer}>
-                <textarea></textarea>
-                <button>Send</button>
+                <textarea ref={newElement}></textarea>
+                <button onClick={addMessage}>Send</button>
             </div>
         </div>
     )

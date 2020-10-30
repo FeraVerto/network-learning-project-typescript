@@ -1,18 +1,15 @@
 import {NavLink} from "react-router-dom";
 import s from "../Dialogs.module.sass";
-import osoba from "../../../assets/image/osoba.png";
 import React from "react";
-import {DialogsItemProps} from "../../../App";
+import {Avatar} from "@material-ui/core";
+import {DialogsItemType} from "../../../redux/state";
 
 
-
-export const DialogsItem: React.FC<DialogsItemProps> = (props) => {
+export const DialogsItem: React.FC<DialogsItemType> = (props) => {
     return (
         <NavLink className={s.link} to={"/messages/" + props.id}>
             <li className={s.item}>
-                <div className={s.user_avatar}>
-                    <img src={osoba} alt="avatar"/>
-                </div>
+                <Avatar alt="Remy Sharp" src={props.avatar} />
                 <div className={s.message}>
                     <div className={s.user_name}>{props.name}</div>
                     <div className={s.last_message}>{props.lastMessage}</div>
