@@ -1,5 +1,7 @@
 /*------------------------------------------------------*/
 /*Типизируем каждый подобьект, начинаем с низшего уровня*/
+import {rerenderEntireTree} from "../render";
+
 export type PostType = {
     id: number
     message: string
@@ -30,6 +32,7 @@ export type FriendType = {
 /*Типизируем каждую ветку*/
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText: string
 }
 
 export type DialogsPageType = {
@@ -60,7 +63,9 @@ export let state = {
             {id: 1, message: "Это передача сдохни или умри!", like: 25},
             {id: 2, message: "Или сдохни", like: 40},
             {id: 3, message: "Или умри", like: 1}
-        ]
+        ],
+
+        newPostText: ""
     },
     dialogsPage: {
         dialogs: [
@@ -120,12 +125,22 @@ export let state = {
 }
 
 
-export let addPost = (newPost: string) => {
-    let post = {id: 5, message: newPost, like: 25}
+export let addPost = () => {
+    let post = {id: 5, message: state.profilePage.newPostText, like: 25}
     state.profilePage.posts.push(post);
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (word: string) => {
+    state.profilePage.newPostText = word;
+    rerenderEntireTree(state);
 }
 
 export let addMessage = (newMessage: string) => {
     let message = {id: 1, name1: "Инженер", textMessage1: newMessage, name2: "Особа", textMessage2: ""}
     state.messagesPage.messages.push(message);
+    rerenderEntireTree(state);
 }
+
+

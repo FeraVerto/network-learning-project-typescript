@@ -1,24 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
-import {addMessage, addPost, state} from "./redux/state";
-import {BrowserRouter} from "react-router-dom";
+import {state} from "./redux/state";
 
+import {rerenderEntireTree} from "./render";
 
+rerenderEntireTree(state);
 
-ReactDOM.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <ScopedCssBaseline>
-                <App state={state} addPost={addPost} addMessage={addMessage}/>
-            </ScopedCssBaseline>
-        </BrowserRouter>
-    </React.StrictMode>,
-    document.getElementById('root')
-);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -12,8 +12,9 @@ import {addMessage, RootStateType} from "./redux/state";
 
 export type AppType = {
     state: RootStateType
-    addPost: (newPost: string) => void
+    addPost: () => void
     addMessage: (newMessage: string) => void
+    updateNewPostText: (word: string) => void
 }
 
 
@@ -23,7 +24,7 @@ const App: React.FC<AppType> = (props) => {
                 <Header/>
                 <Navbar friends={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>}/>
+                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage.posts} updateNewPostText={props.updateNewPostText} newPostText={props.state.profilePage.newPostText} addPost={props.addPost}/>}/>
                     <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}/>}/>
                     <Route path="/messages" render={() => <Messages messages={props.state.messagesPage.messages} addMessage={addMessage}/>}/>
                     <Route exact path="/news" render={() => <News/>}/>
