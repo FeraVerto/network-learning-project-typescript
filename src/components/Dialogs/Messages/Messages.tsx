@@ -3,11 +3,12 @@ import s from "./Messages.module.sass";
 import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import {MessageType} from "../../../redux/state";
+import {AddMessage, AddPostType, UpdateNewMessageText, UpdateNewPostTextType} from "../../../redux/store";
 
 type MessagesType = {
     messages: Array<MessageType>
-    addMessage: (newMessage: string) => void
-
+    newMessageText: string
+    dispatch: (action: AddPostType | UpdateNewPostTextType | AddMessage | UpdateNewMessageText) => void
 }
 
 const Messages: React.FC<MessagesType> = (props) => {
@@ -25,15 +26,21 @@ const Messages: React.FC<MessagesType> = (props) => {
 
     let newElement = React.createRef<HTMLTextAreaElement>();
 
-   /* let [message, setMessage] = useState()
-    let [change, setChange] = useState()
-*/
+    /* let [message, setMessage] = useState()
+     let [change, setChange] = useState()
+ */
     const addMessage = () => {
         /*setMessage(props.addMessage(change))*/
-        if(newElement.current) {
-            let message = newElement.current.value
-            props.addMessage(message);
-        }
+        //Чтобы вынести в отдельную переменную, нужно типизировать эту переменную
+        //так как action определяется как {type: string}
+        let action: actionType = {type: "ADD-MESSAGE"}
+        type actionType = {type: "ADD-MESSAGE"}
+        props.dispatch(action);
+    }
+
+
+    const onChangeMessage = () => {
+        props.dispatch( {type: "UPDATE-NEW-MESSAGE-TEXT", word: newElement.current ? newElement.current.value : "----"})
     }
 
     return (
@@ -46,7 +53,7 @@ const Messages: React.FC<MessagesType> = (props) => {
             </div>
             {newMessages}
             <div className={s.dialog_footer}>
-                <textarea ref={newElement}></textarea>
+                <textarea ref={newElement} value={props.newMessageText} onChange={onChangeMessage}></textarea>
                 {/*value={message} onChange={(e) => {setChange(e.currentTarget.value)}}*/}
                 <button onClick={addMessage}>Send</button>
             </div>

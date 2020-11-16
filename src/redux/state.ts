@@ -1,6 +1,8 @@
 /*------------------------------------------------------*/
 /*Типизируем каждый подобьект, начинаем с низшего уровня*/
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = (state: any) => {
+    console.log("state changed")
+}
 
 export type PostType = {
     id: number
@@ -41,6 +43,7 @@ export type DialogsPageType = {
 
 export type MessagesPageType = {
     messages: Array<MessageType>
+    newMessageText: string
 }
 
 export type SidebarFriendsType = {
@@ -105,7 +108,9 @@ export let state = {
         messages: [
             {id: 1, name1: "Инженер", textMessage1: "Hello", name2: "Особа", textMessage2: "Hi"},
             {id: 2, name1: "Инженер", textMessage1: "Как дела?", name2: "Особа", textMessage2: "Хорошо"}
-        ]
+        ],
+
+        newMessageText: ""
     },
     sidebar: {
         friends: [
@@ -126,7 +131,7 @@ export let state = {
 
 
 export let addPost = () => {
-    let post = {id: 5, message: state.profilePage.newPostText, like: 25}
+    let post: PostType = {id: 5, message: state.profilePage.newPostText, like: 25}
     state.profilePage.posts.push(post);
     state.profilePage.newPostText = ''
     rerenderEntireTree(state);
@@ -137,10 +142,23 @@ export let updateNewPostText = (word: string) => {
     rerenderEntireTree(state);
 }
 
-export let addMessage = (newMessage: string) => {
-    let message = {id: 1, name1: "Инженер", textMessage1: newMessage, name2: "Особа", textMessage2: ""}
+export let addMessage = () => {
+    let message: MessageType = {id: 1, name1: "Инженер", textMessage1: state.messagesPage.newMessageText, name2: "Особа", textMessage2: ""}
     state.messagesPage.messages.push(message);
+    rerenderEntireTree(state);
+    state.messagesPage.newMessageText = ""
+}
+
+export let updateNewMessageText = (word: string) => {
+    state.messagesPage.newMessageText = word;
     rerenderEntireTree(state);
 }
 
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer
+}
 
+/*window.state = state*/
+//observer
+//publisher-subscriber
+//паттерны проектирования

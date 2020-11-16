@@ -3,22 +3,20 @@ import s from "./Profile.module.sass";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostType} from "../../redux/state";
+import {AddMessage, AddPostType, UpdateNewMessageText, UpdateNewPostTextType} from "../../redux/store";
 
 export type ProfileType = {
     posts: Array<PostType>
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (word: string) => void
-
+    dispatch: (action: AddPostType | UpdateNewPostTextType | AddMessage | UpdateNewMessageText) => void
 }
 
-const Profile: React.FC<ProfileType>  = (props) => {
+export const Profile: React.FC<ProfileType>  = (props) => {
     return (
         <main className={s.main}>
+            Hello
             <ProfileInfo/>
-            <MyPosts posts={props.posts} addPost={props.addPost} newPostText={props.newPostText} updateNewPostText={props.updateNewPostText}/>
+            <MyPosts posts={props.posts} newPostText={props.newPostText} dispatch={props.dispatch}/>
         </main>
     )
 }
-
-export default Profile;
