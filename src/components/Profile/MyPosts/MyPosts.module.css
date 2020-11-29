@@ -1,4 +1,5 @@
 .posts {
+    width: 400px;
     display: flex;
     flex-direction: column;
 }
@@ -8,17 +9,18 @@
 }
 
 .button_block {
+    display: flex;
+    justify-content: space-between;
     margin-top: 15px;
 }
 
 .posts_button {
-    width: 150px;
+    width: 180px;
     height: 40px;
     font-size: 15px;
     text-transform: uppercase;
     background-color: #fff;
     border: 1px solid rgb(59, 59, 59);
     color: rgb(59, 59, 59);
-    margin-right: 10px;
 }
 
