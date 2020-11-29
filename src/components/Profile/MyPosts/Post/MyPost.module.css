@@ -1,4 +1,17 @@
-.post_avatar {
-    width: 50px;
+.post_block {
+    display: flex;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    background-color: #fff;
+}
+
+.post {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post_text {
+    width: 300px;
 }
 
