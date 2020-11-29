@@ -22,7 +22,7 @@ export function messageReducer(state: MessagesPageType = initialState, action: a
     switch (action.type) {
         case ADD_MESSAGE:
             let message = {
-                id: 1,
+                id: 2,
                 name: "Ты",
                 textMessage: state.newMessageText,
             }

@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import {actionType, MessageType} from "../../../redux/redux-store";
 import {addMessageAC, updateNewMessageTextAC} from "../../../redux/message-reducer";
+import {Icon, TextareaAutosize} from "@material-ui/core";
 
 type MessagesType = {
     messages: Array<MessageType>
@@ -15,11 +16,11 @@ const Messages: React.FC<MessagesType> = (props) => {
     let newMessages = props.messages.map(m => <div key={m.id} className={s.dialog_body}>
         {/*Не охота верстать, сделать потом*/}
 
-            <div className={m.id === 1 ? s.message_one : s.message_two}>
+            <div className={m.id === 1 ? s.message_one : ""}>
                 <div>{m.id === 1 ? m.name : null}</div>
                 <div>{m.id === 1 ? m.textMessage: null}</div>
             </div>
-            <div className={m.id === 2 ? s.message_two : s.message_one}>
+            <div className={m.id === 2 ? s.message_two : ""}>
                 <div>{m.id === 2 ? m.name : null}</div>
                 <div>{m.id === 2 ? m.textMessage: null}</div>
             </div>
@@ -47,15 +48,34 @@ const Messages: React.FC<MessagesType> = (props) => {
         <div className={s.dialog_window}>
             <div className={s.dialog_header}>
                 <NavLink to="/dialogs">
-                    <Button variant="contained" color="primary">Exit</Button>
+                    <Button variant="contained" color="default">Exit</Button>
                 </NavLink>
                 <div>Avatar + name</div>
             </div>
             {newMessages}
             <div className={s.dialog_footer}>
-                <textarea ref={newElement} value={props.newMessageText} onChange={onChangeMessage}></textarea>
+                <TextareaAutosize ref={newElement}
+                                  rows={5}
+                                  value={props.newMessageText}
+                                  onChange={onChangeMessage}
+                                  aria-label="empty textarea"
+                                  placeholder="Empty"
+                                  className={s.dialog_footer_textarea}
+                />
+{/*
+                <textarea ref={newElement} value={props.newMessageText} onChange={onChangeMessage} rows={5}></textarea>
+*/}
                 {/*value={message} onChange={(e) => {setChange(e.currentTarget.value)}}*/}
-                <button onClick={addMessage}>Send</button>
+                <Button
+                    fullWidth={true}
+                    onClick={addMessage}
+                    variant="contained"
+                    color="default"
+                    className={s.button}
+                    /*endIcon={<Icon>send</Icon>}*/
+                >Send
+                </Button>
+                {/*<button onClick={addMessage}>Send</button>*/}
             </div>
         </div>
     )
