@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "./redux/store";
+import {store} from "./redux/redux-store";
 
 export const rerenderEntireTree = () => {
     ReactDOM.render(
