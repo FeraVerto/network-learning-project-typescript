@@ -1,5 +1,5 @@
 import React from 'react';
-import {actionType, DialogsPageType} from "./store";
+import {actionType, DialogsPageType} from "./redux-store";
 
 let initialState = {
     dialogs: [

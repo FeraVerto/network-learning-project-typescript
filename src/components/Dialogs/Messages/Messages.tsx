@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Messages.module.sass";
 import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
-import {actionType, MessageType} from "../../../redux/store";
+import {actionType, MessageType} from "../../../redux/redux-store";
 import {addMessageAC, updateNewMessageTextAC} from "../../../redux/message-reducer";
 
 type MessagesType = {
@@ -15,12 +15,12 @@ const Messages: React.FC<MessagesType> = (props) => {
     let newMessages = props.messages.map(m => <div key={m.id} className={s.dialog_body}>
         {/*Не охота верстать, сделать потом*/}
         <div className={s.message_one}>
-            <div>{m.name1}</div>
-            <div>{m.textMessage1}</div>
+            <div>{m.name}</div>
+            <div>{m.textMessage}</div>
         </div>
         <div className={s.message_two}>
-            <div>{m.name2}</div>
-            <div>{m.textMessage2}</div>
+            <div>{m.name}</div>
+            <div>{m.textMessage}</div>
         </div>
     </div>)
 

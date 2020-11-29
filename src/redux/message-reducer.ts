@@ -1,27 +1,30 @@
-import React from 'react';
-import {actionType, MessagesPageType} from "./store";
+import {MessagesPageType} from "./redux-store";
 
 const ADD_MESSAGE = "ADD_MESSAGE"
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT"
 
+export type actionMessageType = addMessageAC | updateNewMessageTextAC
+export type addMessageAC = ReturnType<typeof addMessageAC>
+export type updateNewMessageTextAC = ReturnType<typeof updateNewMessageTextAC>
+
 let initialState = {
     messages: [
-        {id: 1, name1: "Инженер", textMessage1: "Hello", name2: "Особа", textMessage2: "Hi"},
-        {id: 2, name1: "Инженер", textMessage1: "Как дела?", name2: "Особа", textMessage2: "Хорошо"}
+        {id: 1, name: "Инженер", textMessage: "Hello"},
+        {id: 2, name: "Особа", textMessage: "Hello"},
+        {id: 1, name: "Инженер", textMessage: "Ты такая хорошая! Ты даже лучше, чем сахар!"},
+        {id: 2, name: "Особа", textMessage: "Спасибо! Приходи сегодня"},
     ],
 
     newMessageText: ""
 }
 
-export function messageReducer(state: MessagesPageType = initialState, action: actionType) {
+export function messageReducer(state: MessagesPageType = initialState, action: actionMessageType) {
     switch (action.type) {
         case ADD_MESSAGE:
             let message = {
                 id: 1,
-                name1: "Инженер",
-                textMessage1: state.newMessageText,
-                name2: "Особа",
-                textMessage2: ""
+                name: "Инженер",
+                textMessage: state.newMessageText,
             }
             state.messages.push(message);
             state.newMessageText = ""

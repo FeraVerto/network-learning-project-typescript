@@ -1,4 +1,4 @@
-import {actionType, ProfilePageType, SidebarFriendsType} from "./store";
+import {actionType, SidebarFriendsType} from "./redux-store";
 
 let initialState = {
     friends: [

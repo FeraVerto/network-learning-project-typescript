@@ -1,5 +1,5 @@
 import React from "react";
-import {SidebarFriendsType} from "../../../redux/store";
+import {SidebarFriendsType} from "../../../redux/redux-store";
 import {Avatar} from "@material-ui/core";
 import s from "./Friends.module.sass";
 import { AvatarGroup } from '@material-ui/lab';
