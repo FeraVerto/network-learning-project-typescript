@@ -4,7 +4,17 @@ import {actionType, ProfilePageType} from "./store";
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 
-export function profileReducer(state: ProfilePageType, action: actionType) {
+let initialState = {
+    posts: [
+        {id: 1, message: "Это передача сдохни или умри!", like: 25},
+        {id: 2, message: "Или сдохни", like: 40},
+        {id: 3, message: "Или умри", like: 1}
+    ],
+
+    newPostText: ""
+}
+
+export function profileReducer(state: ProfilePageType = initialState, action: actionType) {
     switch (action.type) {
         case ADD_POST:
             let post = {id: 5, message: state.newPostText, like: 25}

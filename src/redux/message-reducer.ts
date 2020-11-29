@@ -4,7 +4,16 @@ import {actionType, MessagesPageType} from "./store";
 const ADD_MESSAGE = "ADD_MESSAGE"
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT"
 
-export function messageReducer(state: MessagesPageType, action: actionType) {
+let initialState = {
+    messages: [
+        {id: 1, name1: "Инженер", textMessage1: "Hello", name2: "Особа", textMessage2: "Hi"},
+        {id: 2, name1: "Инженер", textMessage1: "Как дела?", name2: "Особа", textMessage2: "Хорошо"}
+    ],
+
+    newMessageText: ""
+}
+
+export function messageReducer(state: MessagesPageType = initialState, action: actionType) {
     switch (action.type) {
         case ADD_MESSAGE:
             let message = {

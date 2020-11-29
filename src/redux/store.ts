@@ -137,7 +137,10 @@ export const store: StoreType = {
                     name: "Нателла Наумовна",
                     avatar: "https://pbs.twimg.com/profile_images/1298343897559703558/hYmXg4yy.jpg"
                 },
-                {id: 2, name: "Бандитник", avatar: "https://pbs.twimg.com/media/ElgIpNvXUAIiFil.jpg"},
+                {
+                    id: 2,
+                    name: "Бандитник",
+                    avatar: "https://pbs.twimg.com/media/ElgIpNvXUAIiFil.jpg"},
                 {
                     id: 3,
                     name: "Татьяна",
@@ -167,32 +170,3 @@ export const store: StoreType = {
     }
 }
 
-
-/*
-export let addPost = () => {
-    let post: PostType = {id: 5, message: state.profilePage.newPostText, like: 25}
-    state.profilePage.posts.push(post);
-    state.profilePage.newPostText = ''
-    rerenderEntireTree(state);
-}
-
-export let updateNewPostText = (word: string) => {
-    state.profilePage.newPostText = word;
-    rerenderEntireTree(state);
-}
-
-export let addMessage = () => {
-    let message: MessageType = {id: 1, name1: "Инженер", textMessage1: state.messagesPage.newMessageText, name2: "Особа", textMessage2: ""}
-    state.messagesPage.messages.push(message);
-    rerenderEntireTree(state);
-    state.messagesPage.newMessageText = ""
-}
-
-export let updateNewMessageText = (word: string) => {
-    state.messagesPage.newMessageText = word;
-    rerenderEntireTree(state);
-}
-
-export const subscribe = (observer: any) => {
-    rerenderEntireTree = observer
-}*/
