@@ -1,6 +1,7 @@
 import React from "react";
 import MyPost from "./Post/MyPost";
 import {ProfileType} from "../Profile";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 
 export const MyPosts: React.FC<ProfileType>  = (props) => {
@@ -11,7 +12,7 @@ export const MyPosts: React.FC<ProfileType>  = (props) => {
     let [changePost, setChangePost] = useState()*/
     let addPost = () => {
         /*setPost(props.addPost(changePost))*/
-            props.dispatch({type: "ADD_POST"});
+            props.dispatch(addPostAC());
     }
 
     let onPostChange = () => {
@@ -20,7 +21,7 @@ export const MyPosts: React.FC<ProfileType>  = (props) => {
         }*/
         /*newPostElement.current && props.updateNewPostText(newPostElement.current.value)*/
 
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", text: newPostElement.current ? newPostElement.current.value : "----"});
+        props.dispatch(updateNewPostTextAC(newPostElement.current ? newPostElement.current.value : "----"));
     }
 
 

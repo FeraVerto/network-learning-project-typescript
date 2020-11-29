@@ -8,14 +8,12 @@ import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Messages from "./components/Dialogs/Messages/Messages";
-import {RootStateType} from "./redux/state";
-import {AddMessage, AddPostType, UpdateNewMessageText, UpdateNewPostTextType} from "./redux/store";
+import {actionType, RootStateType} from "./redux/store";
 
 export type AppType = {
     store: RootStateType
-    dispatch: (action: AddPostType | UpdateNewPostTextType | AddMessage | UpdateNewMessageText) => void
+    dispatch: (action: actionType) => void
 }
-
 
 const App: React.FC<AppType> = (props) => {
     return (

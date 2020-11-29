@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./Messages.module.sass";
 import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
-import {MessageType} from "../../../redux/state";
-import {AddMessage, AddPostType, UpdateNewMessageText, UpdateNewPostTextType} from "../../../redux/store";
+import {actionType, MessageType} from "../../../redux/store";
+import {addMessageAC, updateNewMessageTextAC} from "../../../redux/message-reducer";
 
 type MessagesType = {
     messages: Array<MessageType>
     newMessageText: string
-    dispatch: (action: AddPostType | UpdateNewPostTextType | AddMessage | UpdateNewMessageText) => void
+    dispatch: (action: actionType) => void
 }
 
 const Messages: React.FC<MessagesType> = (props) => {
@@ -32,15 +32,12 @@ const Messages: React.FC<MessagesType> = (props) => {
     const addMessage = () => {
         /*setMessage(props.addMessage(change))*/
         //Чтобы вынести в отдельную переменную, нужно типизировать эту переменную
-        //так как action определяется как {type: string}
-        let action: actionType = {type: "ADD-MESSAGE"}
-        type actionType = {type: "ADD-MESSAGE"}
-        props.dispatch(action);
+        //так как action определяется как {type: string
+        props.dispatch(addMessageAC());
     }
 
-
     const onChangeMessage = () => {
-        props.dispatch( {type: "UPDATE-NEW-MESSAGE-TEXT", word: newElement.current ? newElement.current.value : "----"})
+        props.dispatch(updateNewMessageTextAC(newElement.current ? newElement.current.value : "----"))
     }
 
     return (

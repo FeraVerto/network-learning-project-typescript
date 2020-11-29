@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Dialogs.module.sass";
 import {DialogsItem} from "./DialogsItem/DialogsItem";
-import {DialogsPageType} from "../../redux/state";
+import {DialogsPageType} from "../../redux/store";
 
 
 const Dialogs: React.FC<DialogsPageType> = (props) => {

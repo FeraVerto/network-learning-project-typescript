@@ -2,7 +2,7 @@ import {NavLink} from "react-router-dom";
 import s from "../Dialogs.module.sass";
 import React from "react";
 import {Avatar} from "@material-ui/core";
-import {DialogsItemType} from "../../../redux/state";
+import {DialogsItemType} from "../../../redux/store";
 
 
 export const DialogsItem: React.FC<DialogsItemType> = (props) => {

@@ -1,6 +1,11 @@
 /*------------------------------------------------------*/
 /*Типизируем каждый подобьект, начинаем с низшего уровня*/
 
+
+import {addPostAC, profileReducer, updateNewPostTextAC} from "./profile-reducer";
+import {action} from "@storybook/addon-actions";
+import {addMessageAC, messageReducer, updateNewMessageTextAC} from "./message-reducer";
+
 export type PostType = {
     id: number
     message: string
@@ -62,26 +67,15 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     _callSubscriber: () => void
     getState: () => RootStateType
-    dispatch: (action: AddPostType | UpdateNewPostTextType | AddMessage | UpdateNewMessageText) => void
+    dispatch: (action: actionType) => void
 }
 
-export type AddPostType = {
-    type: "ADD_POST"
-}
+export type actionType = addPostAC | updateNewPostTextAC | addMessageAC | updateNewMessageTextAC
 
-export type UpdateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    text: string
-}
-
-export type AddMessage = {
-    type: "ADD-MESSAGE"
-}
-
-export type UpdateNewMessageText = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    word: string
-}
+export type addPostAC = ReturnType<typeof addPostAC>
+export type updateNewPostTextAC = ReturnType<typeof updateNewPostTextAC>
+export type addMessageAC = ReturnType<typeof addMessageAC>
+export type updateNewMessageTextAC = ReturnType<typeof updateNewMessageTextAC>
 
 export const store: StoreType = {
     _state: {
@@ -166,28 +160,39 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
-        if(action.type === "ADD_POST") {
-            let post = {id: 5, message: this._state.profilePage.newPostText, like: 25}
-            this._state.profilePage.posts.push(post);
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber();
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.text;
-            this._callSubscriber();
-        } else if (action.type === "ADD-MESSAGE") {
-            let message = {
-                id: 1,
-                name1: "Инженер",
-                textMessage1: this._state.messagesPage.newMessageText,
-                name2: "Особа",
-                textMessage2: ""
-            }
-            this._state.messagesPage.messages.push(message);
-            this._callSubscriber();
-            this._state.messagesPage.newMessageText = ""
-        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-            this._state.messagesPage.newMessageText = action.word;
-            this._callSubscriber();
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = messageReducer(this._state.messagesPage, action)
+
+        this._callSubscriber()
     }
 }
+
+
+/*
+export let addPost = () => {
+    let post: PostType = {id: 5, message: state.profilePage.newPostText, like: 25}
+    state.profilePage.posts.push(post);
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (word: string) => {
+    state.profilePage.newPostText = word;
+    rerenderEntireTree(state);
+}
+
+export let addMessage = () => {
+    let message: MessageType = {id: 1, name1: "Инженер", textMessage1: state.messagesPage.newMessageText, name2: "Особа", textMessage2: ""}
+    state.messagesPage.messages.push(message);
+    rerenderEntireTree(state);
+    state.messagesPage.newMessageText = ""
+}
+
+export let updateNewMessageText = (word: string) => {
+    state.messagesPage.newMessageText = word;
+    rerenderEntireTree(state);
+}
+
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer
+}*/
