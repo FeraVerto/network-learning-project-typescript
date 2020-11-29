@@ -10,7 +10,6 @@
 
 .app-wrapper-content {
     grid-area: m;
-    background-color: gainsboro;
     border: 2px solid black;
 }
 

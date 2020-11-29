@@ -14,14 +14,17 @@ type MessagesType = {
 const Messages: React.FC<MessagesType> = (props) => {
     let newMessages = props.messages.map(m => <div key={m.id} className={s.dialog_body}>
         {/*Не охота верстать, сделать потом*/}
-        <div className={s.message_one}>
-            <div>{m.name}</div>
-            <div>{m.textMessage}</div>
-        </div>
-        <div className={s.message_two}>
-            <div>{m.name}</div>
-            <div>{m.textMessage}</div>
-        </div>
+
+            <div className={m.id === 1 ? s.message_one : s.message_two}>
+                <div>{m.id === 1 ? m.name : null}</div>
+                <div>{m.id === 1 ? m.textMessage: null}</div>
+            </div>
+            <div className={m.id === 2 ? s.message_two : s.message_one}>
+                <div>{m.id === 2 ? m.name : null}</div>
+                <div>{m.id === 2 ? m.textMessage: null}</div>
+            </div>
+
+
     </div>)
 
     let newElement = React.createRef<HTMLTextAreaElement>();

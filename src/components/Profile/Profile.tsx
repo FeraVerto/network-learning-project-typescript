@@ -13,7 +13,6 @@ export type ProfileType = {
 export const Profile: React.FC<ProfileType>  = (props) => {
     return (
         <main className={s.main}>
-            Hello
             <ProfileInfo/>
             <MyPosts posts={props.posts} newPostText={props.newPostText} dispatch={props.dispatch}/>
         </main>

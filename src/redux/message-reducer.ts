@@ -9,10 +9,10 @@ export type updateNewMessageTextAC = ReturnType<typeof updateNewMessageTextAC>
 
 let initialState = {
     messages: [
-        {id: 1, name: "Инженер", textMessage: "Hello"},
-        {id: 2, name: "Особа", textMessage: "Hello"},
-        {id: 1, name: "Инженер", textMessage: "Ты такая хорошая! Ты даже лучше, чем сахар!"},
-        {id: 2, name: "Особа", textMessage: "Спасибо! Приходи сегодня"},
+        {id: 1, name: "Он", textMessage: "Hello"},
+        {id: 2, name: "Ты", textMessage: "Hello"},
+        {id: 1, name: "Он", textMessage: "Ты такая хорошая! Ты даже лучше, чем сахар!"},
+        {id: 2, name: "Ты", textMessage: "Спасибо! Приходи сегодня"},
     ],
 
     newMessageText: ""
@@ -23,7 +23,7 @@ export function messageReducer(state: MessagesPageType = initialState, action: a
         case ADD_MESSAGE:
             let message = {
                 id: 1,
-                name: "Инженер",
+                name: "Ты",
                 textMessage: state.newMessageText,
             }
             state.messages.push(message);
