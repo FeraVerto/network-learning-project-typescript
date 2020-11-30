@@ -8,32 +8,33 @@ import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Messages from "./components/Dialogs/Messages/Messages";
-import {actionType, RootStateType} from "./redux/redux-store";
+import {actionType, AppStateType} from "./redux/redux-store";
+import {MessagesContainer} from "./components/Dialogs/Messages/MessagesContainer";
 
 export type AppType = {
-    store: RootStateType
+    store: AppStateType
     dispatch: (action: actionType) => void
 }
 
+
 const App: React.FC<AppType> = (props) => {
     return (
-        <div className='app-wrapper'>
+        <div>
             <Header/>
-            <Navbar friends={props.store.sidebar.friends}/>
-            <div className="app-wrapper-content">
-                <Route path="/profile" render={() => <Profile posts={props.store.profilePage.posts}
-                                                              dispatch={props.dispatch}
-                                                              newPostText={props.store.profilePage.newPostText}
-                />}/>
-                <Route path="/dialogs" render={() => <Dialogs dialogs={props.store.dialogsPage.dialogs}/>}/>
-                <Route path="/messages" render={() => <Messages messages={props.store.messagesPage.messages}
-                                                                dispatch={props.dispatch}
-                                                                newMessageText={props.store.messagesPage.newMessageText}/>}/>
-                <Route exact path="/news" render={() => <News/>}/>
-                <Route path="/music" render={() => <Music/>}/>
+            <div className='app-wrapper'>
+                <Navbar state={props.store.sidebar}/>
+                <div className="app-wrapper-content">
+                    <Route path="/profile" render={() => <Profile store={props.store}
+                                                                  dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs state={props.store.dialogsPage}/>}/>
+                    <Route path="/messages" render={() => <MessagesContainer store={props.store}
+                                                                             dispatch={props.dispatch}
+                    />}/>
+                    <Route exact path="/news" render={() => <News/>}/>
+                    <Route path="/music" render={() => <Music/>}/>
+                </div>
             </div>
         </div>
-
     );
 }
 

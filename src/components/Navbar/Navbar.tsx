@@ -4,7 +4,11 @@ import {NavLink} from "react-router-dom";
 import {SidebarFriendsType} from "../../redux/redux-store";
 import {Friends} from "./Friends/Friends";
 
-const Navbar: React.FC<SidebarFriendsType> = (props) => {
+type NavbarType = {
+    state: SidebarFriendsType
+}
+
+const Navbar: React.FC<NavbarType> = (props) => {
     return (
         <nav className={s.nav}>
             <ul className={s.nav_list}>
@@ -16,7 +20,7 @@ const Navbar: React.FC<SidebarFriendsType> = (props) => {
                 <li className={s.nav_item}><NavLink className={s.nav_item_link} to="/settings">Settings</NavLink></li>
             </ul>
 
-            <Friends friends={props.friends}/>
+            <Friends friends={props.state.friends}/>
         </nav>
     )
 }

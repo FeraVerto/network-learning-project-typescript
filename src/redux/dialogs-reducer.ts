@@ -1,5 +1,5 @@
 import React from 'react';
-import {actionType, DialogsPageType} from "./redux-store";
+import {actionType} from "./redux-store";
 
 let initialState = {
     dialogs: [
@@ -36,6 +36,6 @@ let initialState = {
     ]
 }
 
-export function dialogsReducer(state: DialogsPageType = initialState, action: actionType) {
+export function dialogsReducer(state = initialState, action: actionType) {
     return state
 }

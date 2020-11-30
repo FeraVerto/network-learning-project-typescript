@@ -5,14 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "./redux/redux-store";
+import {AppStateType, store} from "./redux/redux-store";
 
-export const rerenderEntireTree = () => {
+export const rerenderEntireTree = (state: AppStateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
                 <ScopedCssBaseline>
-                    <App store={store.getState()}
+                    <App store={state}
                          dispatch={store.dispatch.bind(store)}/>
                 </ScopedCssBaseline>
             </BrowserRouter>
@@ -22,8 +22,8 @@ export const rerenderEntireTree = () => {
 }
 serviceWorker.unregister();
 
-store.subscribe(rerenderEntireTree)
-rerenderEntireTree()
+store.subscribe(() => rerenderEntireTree(store.getState()))
+rerenderEntireTree(store.getState())
 
 
 // If you want your app to work offline and load faster, you can change

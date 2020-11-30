@@ -53,23 +53,27 @@ export type SidebarFriendsType = {
 
 /*-------------------------------------------------------*/
 /*Собираем все ветки в один обьект для state*/
-export type RootStateType = {
+/*export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     messagesPage: MessagesPageType
     sidebar: SidebarFriendsType
-}
+}*/
 /*-------------------------------------------------------*/
 
-export type StoreType = {
+/*export type StoreType = {
     _state: RootStateType
     subscribe: (observer: () => void) => void
     _callSubscriber: () => void
     getState: () => RootStateType
     dispatch: (action: actionType) => void
-}
+}*/
 
 export type actionType = addPostAC | updateNewPostTextAC | addMessageAC | updateNewMessageTextAC
+export type addPostAC = ReturnType<typeof addPostAC>
+export type updateNewPostTextAC = ReturnType<typeof updateNewPostTextAC>
+export type addMessageAC = ReturnType<typeof addMessageAC>
+export type updateNewMessageTextAC = ReturnType<typeof updateNewMessageTextAC>
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -77,5 +81,8 @@ let reducers = combineReducers({
     messagesPage: messageReducer,
     sidebar: sidebarReducer
 })
+
+type RootReducerType = typeof reducers
+export type AppStateType = ReturnType<RootReducerType>
 
 export let store = createStore(reducers);

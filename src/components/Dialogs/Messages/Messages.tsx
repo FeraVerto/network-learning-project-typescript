@@ -2,28 +2,28 @@ import React from "react";
 import s from "./Messages.module.sass";
 import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
-import {actionType, MessageType} from "../../../redux/redux-store";
-import {addMessageAC, updateNewMessageTextAC} from "../../../redux/message-reducer";
-import {Icon, TextareaAutosize} from "@material-ui/core";
+import {MessageType} from "../../../redux/redux-store";
+import {TextareaAutosize} from "@material-ui/core";
 
 type MessagesType = {
     messages: Array<MessageType>
+    addMessage: () => void
+    onChangeMessage: (text: string) => void
     newMessageText: string
-    dispatch: (action: actionType) => void
 }
 
 const Messages: React.FC<MessagesType> = (props) => {
     let newMessages = props.messages.map(m => <div key={m.id} className={s.dialog_body}>
         {/*Не охота верстать, сделать потом*/}
 
-            <div className={m.id === 1 ? s.message_one : ""}>
-                <div>{m.id === 1 ? m.name : null}</div>
-                <div>{m.id === 1 ? m.textMessage: null}</div>
-            </div>
-            <div className={m.id === 2 ? s.message_two : ""}>
-                <div>{m.id === 2 ? m.name : null}</div>
-                <div>{m.id === 2 ? m.textMessage: null}</div>
-            </div>
+        <div className={m.id === 1 ? s.message_one : ""}>
+            <div>{m.id === 1 ? m.name : null}</div>
+            <div>{m.id === 1 ? m.textMessage : null}</div>
+        </div>
+        <div className={m.id === 2 ? s.message_two : ""}>
+            <div>{m.id === 2 ? m.name : null}</div>
+            <div>{m.id === 2 ? m.textMessage : null}</div>
+        </div>
 
 
     </div>)
@@ -37,11 +37,11 @@ const Messages: React.FC<MessagesType> = (props) => {
         /*setMessage(props.addMessage(change))*/
         //Чтобы вынести в отдельную переменную, нужно типизировать эту переменную
         //так как action определяется как {type: string
-        props.dispatch(addMessageAC());
+        props.addMessage();
     }
 
     const onChangeMessage = () => {
-        props.dispatch(updateNewMessageTextAC(newElement.current ? newElement.current.value : "----"))
+        props.onChangeMessage(newElement.current ? newElement.current.value : "----")
     }
 
     return (
@@ -62,7 +62,7 @@ const Messages: React.FC<MessagesType> = (props) => {
                                   placeholder="Empty"
                                   className={s.dialog_footer_textarea}
                 />
-{/*
+                {/*
                 <textarea ref={newElement} value={props.newMessageText} onChange={onChangeMessage} rows={5}></textarea>
 */}
                 {/*value={message} onChange={(e) => {setChange(e.currentTarget.value)}}*/}

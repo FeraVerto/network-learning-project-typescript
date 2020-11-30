@@ -1,5 +1,5 @@
 import React from 'react';
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
+/*// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import {Story, Meta} from '@storybook/react/types-6-0';
 import {Profile, ProfileType} from "./Profile";
 import {Route} from "react-router-dom";
@@ -7,7 +7,7 @@ import {Route} from "react-router-dom";
 export default {
     title: 'Profile',
     component: Profile
-} as Meta;
+} as Meta;*/
 
 
 /*const TemplateProfile = (props: ProfileType) => <Profile

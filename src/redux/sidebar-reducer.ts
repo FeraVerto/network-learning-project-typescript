@@ -1,4 +1,4 @@
-import {actionType, SidebarFriendsType} from "./redux-store";
+import {actionType} from "./redux-store";
 
 let initialState = {
     friends: [
@@ -20,6 +20,6 @@ let initialState = {
     ]
 }
 
-export const sidebarReducer = (state: SidebarFriendsType = initialState, action: actionType) => {
+export const sidebarReducer = (state = initialState, action: actionType) => {
     return state
 }
