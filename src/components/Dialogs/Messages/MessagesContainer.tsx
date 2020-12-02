@@ -1,24 +1,31 @@
 import React from "react";
 import {addMessageAC, updateNewMessageTextAC} from "../../../redux/message-reducer";
 import Messages from "./Messages";
-import {AppType} from "../../../App";
+import {StoreContext} from "../../../StoreContext/StoreContext";
 
 
-export const MessagesContainer: React.FC<AppType> = (props) => {
+export const MessagesContainer = () => {
 
 
-    const addMessage = () => {
-        props.dispatch(addMessageAC());
-    }
+    return (
+        <StoreContext.Consumer>
+            { store => {
+                let state = store.getState().messagesPage
 
-    const onChangeMessage = (text: string) => {
-        props.dispatch(updateNewMessageTextAC(text))
-    }
+                const addMessage = () => {
+                    store.dispatch(addMessageAC());
+                }
 
-    return (<Messages addMessage={addMessage}
-                      onChangeMessage={onChangeMessage}
-                      messages={props.store.messagesPage.messages}
-                      newMessageText={props.store.messagesPage.newMessageText}
+                const onChangeMessage = (text: string) => {
+                    store.dispatch(updateNewMessageTextAC(text))
+                }
+                return <Messages addMessage={addMessage}
+                                 onChangeMessage={onChangeMessage}
+                                 messages={state.messages}
+                                 newMessageText={state.newMessageText}
 
-    />)
+                />
+            }}
+        </StoreContext.Consumer>
+    )
 }

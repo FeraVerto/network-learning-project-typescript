@@ -2,7 +2,7 @@ import React from "react";
 import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.css"
 import {TextareaAutosize} from "@material-ui/core";
-import {PostType, ProfilePageType} from "../../../redux/redux-store";
+import {PostType} from "../../../redux/redux-store";
 
 
 export type MyPostsType = {

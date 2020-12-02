@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, createStore, Store} from "redux";
 import {addPostAC, profileReducer, updateNewPostTextAC} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {addMessageAC, messageReducer, updateNewMessageTextAC} from "./message-reducer";
@@ -82,7 +82,7 @@ let reducers = combineReducers({
     sidebar: sidebarReducer
 })
 
-type RootReducerType = typeof reducers
+export type RootReducerType = typeof reducers
 export type AppStateType = ReturnType<RootReducerType>
-
-export let store = createStore(reducers);
+export type StoreType = Store<AppStateType, actionType>
+export let store: StoreType = createStore(reducers);
