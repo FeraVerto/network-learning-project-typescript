@@ -1,7 +1,8 @@
-import {actionType} from "./redux-store";
-
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
+
+export type addPostAC = ReturnType<typeof addPostAC>
+export type updateNewPostTextAC = ReturnType<typeof updateNewPostTextAC>
 
 let initialState = {
     posts: [
@@ -13,17 +14,20 @@ let initialState = {
     newPostText: ""
 }
 
-export function profileReducer(state = initialState, action: actionType) {
+export function profileReducer(state = initialState, action: addPostAC | updateNewPostTextAC) {
     switch (action.type) {
         case ADD_POST:
-            let post = {id: 5, message: state.newPostText, like: 25}
-            state.posts.push(post);
-            state.newPostText = ''
-            return state;
+            return {
+                ...state,
+                posts: [{id: 5, message: state.newPostText, like: 25}, ...state.posts],
+                newPostText: ""
+            }
 
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.text;
-            return state;
+            return {
+                ...state,
+                newPostText: action.text
+            };
 
         default:
             return state

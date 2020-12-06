@@ -1,21 +1,27 @@
 import React from "react";
-import {SidebarFriendsType} from "../../../redux/redux-store";
-import {Avatar} from "@material-ui/core";
-import s from "./Friends.module.sass";
-import {AvatarGroup} from '@material-ui/lab';
 import {Friends} from "./Friends";
-import {StoreContext} from "../../../StoreContext/StoreContext";
+import {connect} from "react-redux";
+import {AppStateType, FriendType} from "../../../redux/redux-store";
 
-export const FriendsContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                store => {
-                    let state = store.getState().sidebar
-                    return <Friends friends={state.friends}/>
-                }
-            }
 
-        </StoreContext.Consumer>
-    )
+type mapStateToPropsType = {
+    friends: Array<FriendType>
 }
+
+type mapDispatchToPropsType = {
+
+}
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    return {
+        friends: state.sidebar.friends
+    }
+}
+
+/*https://stackoverflow.com/questions/49808004/parameter-dispatch-implicitly-has-an-any-type*/
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+
+    }
+}
+export const FriendsContainer = connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(Friends)

@@ -1,6 +1,3 @@
-import React from 'react';
-import {actionType} from "./redux-store";
-
 let initialState = {
     dialogs: [
         {
@@ -36,6 +33,6 @@ let initialState = {
     ]
 }
 
-export function dialogsReducer(state = initialState, action: actionType) {
+export function dialogsReducer(state = initialState, action: any) {
     return state
 }

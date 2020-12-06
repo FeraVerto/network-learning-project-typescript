@@ -1,8 +1,6 @@
 import React from "react";
 import s from "./Navbar.module.sass";
 import {NavLink} from "react-router-dom";
-import {SidebarFriendsType} from "../../redux/redux-store";
-import {Friends} from "./Friends/Friends";
 import {FriendsContainer} from "./Friends/FriendsContainer";
 
 type NavbarType = {
@@ -19,6 +17,7 @@ const Navbar: React.FC<NavbarType> = (props) => {
                 <li className={s.nav_item}><NavLink className={s.nav_item_link} to="/news" href="#">News</NavLink></li>
                 <li className={s.nav_item}><NavLink className={s.nav_item_link} to="/music">Music</NavLink></li>
                 <li className={s.nav_item}><NavLink className={s.nav_item_link} to="/settings">Settings</NavLink></li>
+                <li className={s.nav_item}><NavLink className={s.nav_item_link} to="/users">Users</NavLink></li>
             </ul>
 
             <FriendsContainer />

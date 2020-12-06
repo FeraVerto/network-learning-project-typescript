@@ -1,31 +1,39 @@
 import React from "react";
 import {addMessageAC, updateNewMessageTextAC} from "../../../redux/message-reducer";
 import Messages from "./Messages";
-import {StoreContext} from "../../../StoreContext/StoreContext";
+import {connect} from "react-redux";
+import {AppStateType, MessageType} from "../../../redux/redux-store";
+import {Dispatch} from "redux";
 
 
-export const MessagesContainer = () => {
-
-
-    return (
-        <StoreContext.Consumer>
-            { store => {
-                let state = store.getState().messagesPage
-
-                const addMessage = () => {
-                    store.dispatch(addMessageAC());
-                }
-
-                const onChangeMessage = (text: string) => {
-                    store.dispatch(updateNewMessageTextAC(text))
-                }
-                return <Messages addMessage={addMessage}
-                                 onChangeMessage={onChangeMessage}
-                                 messages={state.messages}
-                                 newMessageText={state.newMessageText}
-
-                />
-            }}
-        </StoreContext.Consumer>
-    )
+type mapStateToPropsType = {
+    messages: Array<MessageType>
+    newMessageText: string
 }
+
+type mapDispatchToPropsType = {
+    addMessage: () => void
+    onChangeMessage: (text: string) => void
+}
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    return {
+        messages: state.messagesPage.messages,
+        newMessageText: state.messagesPage.newMessageText
+    }
+}
+
+/*https://stackoverflow.com/questions/49808004/parameter-dispatch-implicitly-has-an-any-type*/
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        addMessage: () => {
+            dispatch(addMessageAC());
+        },
+
+        onChangeMessage: (text: string) => {
+            dispatch(updateNewMessageTextAC(text))
+        }
+    }
+}
+
+export const MessagesContainer = connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(Messages)

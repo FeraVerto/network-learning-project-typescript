@@ -1,7 +1,8 @@
-import {actionType} from "./redux-store";
-
 const ADD_MESSAGE = "ADD_MESSAGE"
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT"
+
+export type addMessageACType = ReturnType<typeof addMessageAC>
+export type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
 
 let initialState = {
     messages: [
@@ -14,21 +15,20 @@ let initialState = {
     newMessageText: ""
 }
 
-export function messageReducer(state=initialState, action: actionType) {
+export function messageReducer(state = initialState, action: addMessageACType | updateNewMessageTextACType) {
     switch (action.type) {
         case ADD_MESSAGE:
-            let message = {
-                id: 2,
-                name: "Ты",
-                textMessage: state.newMessageText,
-            }
-            state.messages.push(message);
-            state.newMessageText = ""
-            return state;
+            return {
+                ...state,
+                messages: [...state.messages, {id: 2, name: "Ты", textMessage: state.newMessageText}],
+                newMessageText: ""
+            };
 
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.word;
-            return state;
+            return {
+                ...state,
+                newMessageText: action.word
+            };
 
         default:
             return state

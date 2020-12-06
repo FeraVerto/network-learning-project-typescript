@@ -6,7 +6,7 @@ import {PostType} from "../../../redux/redux-store";
 
 
 export type MyPostsType = {
-    state: Array<PostType>
+    posts: Array<PostType>
     onPostChange: (text: string) => void
     addPost: () => void
     newPostText: string
@@ -14,7 +14,7 @@ export type MyPostsType = {
 
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
-    let newPosts = props.state.map(p => <MyPost id={p.id} message={p.message} like={p.like}/>)
+    let newPosts = props.posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like}/>)
     /*Создаем ссылку на какой-то элемент из jsx*/
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     /*let [post, setPost] = useState()
@@ -46,7 +46,6 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                 />
                 <div className={s.button_block}>
                     <button className={s.posts_button} onClick={addPost}>Add post</button>
-                    <button className={s.posts_button}>Delete post</button>
                 </div>
             </div>
             <div>

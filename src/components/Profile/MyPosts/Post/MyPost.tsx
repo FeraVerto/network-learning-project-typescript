@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./MyPost.module.css";
+import s from "./MyPost.module.sass";
 import logo from "../../../../assets/image/logo.png";
 import {PostType} from "../../../../redux/redux-store";
 import {Avatar, Checkbox, FormControlLabel} from "@material-ui/core";

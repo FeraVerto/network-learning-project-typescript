@@ -1,23 +1,18 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import Messages from "./components/Dialogs/Messages/Messages";
-import {actionType, AppStateType} from "./redux/redux-store";
 import {MessagesContainer} from "./components/Dialogs/Messages/MessagesContainer";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-
-/*export type AppType = {
-    store: any
-}*/
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Users} from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
-const App = (props: any) => {
+const App = () => {
     return (
         <div>
             <Header/>
@@ -29,6 +24,7 @@ const App = (props: any) => {
                     <Route path="/messages" render={() => <MessagesContainer/>}/>
                     <Route exact path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
+                    <Route path="/users" render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </div>

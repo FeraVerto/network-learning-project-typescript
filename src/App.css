@@ -11,6 +11,8 @@
 .app-wrapper-content {
     margin-top: 20px;
     grid-area: m;
+    display: grid;
+    grid-template-columns: 5fr 5fr;
 }
 
 
