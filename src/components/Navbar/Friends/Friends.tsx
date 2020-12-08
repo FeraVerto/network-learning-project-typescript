@@ -16,7 +16,7 @@ export const Friends: React.FC<FriendsType> = (props) => {
     </div>)
 
     return (
-        <div></div>
+        <div>Ghbdtn</div>
         /*<AvatarGroup className={s.friends_block} spacing={0} max={3}>
             {friendsList}
         </AvatarGroup>*/
