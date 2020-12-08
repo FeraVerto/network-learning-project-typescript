@@ -1,5 +1,5 @@
-const ADD_MESSAGE = "ADD_MESSAGE"
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT"
+export const ADD_MESSAGE = "ADD_MESSAGE"
+export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT"
 
 export type addMessageACType = ReturnType<typeof addMessageAC>
 export type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>

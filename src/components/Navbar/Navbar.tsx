@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarType> = (props) => {
                 <li className={s.nav_item}><NavLink className={s.nav_item_link} to="/users">Users</NavLink></li>
             </ul>
 
-            <FriendsContainer />
+
         </nav>
     )
 }

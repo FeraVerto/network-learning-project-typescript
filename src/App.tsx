@@ -14,18 +14,23 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 
 const App = () => {
     return (
-        <div>
-            <Header/>
-            <div className='app-wrapper'>
+        <div className='app-wrapper grid-container'>
+            <div className="main_link">Главная</div>
+            <header className="header">
+                <Header/>
+            </header>
+
+            <div className="menu">
                 <Navbar/>
-                <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile/>}/>
-                    <Route path="/dialogs" render={() => <DialogsContainer />}/>
-                    <Route path="/messages" render={() => <MessagesContainer/>}/>
-                    <Route exact path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                </div>
+            </div>
+
+            <div className="app-wrapper-content main">
+                <Route path="/profile" render={() => <Profile/>}/>
+                <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                <Route path="/messages" render={() => <MessagesContainer/>}/>
+                <Route exact path="/news" render={() => <News/>}/>
+                <Route path="/music" render={() => <Music/>}/>
+                <Route path="/users" render={() => <UsersContainer/>}/>
             </div>
         </div>
     );

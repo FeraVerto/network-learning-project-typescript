@@ -1,0 +1,35 @@
+.my_post
+  display: grid
+  grid-template-columns: 1fr 2fr 1fr
+  grid-template-areas: "fb pb ib"
+
+  .friends_block
+    grid-area: fb
+    border: 2px solid green
+
+  .posts_block
+    grid-area: pb
+
+  .info_block
+    grid-area: ib
+    border: 2px solid green
+
+.posts
+  display: flex
+  flex-direction: column
+
+.button_block
+  display: flex
+  justify-content: space-between
+  margin-top: 15px
+
+.posts_button
+  width: 180px
+  height: 40px
+  font-size: 15px
+  text-transform: uppercase
+  background-color: #fff
+  border: 1px solid rgb(59, 59, 59)
+  color: rgb(59, 59, 59)
+
+

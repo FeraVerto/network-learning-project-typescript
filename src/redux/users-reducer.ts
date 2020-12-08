@@ -1,10 +1,10 @@
 import {UsersType, UserType} from "./redux-store";
 
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = "UNFOLLOW"
-const SET_USERS = "SET_USERS"
+export const FOLLOW = "FOLLOW"
+export const UNFOLLOW = "UNFOLLOW"
+export const SET_USERS = "SET_USERS"
 
-const initialState: UsersType = {
+export const initialState: UsersType = {
     users: []
 }
 
@@ -37,6 +37,7 @@ export function usersReducer(state = initialState, action: followACType | unfoll
             }
 
         default:
+            /*throw new Error("Bad action type")*/
             return state
     }
 }

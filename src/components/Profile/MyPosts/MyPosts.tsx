@@ -1,8 +1,9 @@
 import React from "react";
 import MyPost from "./Post/MyPost";
-import s from "./MyPosts.module.css"
+import s from "./MyPosts.module.sass"
 import {TextareaAutosize} from "@material-ui/core";
 import {PostType} from "../../../redux/redux-store";
+import {FriendsContainer} from "../../Navbar/Friends/FriendsContainer";
 
 
 export type MyPostsType = {
@@ -33,24 +34,32 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
     }
 
     return (
-        <div>
+        <div className={s.my_post}>
             My posts
-            <div className={s.posts}>
-                <TextareaAutosize ref={newPostElement}
-                                  rows={5}
-                                  value={props.newPostText}
-                                  onChange={onPostChange}
-                                  aria-label="empty textarea"
-                                  placeholder="Empty"
-                                  className={s.posts_textarea}
-                />
-                <div className={s.button_block}>
-                    <button className={s.posts_button} onClick={addPost}>Add post</button>
+            <div className={s.friends_block}>
+                <FriendsContainer />
+            </div>
+            <div className={s.posts_block}>
+                <div className={s.posts}>
+                    <TextareaAutosize ref={newPostElement}
+                                      rows={5}
+                                      value={props.newPostText}
+                                      onChange={onPostChange}
+                                      aria-label="empty textarea"
+                                      placeholder="Empty"
+                                      className={s.posts_textarea}
+                    />
+                    <div className={s.button_block}>
+                        <button className={s.posts_button} onClick={addPost}>Add post</button>
+                    </div>
+                </div>
+                <div>
+                    {newPosts}
                 </div>
             </div>
-            <div>
-                {newPosts}
-            </div>
+
+            <div className={s.info_block}>Info</div>
+
         </div>
     )
 }
