@@ -35,7 +35,6 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     return (
         <div className={s.my_post}>
-            My posts
             <div className={s.friends_block}>
                 <FriendsContainer />
             </div>
