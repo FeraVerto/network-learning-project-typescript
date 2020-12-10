@@ -1,16 +1,45 @@
 .profile_info
-  display: grid
-  grid-template-rows: 200px 100px
-  grid-template-areas: "ib" "mi"
+  position: relative
+  //display: grid
+  //grid-template-rows: 200px 100px
+  //grid-template-areas: "ib" "mi"
+  display: flex
+  flex-direction: column
+
+  .avatar
+    width: 180px
+    height: 180px
+    top: 85px
+    left: 15%
+
+    img
+      border: 6px solid white
+      border-radius: 9px
+
 
   .img_block
     width: 100%
     grid-area: ib
     overflow: hidden
+    height: 220px
 
     img
       width: 100%
 
 
   .menu_info
-    grid-area: mi
+    height: 80px
+    display: flex
+    justify-content: center
+    align-items: flex-end
+
+    .avatar_block
+      display: flex
+      flex-direction: column
+
+  .menu_list
+    margin-left: 25px
+    max-width: 450px
+
+
+

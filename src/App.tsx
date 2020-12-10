@@ -21,7 +21,7 @@ const App = () => {
             </header>
 
             <div className="menu">
-                <Navbar/>
+
             </div>
 
             <div className="app-wrapper-content main">
