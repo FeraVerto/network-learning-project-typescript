@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/network-learning-project-typescript/static/css/main.8a1eceac.chunk.css",
-    "main.js": "/network-learning-project-typescript/static/js/main.1a981f7c.chunk.js",
-    "main.js.map": "/network-learning-project-typescript/static/js/main.1a981f7c.chunk.js.map",
+    "main.css": "/network-learning-project-typescript/static/css/main.53f6938b.chunk.css",
+    "main.js": "/network-learning-project-typescript/static/js/main.a2805a5f.chunk.js",
+    "main.js.map": "/network-learning-project-typescript/static/js/main.a2805a5f.chunk.js.map",
     "runtime-main.js": "/network-learning-project-typescript/static/js/runtime-main.6f839a01.js",
     "runtime-main.js.map": "/network-learning-project-typescript/static/js/runtime-main.6f839a01.js.map",
-    "static/js/2.c84380ff.chunk.js": "/network-learning-project-typescript/static/js/2.c84380ff.chunk.js",
-    "static/js/2.c84380ff.chunk.js.map": "/network-learning-project-typescript/static/js/2.c84380ff.chunk.js.map",
+    "static/js/2.7c985428.chunk.js": "/network-learning-project-typescript/static/js/2.7c985428.chunk.js",
+    "static/js/2.7c985428.chunk.js.map": "/network-learning-project-typescript/static/js/2.7c985428.chunk.js.map",
     "index.html": "/network-learning-project-typescript/index.html",
-    "static/css/main.8a1eceac.chunk.css.map": "/network-learning-project-typescript/static/css/main.8a1eceac.chunk.css.map",
-    "static/js/2.c84380ff.chunk.js.LICENSE.txt": "/network-learning-project-typescript/static/js/2.c84380ff.chunk.js.LICENSE.txt",
-    "static/media/background_profile.fbaa061b.jpeg": "/network-learning-project-typescript/static/media/background_profile.fbaa061b.jpeg"
+    "static/css/main.53f6938b.chunk.css.map": "/network-learning-project-typescript/static/css/main.53f6938b.chunk.css.map",
+    "static/js/2.7c985428.chunk.js.LICENSE.txt": "/network-learning-project-typescript/static/js/2.7c985428.chunk.js.LICENSE.txt",
+    "static/media/avatar.2679a7bf.jpeg": "/network-learning-project-typescript/static/media/avatar.2679a7bf.jpeg",
+    "static/media/background-image.c89a0cbc.jpeg": "/network-learning-project-typescript/static/media/background-image.c89a0cbc.jpeg"
   },
   "entrypoints": [
     "static/js/runtime-main.6f839a01.js",
-    "static/js/2.c84380ff.chunk.js",
-    "static/css/main.8a1eceac.chunk.css",
-    "static/js/main.1a981f7c.chunk.js"
+    "static/js/2.7c985428.chunk.js",
+    "static/css/main.53f6938b.chunk.css",
+    "static/js/main.a2805a5f.chunk.js"
   ]
 }
