@@ -1,4 +1,4 @@
-https://feraverto.github.io/network-learning-project-typescript/profile
+https://feraverto.github.io/network-learning-project-typescript
 
 # Getting Started with Create React App
 
