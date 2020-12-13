@@ -35,9 +35,6 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     return (
         <div className={s.my_post}>
-            <div className={s.friends_block}>
-                <FriendsContainer />
-            </div>
             <div className={s.posts_block}>
                 <div className={s.posts}>
                     <TextareaAutosize ref={newPostElement}
@@ -56,9 +53,6 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                     {newPosts}
                 </div>
             </div>
-
-            <div className={s.info_block}>Info</div>
-
         </div>
     )
 }

@@ -1,23 +1,21 @@
 .app-wrapper {
     width: 100%;
     margin: 0 auto;
-    /*background-color: black;
-    color: white;*/
 }
 
 .app-wrapper-content {
-    grid-area: m;
-    display: grid;
+    /*grid-area: m;
+    display: grid;*/
 }
 
 .grid-container {
-    display: grid;
+    /*display: grid;
     grid-template-columns: 0.06fr 1fr;
     grid-template-rows: 0.11fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
     "ml h h h"
-    "m p p p"
+    "m p p p"*/
 }
 
 .main_link {
@@ -29,15 +27,6 @@
     grid-area: h;
 }
 
-.menu {
-    grid-area: m;
-}
-
-.main {
-    display: grid;
-    gap: 0px 0px;
-    grid-area: p;
-}
 
 
 

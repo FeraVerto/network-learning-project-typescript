@@ -33,17 +33,19 @@ export type FriendType = {
 }
 
 export type UsersLocationType = {
-    city: string,
+    city: string
     country: string
 }
 
 export type UserType = {
-    id: number,
-    avatar: string
-    fullName: string,
-    followed: boolean,
-    status: string,
-    location: UsersLocationType
+    id: number
+    name: string
+    status: string
+    photos: {
+        small: string
+        large: string
+    },
+    followed: boolean
 }
 
 

@@ -13,13 +13,9 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 export const Profile = () => {
     return (
-        <main className={s.main_profile}>
-            <div className={s.profile_info}>
-                <ProfileInfo/>
-            </div>
-            <div className={s.profile}>
-                <MyPostsContainer/>
-            </div>
+        <main className={s.class}>
+            <ProfileInfo/>
+            <MyPostsContainer/>
         </main>
     )
 }
