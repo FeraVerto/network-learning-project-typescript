@@ -12,7 +12,53 @@ type UsersType = {
     setUsers: (users: Array<UserType>) => void
 }
 
-export function Users(props: UsersType) {
+class Users extends React.Component<UsersType> {
+
+    constructor(props: UsersType) {
+        super(props);
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            props.setUsers(response.data.items)
+        })
+    }
+
+    render() {
+        return <div className={s.users}>
+            {
+                this.props.users.map(u =>
+                    <div key={u.id} className={s.user}>
+                        <div className={s.user_avatar}>
+                            <Avatar variant='rounded'
+                                    className={s.avatar}
+                                    src={u.photos.small !== null ? u.photos.small : `${avatar}`}
+                                    alt={u.name}
+
+                            />
+                            {u.followed ?
+                                <button className={s.follow_unfollow_button}
+                                        onClick={() => this.props.unfollow(u.id)}>
+                                    Unfollow
+                                </button>
+                                : <button className={s.follow_unfollow_button}
+                                          onClick={() => this.props.follow(u.id)}>
+                                    Follow
+                                </button>
+                            }
+                        </div>
+                        <div className={s.user_info}>
+                            <div className={s.user_info_name}>
+                                <div className={s.user_name}>{u.name}</div>
+                                <div className={s.user_status}>{u.status}</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+        </div>
+    }
+}
+
+export default Users
+
+/*export function Users(props: UsersType) {
 
     const getUsers = () => {
         if (props.users.length === 0) {
@@ -22,7 +68,6 @@ export function Users(props: UsersType) {
 
         }
     }
-
 
     return (
         <div className={s.users}>
@@ -58,4 +103,4 @@ export function Users(props: UsersType) {
                 )}
         </div>
     )
-}
+}*/
