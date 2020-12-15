@@ -5,9 +5,7 @@ import logo from '../../assets/image/logo.png';
 const Header = () => {
     return (
         <>
-            <span className={s.icon_search}>Search</span>
-            <input className={s.search} type="search"/>
-            {/*<img className={s.logo} src={logo} alt=""/>*/}
+            <div className={s.site_name}>Spacebook</div>
         </>
     )
 }

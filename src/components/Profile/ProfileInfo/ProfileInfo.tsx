@@ -6,7 +6,10 @@ export const ProfileInfo = () => {
     return (
         <div className={s.profile_info}>
             <img src={avatar} alt="" width="180" height="180"/>
-            <div>Info</div>
+            <div>Имя</div>
+            <div>Возраст</div>
+            <div>Техника</div>
+            <div>Технологии</div>
         </div>
 
     )

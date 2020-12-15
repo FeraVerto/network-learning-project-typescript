@@ -11,14 +11,15 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {FriendsContainer} from "./components/Navbar/Friends/FriendsContainer";
 import {ProfileInfo} from "./components/Profile/ProfileInfo/ProfileInfo";
-import logo from "./assets/image/pngwing.png"
+import logo from "./assets/image/logo.png"
 
 const App = () => {
     return (
         <div className='app-wrapper grid-container'>
             <div className="profile_navbar">
-
+{/*
                 <div className="logo"><img src={logo} alt="logo" width="150"/></div>
+*/}
                 <ProfileInfo/>
                 <Navbar/>
             </div>
