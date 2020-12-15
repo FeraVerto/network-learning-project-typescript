@@ -10,26 +10,37 @@ import {MessagesContainer} from "./components/Dialogs/Messages/MessagesContainer
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {FriendsContainer} from "./components/Navbar/Friends/FriendsContainer";
+import {ProfileInfo} from "./components/Profile/ProfileInfo/ProfileInfo";
 
 
 const App = () => {
     return (
-        <div>
-            <Header/>
-            <Navbar/>
-            <FriendsContainer/>
-            <div className='app-wrapper grid-container'>
-                <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile/>}/>
-                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                    <Route path="/messages" render={() => <MessagesContainer/>}/>
-                    <Route exact path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                </div>
+        <div className='app-wrapper grid-container'>
+            <div className="navbar">
+                <ProfileInfo/>
+                <Navbar/>
             </div>
-        </div>
 
+            <div className="app-wrapper-content">
+                <header className="header">
+                    <Header/>
+                </header>
+                <main className="content">
+                    <div className="main_content">
+                        <Route path="/profile" render={() => <Profile/>}/>
+                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                        <Route path="/messages" render={() => <MessagesContainer/>}/>
+                        <Route exact path="/news" render={() => <News/>}/>
+                        <Route path="/music" render={() => <Music/>}/>
+                        <Route path="/users" render={() => <UsersContainer/>}/>
+                    </div>
+                    <div className="main_content_friends">
+                        Friends
+                    </div>
+                </main>
+            </div>
+            <FriendsContainer/>
+        </div>
     );
 }
 

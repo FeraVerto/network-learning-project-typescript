@@ -14,7 +14,6 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 export const Profile = () => {
     return (
         <main className={s.class}>
-            <ProfileInfo/>
             <MyPostsContainer/>
         </main>
     )

@@ -7,6 +7,7 @@ export const ProfileInfo = () => {
     return (
         <div className={s.class}>
             <img src="" alt="" width="180" height="180"/>
+            <div>Info</div>
         </div>
 
     )
