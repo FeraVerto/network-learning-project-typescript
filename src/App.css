@@ -1,7 +1,6 @@
 
 .app-wrapper {
     width: 100%;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 4fr;
     gap: 0px 0px;
@@ -9,25 +8,46 @@
     "n m";
 }
 
-.navbar {
+.profile_navbar {
+    margin: auto 0;
     grid-area: n;
-    border: 2px solid lightgray;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.header {
-    border: 2px solid lightgray;
+.logo {
+    width: 150px;
+    height: 150px;
+}
+
+.logo img {
+    width: 100%;
 }
 
 .app-wrapper-content {
+    margin-right: 25px;
+    margin-left: 25px;
     grid-area: m;
-    border: 2px solid lightgray;
+
     display: grid;
-    grid-template-rows: 80px 100vh;
+    grid-template-rows: 90px 100vh;
 }
 
 .content {
     display: grid;
     grid-template-columns: 2fr 1fr;
+
+}
+
+.main_content {
+    margin-right: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.main_content_friends {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 

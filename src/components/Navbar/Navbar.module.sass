@@ -1,23 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400&display=swap')
 
 .nav
+  margin-top: 25px
   grid-area: n
   font-family: 'Inconsolata', monospace
 
   .nav_list
-    color: white
     padding: 0
+    margin: 0
+    width: 170px
+    color: white
     display: flex
-    flex-direction: column
+    flex-wrap: wrap
+    justify-content: space-between
     list-style: none
 
     .nav_item
-      margin-right: 15px
+      display: block
+      border: 2px solid #c0c0c0
+      border-radius: 7px
+      width: 80px
+      height: 80px
 
       .nav_item_link
         font-size: 18px
-        color: black
+        color: white
         text-transform: uppercase
+
 
     .nav_item:last-child
       margin-bottom: 0

@@ -13,7 +13,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 export const Profile = () => {
     return (
-        <main className={s.class}>
+        <main className={s.main_profile}>
             <MyPostsContainer/>
         </main>
     )

@@ -3,7 +3,6 @@ import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.sass"
 import {TextareaAutosize} from "@material-ui/core";
 import {PostType} from "../../../redux/redux-store";
-import {FriendsContainer} from "../../Navbar/Friends/FriendsContainer";
 
 
 export type MyPostsType = {
