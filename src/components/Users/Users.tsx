@@ -3,7 +3,8 @@ import s from "./Users.module.sass"
 import {UserType} from "../../redux/redux-store";
 import {Avatar} from "@material-ui/core";
 import axios from 'axios';
-import avatar from './../../assets/image/avatar-alien.png'
+//import avatar from './../../assets/image/avatar-alien.png'
+import avatar from './../../assets/image/ufo-2.png'
 
 type UsersType = {
     users: Array<UserType>
@@ -51,12 +52,10 @@ class Users extends React.Component<UsersType> {
                     this.props.users.map(u =>
                         <div key={u.id} className={s.user}>
                             <div className={s.user_avatar}>
-                                <Avatar variant='square'
-                                        className={s.avatar}
-                                        src={u.photos.small !== null ? u.photos.small : `${avatar}`}
-                                        alt={u.name}
+                                <img className={s.avatar}
+                                     src={u.photos.small !== null ? u.photos.small : `${avatar}`}
+                                     alt={u.name}
                                 />
-
                             </div>
                             <div className={s.button_followed}>
                                 {u.followed ?
