@@ -71,6 +71,9 @@ export type SidebarFriendsType = {
 
 export type UsersType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number | string
 }
 
 

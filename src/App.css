@@ -16,6 +16,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    min-width: 300px;
 }
 
 .logo {
