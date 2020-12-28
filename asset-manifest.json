@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/network-learning-project-typescript/static/css/main.41a46f06.chunk.css",
-    "main.js": "/network-learning-project-typescript/static/js/main.694d4bb9.chunk.js",
-    "main.js.map": "/network-learning-project-typescript/static/js/main.694d4bb9.chunk.js.map",
+    "main.css": "/network-learning-project-typescript/static/css/main.1678306a.chunk.css",
+    "main.js": "/network-learning-project-typescript/static/js/main.397094a7.chunk.js",
+    "main.js.map": "/network-learning-project-typescript/static/js/main.397094a7.chunk.js.map",
     "runtime-main.js": "/network-learning-project-typescript/static/js/runtime-main.6f839a01.js",
     "runtime-main.js.map": "/network-learning-project-typescript/static/js/runtime-main.6f839a01.js.map",
-    "static/js/2.dfaa067e.chunk.js": "/network-learning-project-typescript/static/js/2.dfaa067e.chunk.js",
-    "static/js/2.dfaa067e.chunk.js.map": "/network-learning-project-typescript/static/js/2.dfaa067e.chunk.js.map",
+    "static/js/2.144ab1bc.chunk.js": "/network-learning-project-typescript/static/js/2.144ab1bc.chunk.js",
+    "static/js/2.144ab1bc.chunk.js.map": "/network-learning-project-typescript/static/js/2.144ab1bc.chunk.js.map",
     "index.html": "/network-learning-project-typescript/index.html",
-    "static/css/main.41a46f06.chunk.css.map": "/network-learning-project-typescript/static/css/main.41a46f06.chunk.css.map",
-    "static/js/2.dfaa067e.chunk.js.LICENSE.txt": "/network-learning-project-typescript/static/js/2.dfaa067e.chunk.js.LICENSE.txt",
+    "static/css/main.1678306a.chunk.css.map": "/network-learning-project-typescript/static/css/main.1678306a.chunk.css.map",
+    "static/js/2.144ab1bc.chunk.js.LICENSE.txt": "/network-learning-project-typescript/static/js/2.144ab1bc.chunk.js.LICENSE.txt",
     "static/media/astronaut.cbb62ce6.png": "/network-learning-project-typescript/static/media/astronaut.cbb62ce6.png",
     "static/media/avatar.7a200511.jpg": "/network-learning-project-typescript/static/media/avatar.7a200511.jpg",
     "static/media/index.css": "/network-learning-project-typescript/static/media/background-moon.d2a70814.jpeg",
@@ -17,12 +17,13 @@
     "static/media/news.3350a595.png": "/network-learning-project-typescript/static/media/news.3350a595.png",
     "static/media/photo.bf857649.png": "/network-learning-project-typescript/static/media/photo.bf857649.png",
     "static/media/setting.9ed628b6.png": "/network-learning-project-typescript/static/media/setting.9ed628b6.png",
+    "static/media/ufo-2.3c1ecb26.png": "/network-learning-project-typescript/static/media/ufo-2.3c1ecb26.png",
     "static/media/users.ed5e25fc.png": "/network-learning-project-typescript/static/media/users.ed5e25fc.png"
   },
   "entrypoints": [
     "static/js/runtime-main.6f839a01.js",
-    "static/js/2.dfaa067e.chunk.js",
-    "static/css/main.41a46f06.chunk.css",
-    "static/js/main.694d4bb9.chunk.js"
+    "static/js/2.144ab1bc.chunk.js",
+    "static/css/main.1678306a.chunk.css",
+    "static/js/main.397094a7.chunk.js"
   ]
 }
