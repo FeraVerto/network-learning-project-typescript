@@ -43,37 +43,42 @@ class Users extends React.Component<UsersType> {
         return <div className={s.users}>
             <div className={s.users_paginator}>
                 {/*{pages.map(p => <span className={this.props.currentPage === p && s.selectPage}>{p}</span>)}*/}
-                {pages.map(p => <span onClick={(e) => this.onPageChanged(p)} className={s.selectPage}>{p}</span>)}
+                {pages.map(p => <span onClick={(e) => this.onPageChanged(p)}
+                                      className={this.props.currentPage === p ? s.selectPage : s.page}>{p}</span>)}
             </div>
-            {
-                this.props.users.map(u =>
-                    <div key={u.id} className={s.user}>
-                        <div className={s.user_avatar}>
-                            <Avatar variant='rounded'
-                                    className={s.avatar}
-                                    src={u.photos.small !== null ? u.photos.small : `${avatar}`}
-                                    alt={u.name}
+            <div className={s.users_list}>
+                {
+                    this.props.users.map(u =>
+                        <div key={u.id} className={s.user}>
+                            <div className={s.user_avatar}>
+                                <Avatar variant='square'
+                                        className={s.avatar}
+                                        src={u.photos.small !== null ? u.photos.small : `${avatar}`}
+                                        alt={u.name}
+                                />
 
-                            />
-                            {u.followed ?
-                                <button className={s.follow_unfollow_button}
-                                        onClick={() => this.props.unfollow(u.id)}>
-                                    Unfollow
-                                </button>
-                                : <button className={s.follow_unfollow_button}
-                                          onClick={() => this.props.follow(u.id)}>
-                                    Follow
-                                </button>
-                            }
-                        </div>
-                        <div className={s.user_info}>
-                            <div className={s.user_info_name}>
-                                <div className={s.user_name}>{u.name}</div>
-                                <div className={s.user_status}>{u.status}</div>
+                            </div>
+                            <div className={s.button_followed}>
+                                {u.followed ?
+                                    <button className={s.follow_unfollow_button}
+                                            onClick={() => this.props.unfollow(u.id)}>
+                                        Unfollow
+                                    </button>
+                                    : <button className={s.follow_unfollow_button}
+                                              onClick={() => this.props.follow(u.id)}>
+                                        Follow
+                                    </button>
+                                }
+                            </div>
+                            <div className={s.user_info}>
+                                <div className={s.user_info_name}>
+                                    <div className={s.user_name}>{u.name}</div>
+                                    <div className={s.user_status}>{u.status}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
+            </div>
         </div>
     }
 }

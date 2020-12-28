@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    /*position: fixed;*/
     min-width: 300px;
 }
 
@@ -41,12 +41,12 @@
 .content {
     display: grid;
     grid-template-columns: 2fr 1fr;
-
 }
 
 .main_content {
     margin-right: 25px;
-    background-color: rgba(0, 0, 0, 0.5);
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    /*max-width: 2000px;*/
 }
 
 .main_content_friends {

@@ -8,7 +8,7 @@ export const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 
 export const initialState: UsersType = {
     users: [],
-    pageSize: 5,
+    pageSize: 50,
     totalUsersCount: 0,
     currentPage: 2
 }
