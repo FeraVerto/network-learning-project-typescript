@@ -11,12 +11,14 @@
 .profile_navbar {
     height: 100vh;
     grid-area: n;
-    background-color: rgb(255, 255, 255);
+    /*background-color: rgb(255, 255, 255);*/
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /*position: fixed;*/
+    position: fixed;
     min-width: 300px;
 }
 
