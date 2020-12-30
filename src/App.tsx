@@ -8,10 +8,9 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import {MessagesContainer} from "./components/Dialogs/Messages/MessagesContainer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
 import {FriendsContainer} from "./components/Navbar/Friends/FriendsContainer";
 import {ProfileInfo} from "./components/Profile/ProfileInfo/ProfileInfo";
-import logo from "./assets/image/logo.png"
+import UsersContainer from "./components/Users/UsersContainer";
 
 const App = () => {
     return (

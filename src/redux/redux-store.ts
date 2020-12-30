@@ -74,6 +74,7 @@ export type UsersType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number | string
+    isFetching: boolean
 }
 
 
