@@ -16,28 +16,27 @@ import ProfileInfoContainer from "./components/Profile/ProfileInfo/ProfileInfoCo
 
 const App = () => {
     return (
-        <div className='app-wrapper grid-container'>
-            <div className="profile_navbar">
-                {/*
-                <div className="logo"><img src={logo} alt="logo" width="150"/></div>
-*/}
-
-                <Route path="/profileinfo" render={() => <ProfileInfoContainer/>}/>
-                <Navbar/>
-            </div>
-
+        <div className='app-wrapper'>
+            <header className="header">
+                <Header/>
+            </header>
             <div className="app-wrapper-content">
-                <header className="header">
-                    <Header/>
-                </header>
+
                 <main className="content">
                     <div className="main_content">
-                        <Route path="/profile" render={() => <ProfileContainer/>}/>
-                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                        <Route path="/messages" render={() => <MessagesContainer/>}/>
-                        <Route exact path="/news" render={() => <News/>}/>
-                        <Route path="/music" render={() => <Music/>}/>
-                        <Route path="/users" render={() => <UsersContainer/>}/>
+                        <div className="profile_navbar">
+                            <Route path="/profile" render={() => <ProfileInfoContainer/>}/>
+                            <Navbar/>
+                        </div>
+                        <div className="main">
+                            <Route path="/profile" render={() => <ProfileContainer/>}/>
+                            <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                            <Route path="/messages" render={() => <MessagesContainer/>}/>
+                            <Route exact path="/news" render={() => <News/>}/>
+                            <Route path="/music" render={() => <Music/>}/>
+                            <Route path="/users" render={() => <UsersContainer/>}/>
+                        </div>
+
                     </div>
                     <div className="main_content_friends">
                         Friends

@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import React from "react";
 import {Preloader} from "../common/Preloader/Preloader";
+import {setUserProfile} from "../../redux/profile-reducer";
 
 
 type mapStateToPropsType = {
@@ -30,6 +31,7 @@ type mapDispatchToPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     setToggleIsFetching: (isFetching: boolean) => void
+    setUserProfile: (userId: number) => void
 }
 
 type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -56,6 +58,14 @@ class UsersContainer extends React.Component<UsersContainerType> {
         })
     }
 
+    onClickUser = (userId: number) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => {
+            console.log(response.data)
+            this.props.setUserProfile(response.data)
+        })
+
+    }
+
     render = () =>
         <>
             {this.props.isFetching ? <Preloader/> : null}
@@ -67,7 +77,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
                    totalUsersCount={this.props.totalUsersCount}
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
-
+                   onClickUser={this.onClickUser}
             />
         </>
 }
@@ -84,7 +94,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 }
 
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setToggleIsFetching}
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setToggleIsFetching, setUserProfile}
     )(UsersContainer)
 
 

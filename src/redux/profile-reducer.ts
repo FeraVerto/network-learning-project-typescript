@@ -36,6 +36,7 @@ export function profileReducer(state = initialState, action: addPostAC | updateN
             };
 
         case SET_PROFILE_INFO:
+            console.log(action.profile)
             return {
                 ...state,
                 profile: action.profile

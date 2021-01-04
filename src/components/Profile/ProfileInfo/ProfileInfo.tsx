@@ -2,6 +2,7 @@ import s from "./ProfileInfo.module.sass";
 import React from "react";
 import avatar from './../../../assets/image/avatar.jpg'
 import {Preloader} from "../../common/Preloader/Preloader";
+import {Button} from "@material-ui/core";
 
 type ProfileInfoType = {
     profile: any
@@ -26,7 +27,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 <div>{props.profile.contacts.youtube}</div>
                 <div>{props.profile.contacts.mainLink}</div>
             </div>
-            <div>Технологии</div>
+            <button className={s.button}>Dialog</button>
+            <button className={s.button}>Follow</button>
         </div>
 
     )

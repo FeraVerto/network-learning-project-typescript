@@ -1,26 +1,17 @@
 
 .app-wrapper {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+    height: 100vh;
+    /*width: 100%;
+
+    !*grid-template-columns: 4fr 1fr;*!
     gap: 0px 0px;
     grid-template-areas:
-    "n m";
+    "n m";*/
+    display: grid;
+    grid-template-rows: 90px 100vh;
 }
 
-.profile_navbar {
-    height: 100vh;
-    grid-area: n;
-    /*background-color: rgb(255, 255, 255);*/
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    min-width: 300px;
-}
+
 
 .logo {
     margin-bottom: 50px;
@@ -32,23 +23,39 @@
 }
 
 .app-wrapper-content {
-    margin-right: 25px;
-    margin-left: 25px;
-    grid-area: m;
-
-    display: grid;
-    grid-template-rows: 100px 100vh;
 }
 
 .content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr;
 }
 
 .main_content {
     margin-right: 25px;
     /*background-color: rgba(0, 0, 0, 0.5);*/
-    /*max-width: 2000px;*/
+    display: grid;
+    grid-template-columns: 1.5fr 4fr;
+    grid-template-areas:
+    "n m"
+}
+
+.profile_navbar {
+    /*height: calc(100% - 70px);*/
+    height: 100%;
+    padding: 25px;
+    /*background-color: rgb(255, 255, 255);*/
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: n;
+}
+
+.main {
+    padding: 25px;
+    padding-top: 0;
+    grid-area: m;
 }
 
 .main_content_friends {

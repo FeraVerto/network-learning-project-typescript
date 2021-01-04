@@ -8,12 +8,6 @@ import {setUserProfile} from "../../../redux/profile-reducer";
 
 class ProfileInfoContainer extends React.Component<ProfileInfoContainerType> {
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
-            this.props.setUserProfile(response.data)
-        })
-    }
-
     render() {
         console.log(this.props)
         return (
@@ -32,6 +26,7 @@ type mapDispatchToPropsType = {
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    console.log(state)
     return {
         profile: state.profilePage.profile
     }
