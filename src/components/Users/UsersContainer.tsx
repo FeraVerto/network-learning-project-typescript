@@ -3,16 +3,17 @@ import Users from "./Users";
 import {AppStateType, UserType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    setToggleIsFetching,
+    unfollow
 } from "../../redux/users-reducer";
 import axios from "axios";
 import React from "react";
 import {Preloader} from "../common/Preloader/Preloader";
+
 
 type mapStateToPropsType = {
     users: Array<UserType>
@@ -56,7 +57,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
     }
 
     render = () =>
-        <div>
+        <>
             {this.props.isFetching ? <Preloader/> : null}
 
             <Users users={this.props.users}
@@ -68,7 +69,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
                    onPageChanged={this.onPageChanged}
 
             />
-        </div>
+        </>
 }
 
 
@@ -82,7 +83,12 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setToggleIsFetching}
+    )(UsersContainer)
+
+
+/*const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         follow: (id) => {
             dispatch(followAC(id))
@@ -108,7 +114,4 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
             dispatch(toggleIsFetchingAC(isFetching))
         }
     }
-}
-
-
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(UsersContainer)
+}*/

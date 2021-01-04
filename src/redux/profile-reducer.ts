@@ -1,8 +1,13 @@
+
 const ADD_POST = "ADD_POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
+const SET_PROFILE_INFO = "SET_PROFILE_INFO"
+
 
 export type addPostAC = ReturnType<typeof addPostAC>
 export type updateNewPostTextAC = ReturnType<typeof updateNewPostTextAC>
+export type setUserProfileType = ReturnType<typeof setUserProfile>
+
 
 let initialState = {
     posts: [
@@ -11,10 +16,11 @@ let initialState = {
         {id: 3, message: "Или умри", like: 1}
     ],
 
-    newPostText: ""
+    newPostText: "",
+    profile: null
 }
 
-export function profileReducer(state = initialState, action: addPostAC | updateNewPostTextAC) {
+export function profileReducer(state = initialState, action: addPostAC | updateNewPostTextAC| setUserProfileType) {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -29,6 +35,12 @@ export function profileReducer(state = initialState, action: addPostAC | updateN
                 newPostText: action.text
             };
 
+        case SET_PROFILE_INFO:
+            return {
+                ...state,
+                profile: action.profile
+            }
+
         default:
             return state
     }
@@ -36,3 +48,7 @@ export function profileReducer(state = initialState, action: addPostAC | updateN
 
 export const addPostAC = () => ({type: ADD_POST} as const)
 export const updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, text: text} as const)
+export const setUserProfile = (profile: any) => ({
+    type: SET_PROFILE_INFO,
+    profile
+} as const)

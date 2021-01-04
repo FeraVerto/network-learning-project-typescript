@@ -3,6 +3,8 @@ import preloader from "./../../../assets/image/preloader.svg"
 
 export const Preloader = () => {
     return (
-        <img src={preloader} alt="preloader"/>
+        <>
+            <img src={preloader} alt="preloader"/>
+        </>
     )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import s from "./Users.module.sass"
 import {UserType} from "../../redux/redux-store";
 import avatar from './../../assets/image/ufo-2.png'
+import {NavLink} from "react-router-dom";
 
 type UsersType = {
     users: Array<UserType>
@@ -39,10 +40,13 @@ export const Users = (props: UsersType) => {
                         <div key={u.id} className={s.user}>
 
                             <div className={s.user_avatar}>
-                                <img className={s.avatar}
-                                     src={u.photos.small !== null ? u.photos.small : `${avatar}`}
-                                     alt={u.name}
-                                />
+                                <NavLink to="/profileinfo">
+                                    <img className={s.avatar}
+                                         src={u.photos.small !== null ? u.photos.small : `${avatar}`}
+                                         alt={u.name}
+                                    />
+                                </NavLink>
+
                             </div>
 
                             <div className={s.button_followed}>

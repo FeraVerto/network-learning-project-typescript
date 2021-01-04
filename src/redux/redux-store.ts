@@ -53,7 +53,8 @@ export type UserType = {
 /*Типизируем каждую ветку*/
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
+    newPostText: string,
+    profile: any
 }
 
 export type DialogsPageType = {
