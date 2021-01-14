@@ -1,12 +1,13 @@
 import {combineReducers, createStore, Store} from "redux";
-import {addPostAC, profileReducer, updateNewPostTextAC} from "./profile-reducer";
+import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
-import {addMessageAC, messageReducer, updateNewMessageTextAC} from "./message-reducer";
+import {messageReducer} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {usersReducer} from "./users-reducer";
+import {authReducer} from "./auth-reducer";
+
 
 /*------------------------------------------------------*/
-/*Типизируем каждый подобьект, начинаем с низшего уровня*/
 
 export type PostType = {
     id: number
@@ -78,43 +79,27 @@ export type UsersType = {
     isFetching: boolean
 }
 
+export type photoType = {
+    small: string,
+    large: string
+}
 
-/*-------------------------------------------------------*/
-/*Собираем все ветки в один обьект для state*/
-/*export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    messagesPage: MessagesPageType
-    sidebar: SidebarFriendsType
-}*/
-/*-------------------------------------------------------*/
+export type authType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean | null
+    photo: photoType
+}
 
-/*export type StoreType = {
-    _state: RootStateType
-    subscribe: (observer: () => void) => void
-    _callSubscriber: () => void
-    getState: () => RootStateType
-    dispatch: (action: actionType) => void
-}*/
-
-/*
-export type actionType = addPostAC | updateNewPostTextAC | addMessageAC | updateNewMessageTextAC
-*/
-/*
-export type addPostAC = ReturnType<typeof addPostAC>
-export type updateNewPostTextAC = ReturnType<typeof updateNewPostTextAC>
-*/
-/*
-export type addMessageAC = ReturnType<typeof addMessageAC>
-export type updateNewMessageTextAC = ReturnType<typeof updateNewMessageTextAC>
-*/
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     messagesPage: messageReducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 //типизируем reducers

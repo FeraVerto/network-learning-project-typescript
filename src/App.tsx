@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import {Profile} from "./components/Profile/Profile";
 import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -12,13 +10,14 @@ import {FriendsContainer} from "./components/Navbar/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import ProfileInfoContainer from "./components/Profile/ProfileInfo/ProfileInfoContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 //import {ProfileInfoContainer} from "./components/Profile/ProfileInfo/ProfileInfoContainer";
 
 const App = () => {
     return (
         <div className='app-wrapper'>
             <header className="header">
-                <Header/>
+                <HeaderContainer/>
             </header>
             <div className="app-wrapper-content">
 
@@ -34,7 +33,7 @@ const App = () => {
                             <Route path="/messages" render={() => <MessagesContainer/>}/>
                             <Route exact path="/news" render={() => <News/>}/>
                             <Route path="/music" render={() => <Music/>}/>
-                            <Route path="/users" render={() => <UsersContainer/>}/>
+                            <Route path="/users:userId?" render={() => <UsersContainer/>}/>
                         </div>
 
                     </div>

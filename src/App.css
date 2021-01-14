@@ -11,15 +11,10 @@
     grid-template-rows: 90px 100vh;
 }
 
-
-
-.logo {
-    margin-bottom: 50px;
-    width: 150px;
-}
-
-.logo img {
-    width: 100%;
+.header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .app-wrapper-content {
@@ -44,6 +39,7 @@
     height: 100%;
     padding: 25px;
     /*background-color: rgb(255, 255, 255);*/
+    max-width: 500px;
     background-color: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     display: flex;

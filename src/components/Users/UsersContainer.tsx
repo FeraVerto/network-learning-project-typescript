@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
 import Users from "./Users";
 import {AppStateType, UserType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
@@ -59,8 +58,10 @@ class UsersContainer extends React.Component<UsersContainerType> {
     }
 
     onClickUser = (userId: number) => {
+        console.log(this.props)
+        //let userId = this.props.history.match.params.userId
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => {
-            console.log(response.data)
+
             this.props.setUserProfile(response.data)
         })
 
@@ -93,9 +94,19 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
+//@ts-ignore
+
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setToggleIsFetching, setUserProfile}
-    )(UsersContainer)
+    {
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        setToggleIsFetching,
+        setUserProfile
+    }
+)(UsersContainer)
 
 
 /*const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {

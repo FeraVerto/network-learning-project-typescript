@@ -1,8 +1,6 @@
 import s from "./ProfileInfo.module.sass";
 import React from "react";
-import avatar from './../../../assets/image/avatar.jpg'
 import {Preloader} from "../../common/Preloader/Preloader";
-import {Button} from "@material-ui/core";
 
 type ProfileInfoType = {
     profile: any
@@ -10,7 +8,8 @@ type ProfileInfoType = {
 
 export const ProfileInfo = (props: ProfileInfoType) => {
     console.log(props)
-    if(!props.profile) return <Preloader/>
+    if (!props.profile) return <Preloader/>
+
     return (
         <div className={s.profile_info}>
             <img src={props.profile.photos.large} alt="" width="180" height="180"/>
