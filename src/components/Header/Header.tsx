@@ -12,7 +12,7 @@ const Header = (props: authType) => {
             <div className={s.login}>
                 {props.photo.small === ""
                     ? <img src={avatar} width="40px" height="40px" alt="avatar"/>
-                    : <img src={props.photo.small} alt="avatar"/>}
+                    : <img src={props.photo.small} width="40px" height="40px" alt="avatar"/>}
 
                 {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
             </div>
