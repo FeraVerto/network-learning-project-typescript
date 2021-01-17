@@ -7,7 +7,7 @@ import {
     setTotalUsersCount,
     setUsers,
     setToggleIsFetching,
-    unfollow
+    unfollow, toggleFollowingProgress
 } from "../../redux/users-reducer";
 import axios from "axios";
 import React from "react";
@@ -22,6 +22,7 @@ type mapStateToPropsType = {
     totalUsersCount: number
     currentPage: number | string
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 type mapDispatchToPropsType = {
@@ -32,6 +33,7 @@ type mapDispatchToPropsType = {
     setTotalUsersCount: (totalCount: number) => void
     setToggleIsFetching: (isFetching: boolean) => void
     setUserProfile: (userId: number) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -76,6 +78,8 @@ class UsersContainer extends React.Component<UsersContainerType> {
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
                    onClickUser={this.onClickUser}
+                   followingInProgress={this.props.followingInProgress}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
         </>
 }
@@ -87,11 +91,10 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
-
-//@ts-ignore
 
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
     {
@@ -101,7 +104,8 @@ export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppState
         setCurrentPage,
         setTotalUsersCount,
         setToggleIsFetching,
-        setUserProfile
+        setUserProfile,
+        toggleFollowingProgress
     }
 )(UsersContainer)
 

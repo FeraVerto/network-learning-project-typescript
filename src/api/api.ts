@@ -14,7 +14,6 @@ export const getUsers = (currentPage: string | number, pageSize: number) => {
     return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
 }
 
-
 export const getUsersPage = (pageNumber: number, pageSize: number) => {
     return instance.get(`users?page=${pageNumber}&count=${pageSize}`).then(response => response.data)
 }

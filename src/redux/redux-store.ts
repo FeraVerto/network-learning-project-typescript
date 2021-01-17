@@ -77,6 +77,7 @@ export type UsersType = {
     totalUsersCount: number
     currentPage: number | string
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 export type photoType = {

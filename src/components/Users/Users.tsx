@@ -4,6 +4,7 @@ import {UserType} from "../../redux/redux-store";
 import avatar from './../../assets/image/ufo-2.png'
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {toggleFollowingProgress} from "../../redux/users-reducer";
 
 type UsersType = {
     users: Array<UserType>
@@ -14,6 +15,8 @@ type UsersType = {
     currentPage: number | string
     onPageChanged: (pageNumber: number) => void
     onClickUser: (userId: number) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: Array<number>
 
     //setTotalUsersCount: (totalCount: number) => void
     //setUsers: (users: Array<UserType>) => void
@@ -54,7 +57,9 @@ export const Users = (props: UsersType) => {
                             <div className={s.button_followed}>
                                 {u.followed ?
                                     <button className={s.follow_unfollow_button}
+                                            disabled={props.followingInProgress.some(id => id === u.id)}
                                             onClick={() => {
+                                                props.toggleFollowingProgress(true, u.id)
                                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                                     withCredentials: true,
                                                     headers: {
@@ -64,13 +69,15 @@ export const Users = (props: UsersType) => {
                                                     if (response.data.resultCode === 0) {
                                                         props.unfollow(u.id)
                                                     }
-
+                                                    props.toggleFollowingProgress(false, u.id)
                                                 })
                                             }}>
                                         Unfollow
                                     </button>
                                     : <button className={s.follow_unfollow_button}
+                                              disabled={props.followingInProgress.some(id => id === u.id)}
                                               onClick={() => {
+                                                  props.toggleFollowingProgress(true, u.id)
                                                   axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                                       withCredentials: true,
                                                       headers: {
@@ -80,89 +87,89 @@ export const Users = (props: UsersType) => {
                                                       if (response.data.resultCode === 0) {
                                                           props.follow(u.id)
                                                       }
-
+                                                      props.toggleFollowingProgress(false, u.id)
                                                   })
                                               }}>
-                                                  Follow
-                                                  </button>
-                                              }
-                                    </div>
+                                        Follow
+                                    </button>
+                                }
+                            </div>
 
-                                    <div className={s.user_info}>
-                                    <div className={s.user_info_name}>
+                            <div className={s.user_info}>
+                                <div className={s.user_info_name}>
                                     <div className={s.user_name}>{u.name}</div>
                                     <div className={s.user_status}>{u.status}</div>
-                                    </div>
-                                    </div>
+                                </div>
+                            </div>
 
-                                    </div>
-                                    )}
-                                    </div>
-                                    </div>
-                                    )
-                                    }
-
-
-                                    export default Users
-
-                                    /*export function Users(props: UsersType) {
-
-                                    const getUsers = () => {
-                                    if (props.users.length === 0) {
-                                    axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                                    props.setUsers(response.data.items)
-                                    })
-
-                                    }
-                                    }
-
-                                    return (
-                                    <div className={s.users}>
-                                    <button onClick={getUsers}>get users</button>
-                                    {
-                                    props.users.map(u =>
-                                    <div key={u.id} className={s.user}>
-                                    <div className={s.user_avatar}>
-                                    <Avatar variant='rounded'
-                                    className={s.avatar}
-                                    src={u.photos.small !== null ? u.photos.small : `${avatar}`}
-                                    alt={u.name}
-
-                                    />
-                                    {u.followed ?
-                                    <button className={s.follow_unfollow_button}
-                                    onClick={() => props.unfollow(u.id)}>
-                                    Unfollow
-                                    </button>
-                                    : <button className={s.follow_unfollow_button}
-                                    onClick={() => props.follow(u.id)}>
-                                    Follow
-                                    </button>
-                                    }
-                                    </div>
-                                    <div className={s.user_info}>
-                                    <div className={s.user_info_name}>
-                                    <div className={s.user_name}>{u.name}</div>
-                                    <div className={s.user_status}>{u.status}</div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    )}
-                                    </div>
-                                    )
-                                    }*/
+                        </div>
+                    )}
+            </div>
+        </div>
+    )
+}
 
 
-                                    /*123321
-                                    let palindromeChainLength = function (n) {
-                                    // let newN = String(n).split("")
-                                    let newN2 = String(n).split("").reverse().join()
-                                    if(n !== newN2) {
-                                    let sum = n + Number(newN2)
-                                    return palindromeChainLength(sum)
-                                    } else {
-                                    return n
-                                    }
-                                    };
+export default Users
 
-                                    palindromeChainLength(44)*/
+/*export function Users(props: UsersType) {
+
+const getUsers = () => {
+if (props.users.length === 0) {
+axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+props.setUsers(response.data.items)
+})
+
+}
+}
+
+return (
+<div className={s.users}>
+<button onClick={getUsers}>get users</button>
+{
+props.users.map(u =>
+<div key={u.id} className={s.user}>
+<div className={s.user_avatar}>
+<Avatar variant='rounded'
+className={s.avatar}
+src={u.photos.small !== null ? u.photos.small : `${avatar}`}
+alt={u.name}
+
+/>
+{u.followed ?
+<button className={s.follow_unfollow_button}
+onClick={() => props.unfollow(u.id)}>
+Unfollow
+</button>
+: <button className={s.follow_unfollow_button}
+onClick={() => props.follow(u.id)}>
+Follow
+</button>
+}
+</div>
+<div className={s.user_info}>
+<div className={s.user_info_name}>
+<div className={s.user_name}>{u.name}</div>
+<div className={s.user_status}>{u.status}</div>
+</div>
+</div>
+</div>
+)}
+</div>
+)
+}*/
+
+
+/*123321
+let palindromeChainLength = function (n) {
+// let newN = String(n).split("")
+let newN2 = String(n).split("").reverse().join()
+if(n !== newN2) {
+let sum = n + Number(newN2)
+return palindromeChainLength(sum)
+} else {
+return n
+}
+};
+
+palindromeChainLength(44)*/
