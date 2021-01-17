@@ -24,7 +24,7 @@ const App = () => {
                 <main className="content">
                     <div className="main_content">
                         <div className="profile_navbar">
-                            <Route path="/profile" render={() => <ProfileInfoContainer/>}/>
+                            <Route path="/" render={() => <ProfileInfoContainer/>}/>
                             <Navbar/>
                         </div>
                         <div className="main">
