@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {ProfileInfo} from "./ProfileInfo";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
@@ -11,10 +10,34 @@ class ProfileInfoContainer extends React.Component<ProfileInfoContainerType> {
 
     render() {
         return (
-
             <ProfileInfo {...this.props} profile={this.props.profile}/>
         )
     }
+}
+
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export type PhotosType = {
+    small: string
+    large: string
+}
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
 }
 
 type mapStateToPropsType = {
@@ -26,7 +49,6 @@ type mapDispatchToPropsType = {
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-
     return {
         profile: state.profilePage.profile
     }
