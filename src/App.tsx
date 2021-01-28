@@ -11,7 +11,6 @@ import UsersContainer from "./components/Users/UsersContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import ProfileInfoContainer from "./components/Profile/ProfileInfo/ProfileInfoContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-//import {ProfileInfoContainer} from "./components/Profile/ProfileInfo/ProfileInfoContainer";
 
 const App = () => {
     return (
@@ -24,16 +23,16 @@ const App = () => {
                 <main className="content">
                     <div className="main_content">
                         <div className="profile_navbar">
-                            <Route path="/" render={() => <ProfileInfoContainer/>}/>
+                            <Route exact path="/profile/:userId" render={() => <ProfileInfoContainer/>}/>
                             <Navbar/>
                         </div>
                         <div className="main">
-                            <Route path="/profile" render={() => <ProfileContainer/>}/>
+                            <Route exact path="/profile" render={() => <ProfileContainer/>}/>
                             <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                             <Route path="/messages" render={() => <MessagesContainer/>}/>
                             <Route exact path="/news" render={() => <News/>}/>
                             <Route path="/music" render={() => <Music/>}/>
-                            <Route path="/users:userId?" render={() => <UsersContainer/>}/>
+                            <Route path="/users" render={() => <UsersContainer/>}/>
                         </div>
 
                     </div>

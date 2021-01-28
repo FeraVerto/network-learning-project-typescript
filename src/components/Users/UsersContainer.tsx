@@ -5,14 +5,16 @@ import {
     follow,
     setCurrentPage,
     unfollow,
-    toggleFollowingProgress,
     getUsers
 } from "../../redux/users-reducer";
 import React from "react";
 import {Preloader} from "../common/Preloader/Preloader";
 import {setUserProfile} from "../../redux/profile-reducer";
-import {usersAPI} from "../../api/api";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
+type PathParamsType = {
+    userId: string
+}
 
 type mapStateToPropsType = {
     users: Array<UserType>
@@ -32,23 +34,16 @@ type mapDispatchToPropsType = {
 }
 
 type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
+type ContainerType = RouteComponentProps<PathParamsType> & UsersContainerType
 
 
-class UsersContainer extends React.Component<UsersContainerType> {
+class UsersContainer extends React.Component<ContainerType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
-    }
-
-    onClickUser = (userId: number) => {
-        //let userId = this.props.history.match.params.userId
-        usersAPI.getUser(userId).then(data => {
-            this.props.setUserProfile(data)
-        })
-
     }
 
     render = () =>
@@ -62,7 +57,6 @@ class UsersContainer extends React.Component<UsersContainerType> {
                    totalUsersCount={this.props.totalUsersCount}
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
-                   onClickUser={this.onClickUser}
                    followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -80,6 +74,9 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
+
+let WithUrlDataContainerComponent = withRouter(UsersContainer)
+
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
     {
         follow,
@@ -88,7 +85,7 @@ export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppState
         setUserProfile,
         getUsers
     }
-)(UsersContainer)
+)(WithUrlDataContainerComponent)
 
 
 /*const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {

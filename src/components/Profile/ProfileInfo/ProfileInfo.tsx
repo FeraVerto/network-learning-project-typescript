@@ -2,7 +2,6 @@ import s from "./ProfileInfo.module.sass";
 import React from "react";
 import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from "./../../../assets/image/ufo-2.png"
-import {ProfileType} from "./ProfileInfoContainer";
 
 type ProfileInfoType = {
     profile: any
@@ -10,19 +9,16 @@ type ProfileInfoType = {
 
 export const ProfileInfo = (props: ProfileInfoType) => {
 
-    /*let arr = []
-    for (let c in props.profile?.contacts) {
-        props.profile?.contacts[c] !== null && arr.push(props.profile?.contacts[c])
-    }*/
-
     //достаем значения из объекта и складываем в массив
     //фильтруем массив
     //возвращаем разметку со значениями из массива
-    let contact = Object
+    let contact = props.profile !== null && Object
         .values(props.profile.contacts)
         .filter(item => item !== null)
         .map((a: any) => {
-            return <div>{a}</div>
+            return <div className={s.contact}>
+                <a rel="stylesheet" href={a}>{a} </a>
+            </div> //6326
         })
 
     if (!props.profile) return <Preloader/>
@@ -48,9 +44,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                     : null
             }
 
-            <div className={s.info_contacts}>contacts:
-                {contact}
-            </div>
+            <div className={s.info_contacts}>contacts:{contact}</div>
             <button className={s.button}>Dialog</button>
             <button className={s.button}>Follow</button>
         </div>

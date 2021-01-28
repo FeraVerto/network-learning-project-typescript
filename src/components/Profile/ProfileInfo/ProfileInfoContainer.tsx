@@ -3,16 +3,28 @@ import {ProfileInfo} from "./ProfileInfo";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {setUserProfile} from "../../../redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {usersAPI} from "../../../api/api";
 
 
-class ProfileInfoContainer extends React.Component<ProfileInfoContainerType> {
+class ProfileInfoContainer extends React.Component<Type> {
+
+    componentDidMount() {
+        let userId= this.props.match.params.userId
+        usersAPI.getUser(userId).then(data => {
+            this.props.setUserProfile(data)
+        })
+    }
 
     render() {
         return (
             <ProfileInfo {...this.props} profile={this.props.profile}/>
         )
     }
+}
+
+type ParamsType = {
+    userId: string
 }
 
 export type ContactsType = {
@@ -55,8 +67,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 }
 
 type ProfileInfoContainerType = mapStateToPropsType & mapDispatchToPropsType
+type Type = RouteComponentProps<ParamsType> & ProfileInfoContainerType
 
-//@ts-ignore
 let WithUrlDataContainerComponent = withRouter(ProfileInfoContainer)
 
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)

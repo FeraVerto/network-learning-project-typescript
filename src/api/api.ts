@@ -19,7 +19,11 @@ export const usersAPI = {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`).then(response => response.data)
     },
 
-    getUser(userId: number) {
+    getUsersPhoto() {
+        return instance.get(`/profile/photo`).then(response => response.data)
+    },
+
+    getUser(userId: string) {
         return instance.get(`profile/${userId}`).then(response => response.data)
     },
 
@@ -30,5 +34,10 @@ export const usersAPI = {
     unfollow(id: number) {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
     }
+}
 
+export const authAPI = {
+    me () {
+        return instance.get('auth/me')
+    }
 }

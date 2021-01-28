@@ -12,7 +12,6 @@ type UsersType = {
     totalUsersCount: number
     currentPage: number | string
     onPageChanged: (pageNumber: number) => void
-    onClickUser: (userId: number) => void
     followingInProgress: Array<number>
 
     //setTotalUsersCount: (totalCount: number) => void
@@ -42,7 +41,7 @@ export const Users = (props: UsersType) => {
                         <div key={u.id} className={s.user}>
 
                             <div className={s.user_avatar}>
-                                <NavLink to={"/profile/" + u.id} onClick={() => props.onClickUser(u.id)}>
+                                <NavLink to={"/profile/" + u.id}>
                                     <img className={s.avatar}
                                          src={u.photos.large !== null ? u.photos.large : `${avatar}`}
                                          alt={u.name}

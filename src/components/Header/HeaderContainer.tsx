@@ -1,10 +1,14 @@
 import React from 'react'
 import Header from "./Header";
 import {connect} from "react-redux";
-import axios from "axios";
 import {AppStateType, photoType} from "../../redux/redux-store";
 import {setUserData, setUserPhoto} from "../../redux/auth-reducer";
+import {authAPI, usersAPI} from "../../api/api";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
+type ParamsType ={
+    userId: string
+}
 
 type mapStateToPropsType = {
     id: number | null,
@@ -19,15 +23,14 @@ type mapDispatchToPropsType = {
     setUserPhoto: (small: string, large: string) => void
 }
 
-type HeaderContainerType = mapStateToPropsType & mapDispatchToPropsType
+type OwnHeaderContainerType = mapStateToPropsType & mapDispatchToPropsType
+type HeaderContainerType = RouteComponentProps<ParamsType> & OwnHeaderContainerType
 
 
 class HeaderContainer extends React.Component<HeaderContainerType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            //отправляем куки
-            withCredentials: true
-        }).then(response => {
+
+        authAPI.me().then(response => {
             if (response.data.resultCode === 0) {
                 let id = response.data.data.id
                 let email = response.data.data.email
@@ -36,16 +39,22 @@ class HeaderContainer extends React.Component<HeaderContainerType> {
             }
         })
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/photo`, {
-            //отправляем куки
-            withCredentials: true
-        }).then(response => {
+        let userId = this.props.match.params.userId
+        usersAPI.getUser(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                let small = response.data.photos.small
+                let large = response.data.photos.large
+                this.props.setUserPhoto(small, large)
+            }
+        })
+
+        /*usersAPI.getUsersPhoto().then(response => {
             if (response.data.resultCode === 0) {
                 let small = response.data.data.small
                 let large = response.data.data.large
                 this.props.setUserPhoto(small, large)
             }
-        })
+        })*/
     }
 
     render = () => <Header {...this.props}/>
@@ -61,6 +70,11 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
+//@ts-ignore
+let WithUrlUsersDataContainerComponent = withRouter(HeaderContainer)
 
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {setUserData, setUserPhoto})(HeaderContainer)
+export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
+    setUserData,
+    setUserPhoto
+})(WithUrlUsersDataContainerComponent)
 

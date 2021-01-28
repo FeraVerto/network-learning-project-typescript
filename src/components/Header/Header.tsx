@@ -5,7 +5,6 @@ import {authType} from "../../redux/redux-store";
 import avatar from "./../../assets/image/ufo-2.png"
 
 const Header = (props: authType) => {
-    console.log(props)
     return (
         <>
             <div className={s.site_name}>Spacebook</div>
