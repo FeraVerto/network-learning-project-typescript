@@ -39,10 +39,12 @@ type ContainerType = RouteComponentProps<PathParamsType> & UsersContainerType
 
 class UsersContainer extends React.Component<ContainerType> {
     componentDidMount() {
+        //запрашиваем юзеров
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
+        //запрашиваем юзеров
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
@@ -86,32 +88,3 @@ export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppState
         getUsers
     }
 )(WithUrlDataContainerComponent)
-
-
-/*const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        follow: (id) => {
-            dispatch(followAC(id))
-        },
-
-        unfollow: (id) => {
-            dispatch(unfollowAC(id))
-        },
-
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-
-        setToggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}*/

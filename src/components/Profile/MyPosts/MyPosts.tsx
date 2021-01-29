@@ -3,13 +3,15 @@ import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.sass"
 import {TextareaAutosize} from "@material-ui/core";
 import {PostType} from "../../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 
 export type MyPostsType = {
     posts: Array<PostType>
-    onPostChange: (text: string) => void
-    addPost: () => void
+    updateNewPostTextAC: (text: string) => void
+    addPostAC: () => void
     newPostText: string
+    isAuth: boolean | null
 }
 
 
@@ -21,7 +23,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
     let [changePost, setChangePost] = useState()*/
     let addPost = () => {
         /*setPost(props.addPost(changePost))*/
-        props.addPost();
+        props.addPostAC();
     }
 
     let onPostChange = () => {
@@ -29,8 +31,10 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
             props.updateNewPostText(newPostElement.current.value)
         }*/
         /*newPostElement.current && props.updateNewPostText(newPostElement.current.value)*/
-        props.onPostChange(newPostElement.current ? newPostElement.current.value : "----")
+        props.updateNewPostTextAC(newPostElement.current ? newPostElement.current.value : "----")
     }
+
+    if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={s.my_post}>

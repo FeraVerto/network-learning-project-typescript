@@ -19,10 +19,6 @@ export const usersAPI = {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`).then(response => response.data)
     },
 
-    getUsersPhoto() {
-        return instance.get(`/profile/photo`).then(response => response.data)
-    },
-
     getUser(userId: string) {
         return instance.get(`profile/${userId}`).then(response => response.data)
     },

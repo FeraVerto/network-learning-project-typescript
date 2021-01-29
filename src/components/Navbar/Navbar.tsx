@@ -7,6 +7,7 @@ type NavbarType = {
 }
 
 const Navbar: React.FC<NavbarType> = (props) => {
+
     return (
         <nav className={s.nav}>
             <ul className={s.nav_list}>

@@ -1,4 +1,5 @@
 import {authType} from "./redux-store";
+import {authAPI, usersAPI} from "../api/api";
 
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const SET_USER_PHOTO = 'SET_USER_PHOTO'
@@ -38,12 +39,33 @@ export function authReducer(state = initialState, action: setUserDataType | setU
     }
 }
 
-export const setUserData = (id: number, email: string, login: string) => ({
+const setUserData = (id: number, email: string, login: string) => ({
     type: SET_USER_DATA,
     data: {id, email, login}
 } as const)
 
-export const setUserPhoto = (small: string, large: string) => ({
+const setUserPhoto = (small: string, large: string) => ({
     type: SET_USER_PHOTO,
     data: {small, large}
 } as const)
+
+export const getUserAuthData = () => (dispatch: any) => {
+    authAPI.me().then(response => {
+        if (response.data.resultCode === 0) {
+            let id = response.data.data.id
+            let email = response.data.data.email
+            let login = response.data.data.login
+            dispatch(setUserData(id, email, login))
+        }
+    })
+}
+
+export const getUserPhoto = (userId: string) => (dispatch: any) => {
+    usersAPI.getUser(userId).then(response => {
+        if (response.data.resultCode === 0) {
+            let small = response.data.photos.small
+            let large = response.data.photos.large
+            dispatch(setUserPhoto(small, large))
+        }
+    })
+}
