@@ -1,0 +1,1 @@
+/*!userId && <Redirect to={"/login"}></Redirect>*/
