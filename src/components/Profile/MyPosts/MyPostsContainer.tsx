@@ -1,6 +1,6 @@
 import React from "react";
 import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
-import {MyPosts} from "./MyPosts";
+import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType, PostType} from "../../../redux/redux-store";
 

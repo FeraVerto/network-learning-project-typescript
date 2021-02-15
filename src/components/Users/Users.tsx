@@ -13,10 +13,6 @@ type UsersType = {
     currentPage: number | string
     onPageChanged: (pageNumber: number) => void
     followingInProgress: Array<number>
-
-    //setTotalUsersCount: (totalCount: number) => void
-    //setUsers: (users: Array<UserType>) => void
-    //setCurrentPage: (pageNumber: number) => void
 }
 
 export const Users = (props: UsersType) => {

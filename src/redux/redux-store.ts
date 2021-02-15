@@ -95,7 +95,7 @@ export type authType = {
 }
 
 
-let reducers = combineReducers({
+let reducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     messagesPage: messageReducer,
@@ -105,7 +105,7 @@ let reducers = combineReducers({
 })
 
 //типизируем reducers
-export type RootReducerType = typeof reducers
+export type RootReducerType = typeof reducer
 //типизируем state
 export type AppStateType = ReturnType<RootReducerType>
 
@@ -113,4 +113,4 @@ export type StoreType = Store<AppStateType>
 /*export type StoreType = Store<AppStateType, actionType>*/
 
 //создаем store
-export let store: StoreType = createStore(reducers, applyMiddleware(thunkMiddleware));
+export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddleware));

@@ -15,7 +15,7 @@ export type MyPostsType = {
 }
 
 
-export const MyPosts: React.FC<MyPostsType> = (props) => {
+const MyPosts: React.FC<MyPostsType> = (props) => {
     let newPosts = props.posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like}/>)
     /*Создаем ссылку на какой-то элемент из jsx*/
     let newPostElement = React.createRef<HTMLTextAreaElement>();
@@ -59,3 +59,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
         </div>
     )
 }
+
+export default MyPosts
+
+
