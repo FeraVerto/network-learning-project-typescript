@@ -56,7 +56,8 @@ export type UserType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string,
-    profile: any
+    profile: any,
+    status: any
 }
 
 export type DialogsPageType = {

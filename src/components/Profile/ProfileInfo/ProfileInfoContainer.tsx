@@ -2,8 +2,8 @@ import React from "react";
 import {ProfileInfo} from "./ProfileInfo";
 import {connect} from "react-redux";
 import {AppStateType, ProfilePageType} from "../../../redux/redux-store";
-import {getUserProfile} from "../../../redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {getStatus, getUserProfile, updateStatus} from "../../../redux/profile-reducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
@@ -16,13 +16,17 @@ class ProfileInfoContainer extends React.Component<Type> {
             userId = '8320'
         }
         this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
-        console.log('Уходит в Профайл инфо')
-        console.log(this.props)
+
         return (
-            <ProfileInfo {...this.props} profile={this.props.profile}/>
+            <ProfileInfo {...this.props}
+                         profile={this.props.profile}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatus}
+            />
         )
     }
 }
@@ -58,15 +62,19 @@ export type ProfileType = {
 
 type mapStateToPropsType = {
     profile: ProfilePageType
+    status: any
 }
 
 type mapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
+    getStatus: (userId: string) => void
+    updateStatus: (status: string) => void
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
 
@@ -76,7 +84,11 @@ type Type = RouteComponentProps<ParamsType> & ProfileInfoContainerType
 
 
 export default compose<React.ComponentType>(
-    connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {getUserProfile}),
+    connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
+        getUserProfile,
+        getStatus,
+        updateStatus
+    }),
     withRouter,
     withAuthRedirect
 )(ProfileInfoContainer)

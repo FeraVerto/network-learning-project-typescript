@@ -3,9 +3,12 @@ import React from "react";
 import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from "./../../../assets/image/ufo-2.png"
 import {ProfileStatus} from "./ProfileStatus";
+import {updateStatus} from "../../../redux/profile-reducer";
 
 type ProfileInfoType = {
     profile: any
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
@@ -16,7 +19,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         .values(props.profile.contacts)
         .filter(item => item !== null)
         .map((a: any) => {
-            return <div className={s.contact}>
+            return <div key={a} className={s.contact}>
                 <a rel="stylesheet" href={a}>{a} </a>
             </div> //6326
         })
@@ -31,7 +34,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                     : <img src={avatar} alt="" width="180" height="180"/>
             }
 
-            <ProfileStatus/>
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
 
             <div className={s.info_name}>{props.profile.fullName}</div>
             {

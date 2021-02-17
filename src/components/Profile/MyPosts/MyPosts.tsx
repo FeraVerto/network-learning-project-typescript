@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.sass"
 import {TextareaAutosize} from "@material-ui/core";
@@ -18,7 +18,6 @@ export type MyPostsType = {
 const MyPosts: React.FC<MyPostsType> = (props) => {
     let newPosts = props.posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like}/>)
     /*Создаем ссылку на какой-то элемент из jsx*/
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
     /*let [post, setPost] = useState()
     let [changePost, setChangePost] = useState()*/
     let addPost = () => {
@@ -26,12 +25,12 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
         props.addPostAC();
     }
 
-    let onPostChange = () => {
+    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         /*if (newPostElement.current) {
             props.updateNewPostText(newPostElement.current.value)
         }*/
         /*newPostElement.current && props.updateNewPostText(newPostElement.current.value)*/
-        props.updateNewPostTextAC(newPostElement.current ? newPostElement.current.value : "----")
+        props.updateNewPostTextAC(e.target ? e.target.value : "----")
     }
 
     if (!props.isAuth) return <Redirect to={"/login"}/>
@@ -40,7 +39,7 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
         <div className={s.my_post}>
             <div className={s.posts_block}>
                 <div className={s.posts}>
-                    <TextareaAutosize ref={newPostElement}
+                    <TextareaAutosize
                                       rows={5}
                                       value={props.newPostText}
                                       onChange={onPostChange}

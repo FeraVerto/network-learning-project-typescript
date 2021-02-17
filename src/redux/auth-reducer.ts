@@ -61,7 +61,7 @@ export const getUserAuthData = () => (dispatch: any) => {
 }
 
 export const getUserPhoto = (userId: string) => (dispatch: any) => {
-    usersAPI.getUser(userId).then(response => {
+    usersAPI.getProfile(userId).then(response => {
         if (response.data.resultCode === 0) {
             let small = response.data.photos.small
             let large = response.data.photos.large

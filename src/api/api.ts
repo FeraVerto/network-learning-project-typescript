@@ -19,8 +19,9 @@ export const usersAPI = {
         return instance.get(`users?page=${pageNumber}&count=${pageSize}`).then(response => response.data)
     },
 
-    getUser(userId: string) {
-        return instance.get(`profile/${userId}`).then(response => response.data)
+    getProfile(userId: string) {
+        console.warn("Obsolete method. Please profileAPI object")
+        return profileAPI.getProfile(userId)
     },
 
     follow(id: number) {
@@ -29,6 +30,21 @@ export const usersAPI = {
 
     unfollow(id: number) {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: string) {
+        console.warn("Obsolete method. Please profileAPI object")
+        return instance.get(`profile/${userId}`).then(response => response.data)
+    },
+
+    getStatus(userId: string) {
+        return instance.get(`profile/status/` + userId)
+    },
+
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status: status})
     }
 }
 
