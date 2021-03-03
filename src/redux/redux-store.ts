@@ -5,7 +5,29 @@ import {messageReducer} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
-import thunkMiddleware from "redux-thunk"
+import thunkMiddleware from "redux-thunk";
+import {reducer as formReducer} from 'redux-form';
+
+let reducer = combineReducers({
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    messagesPage: messageReducer,
+    sidebar: sidebarReducer,
+    usersPage: usersReducer,
+    auth: authReducer,
+    form: formReducer
+})
+
+//типизируем reducers
+export type RootReducerType = typeof reducer
+//типизируем state
+export type AppStateType = ReturnType<RootReducerType>
+
+export type StoreType = Store<AppStateType>
+/*export type StoreType = Store<AppStateType, actionType>*/
+
+//создаем store
+export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 
 /*------------------------------------------------------*/
@@ -66,7 +88,6 @@ export type DialogsPageType = {
 
 export type MessagesPageType = {
     messages: Array<MessageType>
-    newMessageText: string
 }
 
 export type SidebarFriendsType = {
@@ -93,25 +114,8 @@ export type authType = {
     login: string | null,
     isAuth: boolean | null
     photo: photoType
+    isLoggedIn: boolean
 }
 
 
-let reducer = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    messagesPage: messageReducer,
-    sidebar: sidebarReducer,
-    usersPage: usersReducer,
-    auth: authReducer
-})
 
-//типизируем reducers
-export type RootReducerType = typeof reducer
-//типизируем state
-export type AppStateType = ReturnType<RootReducerType>
-
-export type StoreType = Store<AppStateType>
-/*export type StoreType = Store<AppStateType, actionType>*/
-
-//создаем store
-export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddleware));

@@ -3,13 +3,11 @@ import s from "./Messages.module.sass";
 import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import {MessageType} from "../../../redux/redux-store";
-import {TextareaAutosize} from "@material-ui/core";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type MessagesType = {
     messages: Array<MessageType>
-    addMessage: () => void
-    onChangeMessage: (text: string) => void
-    newMessageText: string
+    addMessage: (newMessageText: string) => void
 }
 
 const Messages: React.FC<MessagesType> = (props) => {
@@ -28,20 +26,9 @@ const Messages: React.FC<MessagesType> = (props) => {
 
     </div>)
 
-    let newElement = React.createRef<HTMLTextAreaElement>();
-
-    /* let [message, setMessage] = useState()
-     let [change, setChange] = useState()
- */
-    const addMessage = () => {
-        /*setMessage(props.addMessage(change))*/
-        //Чтобы вынести в отдельную переменную, нужно типизировать эту переменную
-        //так как action определяется как {type: string
-        props.addMessage();
-    }
-
-    const onChangeMessage = () => {
-        props.onChangeMessage(newElement.current ? newElement.current.value : "----")
+    const onSubmit = (formData: MessagesPropsFormType) => {
+        /*props.loginTC(formData)*/
+        props.addMessage(formData.newMessageText)
     }
 
     return (
@@ -53,32 +40,36 @@ const Messages: React.FC<MessagesType> = (props) => {
                 <div>Avatar + name</div>
             </div>
             {newMessages}
-            <div className={s.dialog_footer}>
-                <TextareaAutosize ref={newElement}
-                                  rows={5}
-                                  value={props.newMessageText}
-                                  onChange={onChangeMessage}
-                                  aria-label="empty textarea"
-                                  placeholder="Empty"
-                                  className={s.dialog_footer_textarea}
-                />
-                {/*
-                <textarea ref={newElement} value={props.newMessageText} onChange={onChangeMessage} rows={5}></textarea>
-*/}
-                {/*value={message} onChange={(e) => {setChange(e.currentTarget.value)}}*/}
-                <Button
-                    fullWidth={true}
-                    onClick={addMessage}
-                    variant="contained"
-                    color="default"
-                    className={s.button}
-                    /*endIcon={<Icon>send</Icon>}*/
-                >Send
-                </Button>
-                {/*<button onClick={addMessage}>Send</button>*/}
-            </div>
+            <MessagesReduxForm onSubmit={onSubmit}/>
+
         </div>
     )
 }
 
 export default Messages;
+
+export type MessagesPropsFormType = {
+    newMessageText: string
+}
+
+export const MessagesForm: React.FC<InjectedFormProps<MessagesPropsFormType>> = (props) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div className={s.dialog_footer}>
+                <Field
+                    component={"textarea"}
+                    name={"newMessageText"}
+                    placeholder={"Enter your message"}
+                    className={s.dialog_footer_textarea}
+                />
+
+                <button className={s.button}>Send</button>
+            </div>
+        </form>
+    )
+}
+
+export const MessagesReduxForm = reduxForm<MessagesPropsFormType>({
+    form: 'newMessageText'
+})(MessagesForm)

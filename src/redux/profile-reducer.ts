@@ -2,14 +2,12 @@ import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 const ADD_POST = "ADD_POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT"
 const SET_PROFILE_INFO = "SET_PROFILE_INFO"
 const SET_STATUS = "SET_STATUS"
 const UPDATE_STATUS = "UPDATE_STATUS"
 
 
 export type addPostAC = ReturnType<typeof addPostAC>
-export type updateNewPostTextAC = ReturnType<typeof updateNewPostTextAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setUserStatus = ReturnType<typeof setUserStatus>
 export type updateUserStatus = ReturnType<typeof updateUserStatus>
@@ -21,26 +19,17 @@ let initialState = {
         {id: 2, message: "Или сдохни", like: 40},
         {id: 3, message: "Или умри", like: 1}
     ],
-
-    newPostText: "",
     profile: null,
     status: ""
 }
 
-export function profileReducer(state = initialState, action: addPostAC | updateNewPostTextAC | setUserProfileType | setUserStatus | updateUserStatus) {
+export function profileReducer(state = initialState, action: addPostAC | setUserProfileType | setUserStatus | updateUserStatus) {
     switch (action.type) {
         case ADD_POST:
             return {
                 ...state,
-                posts: [{id: 5, message: state.newPostText, like: 25}, ...state.posts],
-                newPostText: ""
+                posts: [{id: 5, message: action.newPostText, like: 25}, ...state.posts],
             }
-
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.text
-            };
 
         case SET_PROFILE_INFO:
             return {
@@ -55,8 +44,6 @@ export function profileReducer(state = initialState, action: addPostAC | updateN
             }
 
         case UPDATE_STATUS:
-            console.log("UPDATE_STATUS")
-            console.log(action.status)
             return {
                 ...state,
                 status: action.status
@@ -67,8 +54,7 @@ export function profileReducer(state = initialState, action: addPostAC | updateN
     }
 }
 
-export const addPostAC = () => ({type: ADD_POST} as const)
-export const updateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, text: text} as const)
+export const addPostAC = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
 export const setUserProfile = (profile: any) => ({
     type: SET_PROFILE_INFO,
     profile

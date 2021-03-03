@@ -15,6 +15,7 @@ type mapStateToPropsType = {
     login: string | null,
     isAuth: boolean | null,
     photo: photoType
+    isLoggedIn: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -45,7 +46,8 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         email: state.auth.email,
         login: state.auth.login,
         isAuth: state.auth.isAuth,
-        photo: state.auth.photo
+        photo: state.auth.photo,
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 

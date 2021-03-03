@@ -25,7 +25,7 @@ const App = () => {
                     <div className="main_content">
                         <div className="profile_navbar">
                             <Route exact path="/profile/:userId?" render={() => <ProfileInfoContainer/>}/>
-                            <Route path="/login" render={() => <Login />}/>
+                            <Route path="/login" render={() => <Login/>}/>
                             <Navbar/>
                         </div>
                         <div className="main">
@@ -35,7 +35,6 @@ const App = () => {
                             <Route path="/news" render={() => <News/>}/>
                             <Route path="/music" render={() => <Music/>}/>
                             <Route path="/users" render={() => <UsersContainer/>}/>
-
                         </div>
 
                     </div>

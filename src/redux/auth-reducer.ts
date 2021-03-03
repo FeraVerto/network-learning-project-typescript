@@ -1,8 +1,11 @@
 import {authType} from "./redux-store";
 import {authAPI, usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+import {FormDataType} from "../components/Login/Login";
 
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const SET_USER_PHOTO = 'SET_USER_PHOTO'
+export const SET_LOGGED_IN = 'SET_LOGGED_IN'
 
 
 export const initialState: authType = {
@@ -13,13 +16,15 @@ export const initialState: authType = {
     photo: {
         small: "",
         large: ""
-    }
+    },
+    isLoggedIn: false
 }
 
 export type setUserDataType = ReturnType<typeof setUserData>
 export type setUserPhotoType = ReturnType<typeof setUserPhoto>
+export type setIsLoggedInType = ReturnType<typeof setIsLoggedIn>
 
-export function authReducer(state = initialState, action: setUserDataType | setUserPhotoType) {
+export function authReducer(state = initialState, action: setUserDataType | setUserPhotoType | setIsLoggedInType) {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -49,6 +54,12 @@ const setUserPhoto = (small: string, large: string) => ({
     data: {small, large}
 } as const)
 
+const setIsLoggedIn = (value: boolean) => ({
+    type: SET_LOGGED_IN,
+    value
+} as const)
+
+
 export const getUserAuthData = () => (dispatch: any) => {
     authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
@@ -60,12 +71,20 @@ export const getUserAuthData = () => (dispatch: any) => {
     })
 }
 
-export const getUserPhoto = (userId: string) => (dispatch: any) => {
+export const getUserPhoto = (userId: string) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId).then(response => {
         if (response.data.resultCode === 0) {
             let small = response.data.photos.small
             let large = response.data.photos.large
             dispatch(setUserPhoto(small, large))
+        }
+    })
+}
+
+export const loginTC = (formData: FormDataType) => (dispatch: Dispatch) => {
+    authAPI.login(formData).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setIsLoggedIn(true))
         }
     })
 }
