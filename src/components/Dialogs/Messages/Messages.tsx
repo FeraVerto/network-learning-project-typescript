@@ -4,11 +4,15 @@ import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import {MessageType} from "../../../redux/redux-store";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../../common/Preloader/FormsControls/FormsControls";
+import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 
 type MessagesType = {
     messages: Array<MessageType>
     addMessage: (newMessageText: string) => void
 }
+
+const maxLength50 = maxLengthCreator(50)
 
 const Messages: React.FC<MessagesType> = (props) => {
     let newMessages = props.messages.map(m => <div key={m.id} className={s.dialog_body}>
@@ -58,10 +62,11 @@ export const MessagesForm: React.FC<InjectedFormProps<MessagesPropsFormType>> = 
         <form onSubmit={props.handleSubmit}>
             <div className={s.dialog_footer}>
                 <Field
-                    component={"textarea"}
+                    component={Textarea}
                     name={"newMessageText"}
                     placeholder={"Enter your message"}
                     className={s.dialog_footer_textarea}
+                    validate={[requiredField, maxLength50]}
                 />
 
                 <button className={s.button}>Send</button>

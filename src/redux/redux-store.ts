@@ -112,9 +112,8 @@ export type authType = {
     id: number | null,
     email: string | null,
     login: string | null,
-    isAuth: boolean | null
+    isAuth: boolean
     photo: photoType
-    isLoggedIn: boolean
 }
 
 

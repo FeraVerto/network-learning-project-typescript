@@ -5,7 +5,7 @@ import {FormDataType} from "../components/Login/Login";
 
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const SET_USER_PHOTO = 'SET_USER_PHOTO'
-export const SET_LOGGED_IN = 'SET_LOGGED_IN'
+/*export const SET_LOGGED_IN = 'SET_LOGGED_IN'*/
 
 
 export const initialState: authType = {
@@ -16,21 +16,19 @@ export const initialState: authType = {
     photo: {
         small: "",
         large: ""
-    },
-    isLoggedIn: false
+    }
 }
 
 export type setUserDataType = ReturnType<typeof setUserData>
 export type setUserPhotoType = ReturnType<typeof setUserPhoto>
-export type setIsLoggedInType = ReturnType<typeof setIsLoggedIn>
+/*export type setIsLoggedInType = ReturnType<typeof setIsLoggedIn>*/
 
-export function authReducer(state = initialState, action: setUserDataType | setUserPhotoType | setIsLoggedInType) {
+export function authReducer(state = initialState, action: setUserDataType | setUserPhotoType) {
     switch (action.type) {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
 
         case SET_USER_PHOTO:
@@ -44,9 +42,9 @@ export function authReducer(state = initialState, action: setUserDataType | setU
     }
 }
 
-const setUserData = (id: number, email: string, login: string) => ({
+const setUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {id, email, login}
+    payload: {id, email, login, isAuth}
 } as const)
 
 const setUserPhoto = (small: string, large: string) => ({
@@ -54,19 +52,19 @@ const setUserPhoto = (small: string, large: string) => ({
     data: {small, large}
 } as const)
 
-const setIsLoggedIn = (value: boolean) => ({
+/*const setIsLoggedIn = (value: boolean) => ({
     type: SET_LOGGED_IN,
     value
-} as const)
+} as const)*/
 
 
-export const getUserAuthData = () => (dispatch: any) => {
+export const getUserAuthData = () => (dispatch: Dispatch) => {
     authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let id = response.data.data.id
             let email = response.data.data.email
             let login = response.data.data.login
-            dispatch(setUserData(id, email, login))
+            dispatch(setUserData(id, email, login, true))
         }
     })
 }
@@ -81,10 +79,18 @@ export const getUserPhoto = (userId: string) => (dispatch: Dispatch) => {
     })
 }
 
-export const loginTC = (formData: FormDataType) => (dispatch: Dispatch) => {
-    authAPI.login(formData).then(response => {
+export const loginTC = (email: string, password: string, rememberMe: boolean, captcha?: boolean) => (dispatch: Dispatch) => {
+    authAPI.login(email, password, rememberMe, captcha).then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(setIsLoggedIn(true))
+            dispatch(getUserAuthData() as any)
         }
-    })
+    } )
+}
+
+export const logoutTC = () => (dispatch: Dispatch) => {
+    authAPI.logout().then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setUserData(null, null, null, true))
+        }
+    } )
 }

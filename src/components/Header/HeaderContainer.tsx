@@ -2,7 +2,7 @@ import React from 'react'
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType, photoType} from "../../redux/redux-store";
-import {getUserAuthData, getUserPhoto} from "../../redux/auth-reducer";
+import {getUserAuthData, getUserPhoto, logoutTC} from "../../redux/auth-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type ParamsType = {
@@ -13,14 +13,14 @@ type mapStateToPropsType = {
     id: number | null,
     email: string | null,
     login: string | null,
-    isAuth: boolean | null,
+    isAuth: boolean,
     photo: photoType
-    isLoggedIn: boolean
 }
 
 type mapDispatchToPropsType = {
     getUserAuthData: () => void
     getUserPhoto: (userId: string) => void
+    logoutTC: () => void
 }
 
 type OwnHeaderContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -46,8 +46,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         email: state.auth.email,
         login: state.auth.login,
         isAuth: state.auth.isAuth,
-        photo: state.auth.photo,
-        isLoggedIn: state.auth.isLoggedIn
+        photo: state.auth.photo
     }
 }
 
@@ -57,6 +56,7 @@ let WithUrlUsersDataContainerComponent = withRouter(HeaderContainer)
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
     {
         getUserAuthData,
-        getUserPhoto
+        getUserPhoto,
+        logoutTC
     })(WithUrlUsersDataContainerComponent)
 

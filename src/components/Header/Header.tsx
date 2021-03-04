@@ -4,7 +4,9 @@ import {NavLink} from "react-router-dom";
 import {authType} from "../../redux/redux-store";
 import avatar from "./../../assets/image/ufo-2.png"
 
-const Header = (props: authType) => {
+type HeaderType = authType
+
+const Header = (props: any) => {
     return (
         <>
             <div className={s.site_name}>Spacebook</div>
@@ -13,7 +15,9 @@ const Header = (props: authType) => {
                     ? <img src={avatar} width="40px" height="40px" alt="avatar"/>
                     : <img src={props.photo.small} width="40px" height="40px" alt="avatar"/>}
 
-                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth
+                    ? <div>{props.login} - <button onClick={props.logoutTC}>Log out</button></div>
+                    : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </>
     )
