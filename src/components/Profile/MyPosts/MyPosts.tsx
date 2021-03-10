@@ -67,10 +67,6 @@ export const PostsFormRedux = reduxForm<PostsFormType>({
 export default MyPosts
 
 
-// 2nd root of 256 is 16
-// 4th root of 256 is 4
-// 8th root of 256 is 2
-
 /*function perfectRoots(n) {
     if (!Number.isInteger(n)) {
         return
@@ -83,8 +79,35 @@ export default MyPosts
             perfectRoots(sqrt)
         }
     }
+
+}*/
+/*let num = (a) => {
+    return +a
+}
+let arr = ["1", "2", "3"]
+let toNumberArray = (stringarray) => stringarray.map(num)
+
+toNumberArray(arr)*/
+
+/*numbers[numbers.length - 1] **/
+/*function evenLast(numbers) {
+    return numbers.length === 0
+        ? 0
+        : numbers[numbers.length - 1] *
+        numbers.reduce((num, acc, i) =>
+            i % 2 === 0 ? num + acc : num + 0, 0)
 }
 
-perfectRoots(256) // returns true
-perfectRoots(1000) // returns true
-perfectRoots(6561) // returns true*/
+evenLast([2, 3, 4, 5])
+
+
+function sequence(x) {
+    let res = []
+    for (let i = 1; i <= x; i++) {
+        res.push(i)
+    }
+    return res.sort()
+}
+
+sequence(16)*/
+//result = [1, 10, 11, 12, 13, 14, 15, 16, 2, 3, 4, 5, 6, 7, 8, 9]

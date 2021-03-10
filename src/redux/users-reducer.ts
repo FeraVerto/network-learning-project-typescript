@@ -105,7 +105,7 @@ export const setUsers = (users: Array<UserType>) => ({
     users
 } as const)
 
-export const setCurrentPage = (currentPage: number) => ({
+export const setCurrentPage = (currentPage: number | string) => ({
     type: SET_CURRENT_PAGE,
     currentPage
 } as const)
@@ -126,9 +126,10 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     userId
 } as const)
 
-export const getUsers = (currentPage: number | string, pageSize: number) => (dispatch: any) => {
+export const requestUsers = (page: number | string, pageSize: number) => (dispatch: any) => {
     dispatch(setToggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize).then(data => {
+    dispatch(setCurrentPage(page))
+    usersAPI.getUsers(page, pageSize).then(data => {
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
         dispatch(setToggleIsFetching(false))

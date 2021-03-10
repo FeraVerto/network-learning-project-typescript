@@ -5,12 +5,19 @@ import {
     follow,
     setCurrentPage,
     unfollow,
-    getUsers
+    requestUsers
 } from "../../redux/users-reducer";
 import React from "react";
 import {Preloader} from "../common/Preloader/Preloader";
 import {setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsersSelector
+} from "../../redux/users-selectors";
 
 type PathParamsType = {
     userId: string
@@ -65,7 +72,7 @@ class UsersContainer extends React.Component<ContainerType> {
 }
 
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+/*const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -73,6 +80,18 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
+    }
+}*/
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+
+    return {
+        users: getUsersSelector(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
@@ -85,7 +104,7 @@ export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppState
         unfollow,
         setCurrentPage,
         setUserProfile,
-        getUsers
+        getUsers: requestUsers
     }
 )(WithUrlDataContainerComponent)
 

@@ -2,7 +2,7 @@ import React from 'react'
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType, photoType} from "../../redux/redux-store";
-import {getUserAuthData, getUserPhoto, logoutTC} from "../../redux/auth-reducer";
+import {getUserPhoto, logoutTC} from "../../redux/auth-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type ParamsType = {
@@ -18,7 +18,7 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    getUserAuthData: () => void
+    /*getUserAuthData: () => void*/
     getUserPhoto: (userId: string) => void
     logoutTC: () => void
 }
@@ -29,9 +29,9 @@ type HeaderContainerType = RouteComponentProps<ParamsType> & OwnHeaderContainerT
 
 class HeaderContainer extends React.Component<HeaderContainerType> {
     componentDidMount() {
-        //запрашиваем авторизационные данные
+        /*//запрашиваем авторизационные данные
         this.props.getUserAuthData()
-
+*/
         //запрашиваем фото авторизованного пользователя
         let userId = this.props.match.params.userId
         this.props.getUserPhoto(userId)
@@ -55,7 +55,7 @@ let WithUrlUsersDataContainerComponent = withRouter(HeaderContainer)
 
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
     {
-        getUserAuthData,
+        /*getUserAuthData,*/
         getUserPhoto,
         logoutTC
     })(WithUrlUsersDataContainerComponent)

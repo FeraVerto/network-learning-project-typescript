@@ -1,11 +1,10 @@
 import {authType} from "./redux-store";
 import {authAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {FormDataType} from "../components/Login/Login";
+import {stopSubmit} from "redux-form";
 
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const SET_USER_PHOTO = 'SET_USER_PHOTO'
-/*export const SET_LOGGED_IN = 'SET_LOGGED_IN'*/
 
 
 export const initialState: authType = {
@@ -21,7 +20,6 @@ export const initialState: authType = {
 
 export type setUserDataType = ReturnType<typeof setUserData>
 export type setUserPhotoType = ReturnType<typeof setUserPhoto>
-/*export type setIsLoggedInType = ReturnType<typeof setIsLoggedIn>*/
 
 export function authReducer(state = initialState, action: setUserDataType | setUserPhotoType) {
     switch (action.type) {
@@ -52,11 +50,6 @@ const setUserPhoto = (small: string, large: string) => ({
     data: {small, large}
 } as const)
 
-/*const setIsLoggedIn = (value: boolean) => ({
-    type: SET_LOGGED_IN,
-    value
-} as const)*/
-
 
 export const getUserAuthData = () => (dispatch: Dispatch) => {
     authAPI.me().then(response => {
@@ -83,14 +76,17 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
     authAPI.login(email, password, rememberMe, captcha).then(response => {
         if (response.data.resultCode === 0) {
             dispatch(getUserAuthData() as any)
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+            dispatch(stopSubmit("login", {_error: message}))
         }
-    } )
+    })
 }
 
 export const logoutTC = () => (dispatch: Dispatch) => {
     authAPI.logout().then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(setUserData(null, null, null, true))
+            dispatch(setUserData(null, null, null, false))
         }
-    } )
+    })
 }

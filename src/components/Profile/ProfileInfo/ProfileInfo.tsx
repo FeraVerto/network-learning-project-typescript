@@ -31,7 +31,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             {
                 props.profile.photos.large
                     ? <img src={props.profile.photos.large} alt="" width="180" height="180"/>
-                    : <img src={avatar} alt="" width="180" height="180"/>
+                    : <img src={avatar} alt="" width="240" height="180"/>
             }
 
             <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
