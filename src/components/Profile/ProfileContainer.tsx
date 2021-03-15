@@ -24,10 +24,8 @@ class ProfileContainer extends React.Component<Type> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId;
-        console.log("ProfileContainer", userId)
         if (!userId) {
             userId = this.props.authorizedUserId;
-            console.log("ProfileContainer undefined", userId)
             if (!userId) {
                 //Не самое лучшее решение, но по-быструхе можно так сделать
                 this.props.history.push("/login");
@@ -42,13 +40,12 @@ class ProfileContainer extends React.Component<Type> {
     }
 
     componentDidUpdate(prevProps: any) {
-        if (this.props.match.params.userId != prevProps.match.params.userId) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile();
         }
     }
 
     render() {
-        console.log("ProfileContainer", this.props)
         return <Profile {...this.props}
                         isOwner={!this.props.match.params.userId}
                         profile={this.props.profile}

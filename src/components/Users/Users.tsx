@@ -15,70 +15,70 @@ type UsersType = {
     followingInProgress: Array<number>
 }
 
-export const Users = (props: UsersType) => {
+export const Users = React.memo((props: UsersType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = []
-    for (let i = 1; i < pagesCount; i++) {
-        pages.push(i)
-    }
+        let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+        let pages = []
+        for (let i = 1; i < pagesCount; i++) {
+            pages.push(i)
+        }
 
-    return (
-        <div className={s.users}>
+        return (
+            <div className={s.users}>
 
-            <div className={s.users_paginator}>
-                {pages.map(p => <span onClick={(e) => props.onPageChanged(p)}
-                                      className={props.currentPage === p ? s.selectPage : s.page}>{p}</span>)}
-            </div>
+                <div className={s.users_paginator}>
+                    {pages.map(p => <span onClick={(e) => props.onPageChanged(p)}
+                                          className={props.currentPage === p ? s.selectPage : s.page}>{p}</span>)}
+                </div>
 
-            <div className={s.users_list}>
-                {
-                    props.users.map(u =>
-                        <div key={u.id} className={s.user}>
+                <div className={s.users_list}>
+                    {
+                        props.users.map(u =>
+                            <div key={u.id} className={s.user}>
 
-                            <div className={s.user_avatar}>
-                                <NavLink to={"/profile/" + u.id}>
-                                    <img className={s.avatar}
-                                         src={u.photos.large !== null ? u.photos.large : `${avatar}`}
-                                         alt={u.name}
-                                    />
-                                </NavLink>
+                                <div className={s.user_avatar}>
+                                    <NavLink to={"/profile/" + u.id}>
+                                        <img className={s.avatar}
+                                             src={u.photos.large !== null ? u.photos.large : `${avatar}`}
+                                             alt={u.name}
+                                        />
+                                    </NavLink>
 
-                            </div>
-
-                            <div className={s.button_followed}>
-                                {u.followed ?
-                                    <button className={s.follow_unfollow_button}
-                                            disabled={props.followingInProgress.some(id => id === u.id)}
-                                            onClick={() => {
-                                                props.unfollow(u.id)
-                                            }}>
-                                        Unfollow
-                                    </button>
-                                    : <button className={s.follow_unfollow_button}
-                                              disabled={props.followingInProgress.some(id => id === u.id)}
-                                              onClick={() => {
-                                                  props.follow(u.id)
-                                              }}>
-                                        Follow
-                                    </button>
-                                }
-                            </div>
-
-                            <div className={s.user_info}>
-                                <div className={s.user_info_name}>
-                                    <div className={s.user_name}>{u.name}</div>
-                                    <div className={s.user_status}>{u.status}</div>
                                 </div>
+
+                                <div className={s.button_followed}>
+                                    {u.followed ?
+                                        <button className={s.follow_unfollow_button}
+                                                disabled={props.followingInProgress.some(id => id === u.id)}
+                                                onClick={() => {
+                                                    props.unfollow(u.id)
+                                                }}>
+                                            Unfollow
+                                        </button>
+                                        : <button className={s.follow_unfollow_button}
+                                                  disabled={props.followingInProgress.some(id => id === u.id)}
+                                                  onClick={() => {
+                                                      props.follow(u.id)
+                                                  }}>
+                                            Follow
+                                        </button>
+                                    }
+                                </div>
+
+                                <div className={s.user_info}>
+                                    <div className={s.user_info_name}>
+                                        <div className={s.user_name}>{u.name}</div>
+                                        <div className={s.user_status}>{u.status}</div>
+                                    </div>
+                                </div>
+
                             </div>
-
-                        </div>
-                    )}
+                        )}
+                </div>
             </div>
-        </div>
-    )
-}
-
+        )
+    }
+)
 
 export default Users
 

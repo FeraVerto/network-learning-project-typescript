@@ -71,7 +71,6 @@ export const updateUserStatus = (status: string) => ({
 } as const)
 
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
-    console.log("getUserProfile", userId)
     usersAPI.getProfile(userId).then(data => {
         dispatch(setUserProfile(data))
     })
@@ -84,12 +83,8 @@ export const getStatus = (userId: string) => (dispatch: Dispatch) => {
 }
 
 export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    console.log("updateStatus")
-    console.log(status)
     profileAPI.updateStatus(status).then(res => {
         if (res.data.resultCode === 0) {
-            console.log("Status thunk")
-            console.log(res.data)
             dispatch(updateUserStatus(status))
         }
     })

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.sass"
 import {PostType} from "../../../redux/redux-store";
@@ -16,7 +16,7 @@ export type MyPostsType = {
 
 const maxLength10 = maxLengthCreator(10)
 
-const MyPosts: React.FC<MyPostsType> = (props) => {
+const MyPosts = React.memo((props: MyPostsType) => {
     let newPosts = props.posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like}/>)
 
     const onSubmit = (value: PostsFormType) => {
@@ -33,7 +33,7 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
             </div>
         </div>
     )
-}
+})
 
 export type PostsFormType = {
     newPostText: string
