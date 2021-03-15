@@ -10,6 +10,7 @@ const Header = (props: any) => {
     return (
         <>
             <div className={s.site_name}>Spacebook</div>
+
             <div className={s.login}>
                 {props.photo.small === ""
                     ? <img src={avatar} width="40px" height="40px" alt="avatar"/>

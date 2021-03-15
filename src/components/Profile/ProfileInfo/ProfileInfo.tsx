@@ -2,13 +2,14 @@ import s from "./ProfileInfo.module.sass";
 import React from "react";
 import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from "./../../../assets/image/ufo-2.png"
-import {ProfileStatus} from "./ProfileStatus";
-import {updateStatus} from "../../../redux/profile-reducer";
+import {ProfileStatusWithHook} from "./ProfileStatusWithHook";
+import {NavLink} from "react-router-dom";
 
 type ProfileInfoType = {
     profile: any
     status: string
     updateStatus: (status: string) => void
+    isOwner: string
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
@@ -27,32 +28,70 @@ export const ProfileInfo = (props: ProfileInfoType) => {
     if (!props.profile) return <Preloader/>
 
     return (
-        <div className={s.profile_info}>
-            {
-                props.profile.photos.large
-                    ? <img src={props.profile.photos.large} alt="" width="180" height="180"/>
-                    : <img src={avatar} alt="" width="240" height="180"/>
-            }
+        <div className={s.profile}>
 
-            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <div className={s.profile_info}>
+                <div>
+                    {
+                        props.profile.photos.large
+                            ? <div className={s.avatar}><img src={props.profile.photos.large}
+                                                             alt="user avatar"
+                                                             width="180"
+                                                             height="180"/></div>
+                            : <div className={s.avatar}><img src={avatar}
+                                                             alt="no avatar"
+                                                             width="180"
+                                                             height="240"/></div>
 
-            <div className={s.info_name}>{props.profile.fullName}</div>
-            {
-                props.profile.lookingForAJobDescription === null
-                    ? <div className={s.info_description}>Description: {props.profile.lookingForAJobDescription}</div>
-                    : null
-            }
+                    }
+                    <div className={s.info_name}>{props.profile.fullName}</div>
+                    <div>
+                        <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
+                    </div>
+                    <div className={s.button_block}>
+                        <button className={s.button}><NavLink to={"/dialogs"}>Dialog</NavLink></button>
+                        <button className={s.button}>Follow</button>
+                    </div>
+                </div>
 
-            {
-                props.profile.lookingForAJob === null
-                    ? <div className={s.info_job}>lookingForAJob: {props.profile.lookingForAJob}</div>
-                    : null
-            }
 
-            <div className={s.info_contacts}>contacts:{contact}</div>
-            <button className={s.button}>Dialog</button>
-            <button className={s.button}>Follow</button>
+                <div className={s.info}>
+
+                    {
+                        props.profile.lookingForAJobDescription === null
+                            ?
+                            <div
+                                className={s.info_description}>Description: {props.profile.lookingForAJobDescription}</div>
+                            : null
+                    }
+
+                    {
+                        props.profile.lookingForAJob === null
+                            ? <div className={s.info_job}>lookingForAJob: {props.profile.lookingForAJob}</div>
+                            : null
+                    }
+                    <div className={s.info_contacts}>contacts:{contact}</div>
+
+                </div>
+
+
+            </div>
+            <div>
+
+            </div>
+
         </div>
 
     )
 }
+
+
+
+
+
+
+
+
+
+
+

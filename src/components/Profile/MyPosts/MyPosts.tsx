@@ -26,12 +26,10 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
-        <div className={s.my_post}>
-            <div className={s.posts_block}>
-                <PostsFormRedux onSubmit={onSubmit}/>
-                <div>
-                    {newPosts}
-                </div>
+        <div className={s.posts}>
+            <PostsFormRedux onSubmit={onSubmit}/>
+            <div>
+                {newPosts}
             </div>
         </div>
     )
@@ -44,7 +42,7 @@ export type PostsFormType = {
 export const PostsForm: React.FC<InjectedFormProps<PostsFormType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div className={s.posts}>
+            <div className={s.posts_form}>
                 <Field
                     component={Textarea}
                     name={"newPostText"}

@@ -1,15 +1,13 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import {MessagesContainer} from "./components/Dialogs/Messages/MessagesContainer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Navbar/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
-import ProfileInfoContainer from "./components/Profile/ProfileInfo/ProfileInfoContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
@@ -17,7 +15,8 @@ import {AppStateType} from "./redux/redux-store";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
-import {withAuthRedirect} from "./hoc/withAuthRedirect";
+import {ProfileInfo} from "./components/Profile/ProfileInfo/ProfileInfo";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 type AppContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -43,8 +42,8 @@ export class App extends React.Component<AppContainerType> {
 
     render() {
 
-        if(!this.props.initialized) {
-           return <Preloader/>
+        if (!this.props.initialized) {
+            return <Preloader/>
         }
 
         return (
@@ -53,23 +52,23 @@ export class App extends React.Component<AppContainerType> {
                     <HeaderContainer/>
                 </header>
                 <div className="app-wrapper-content">
-
                     <main className="content">
+                        <div className="">
+                            <Navbar/>
+                        </div>
                         <div className="main_content">
-                            <div className="profile_navbar">
-                                <Route exact path="/profile/:userId?" render={() => <ProfileInfoContainer/>}/>
-                                <Route path="/login" render={() => <Login/>}/>
-                                <Navbar/>
-                            </div>
                             <div className="main">
-                                <Route exact path="/profile" render={() => <ProfileContainer/>}/>
+                                <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
+                                <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                                {/*<Route exact path="/profile" render={() => <ProfileContainer/>}/>*/}
                                 <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                                 <Route path="/messages" render={() => <MessagesContainer/>}/>
                                 <Route path="/news" render={() => <News/>}/>
                                 <Route path="/music" render={() => <Music/>}/>
                                 <Route path="/users" render={() => <UsersContainer/>}/>
+                                <Route path="/login" component={() => <Login/>}/>
+                                <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
                             </div>
-
                         </div>
                         <div className="main_content_friends">
                             Friends

@@ -71,6 +71,7 @@ export const updateUserStatus = (status: string) => ({
 } as const)
 
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+    console.log("getUserProfile", userId)
     usersAPI.getProfile(userId).then(data => {
         dispatch(setUserProfile(data))
     })
