@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import {MessageType} from "../../../redux/redux-store";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "../../common/Preloader/FormsControls/FormsControls";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 
 type MessagesType = {
@@ -14,8 +14,8 @@ type MessagesType = {
 
 const maxLength50 = maxLengthCreator(50)
 
-const Messages: React.FC<MessagesType> = (props) => {
-    let newMessages = props.messages.map(m => <div key={m.id} className={s.dialog_body}>
+const Messages: React.FC<MessagesType> = ({messages, addMessage}) => {
+    let newMessages = messages.map(m => <div key={m.id} className={s.dialog_body}>
         {/*Не охота верстать, сделать потом*/}
 
         <div className={m.id === 1 ? s.message_one : ""}>
@@ -31,8 +31,7 @@ const Messages: React.FC<MessagesType> = (props) => {
     </div>)
 
     const onSubmit = (formData: MessagesPropsFormType) => {
-        /*props.loginTC(formData)*/
-        props.addMessage(formData.newMessageText)
+        addMessage(formData.newMessageText)
     }
 
     return (
@@ -56,10 +55,10 @@ export type MessagesPropsFormType = {
     newMessageText: string
 }
 
-export const MessagesForm: React.FC<InjectedFormProps<MessagesPropsFormType>> = (props) => {
+export const MessagesForm: React.FC<InjectedFormProps<MessagesPropsFormType>> = ({handleSubmit}) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div className={s.dialog_footer}>
                 <Field
                     component={Textarea}

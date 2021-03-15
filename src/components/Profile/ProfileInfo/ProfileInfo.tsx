@@ -12,12 +12,12 @@ type ProfileInfoType = {
     isOwner: string
 }
 
-export const ProfileInfo = (props: ProfileInfoType) => {
+export const ProfileInfo = ({isOwner, profile, status, updateStatus}: ProfileInfoType) => {
     //достаем значения из объекта и складываем в массив
     //фильтруем массив
     //возвращаем разметку со значениями из массива
-    let contact = props.profile !== null && props.profile !== undefined && Object
-        .values(props.profile.contacts)
+    let contact = profile !== null && profile !== undefined && Object
+        .values(profile.contacts)
         .filter(item => item !== null)
         .map((a: any) => {
             return <div key={a} className={s.contact}>
@@ -25,7 +25,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             </div> //6326
         })
 
-    if (!props.profile) return <Preloader/>
+    if (!profile) return <Preloader/>
 
     return (
         <div className={s.profile}>
@@ -33,8 +33,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             <div className={s.profile_info}>
                 <div>
                     {
-                        props.profile.photos.large
-                            ? <div className={s.avatar}><img src={props.profile.photos.large}
+                        profile.photos.large
+                            ? <div className={s.avatar}><img src={profile.photos.large}
                                                              alt="user avatar"
                                                              width="180"
                                                              height="180"/></div>
@@ -44,9 +44,9 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                                                              height="240"/></div>
 
                     }
-                    <div className={s.info_name}>{props.profile.fullName}</div>
+                    <div className={s.info_name}>{profile.fullName}</div>
                     <div>
-                        <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
+                        <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
                     </div>
                     <div className={s.button_block}>
                         <button className={s.button}><NavLink to={"/dialogs"}>Dialog</NavLink></button>
@@ -58,30 +58,25 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 <div className={s.info}>
 
                     {
-                        props.profile.lookingForAJobDescription === null
+                        profile.lookingForAJobDescription === null
                             ?
                             <div
-                                className={s.info_description}>Description: {props.profile.lookingForAJobDescription}</div>
+                                className={s.info_description}>Description: {profile.lookingForAJobDescription}</div>
                             : null
                     }
 
                     {
-                        props.profile.lookingForAJob === null
-                            ? <div className={s.info_job}>lookingForAJob: {props.profile.lookingForAJob}</div>
+                        profile.lookingForAJob === null
+                            ? <div className={s.info_job}>lookingForAJob: {profile.lookingForAJob}</div>
                             : null
                     }
                     <div className={s.info_contacts}>contacts:{contact}</div>
 
                 </div>
-
-
             </div>
             <div>
-
             </div>
-
         </div>
-
     )
 }
 

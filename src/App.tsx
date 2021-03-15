@@ -15,7 +15,6 @@ import {AppStateType} from "./redux/redux-store";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
-import {ProfileInfo} from "./components/Profile/ProfileInfo/ProfileInfo";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
@@ -60,7 +59,6 @@ export class App extends React.Component<AppContainerType> {
                             <div className="main">
                                 <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
                                 <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                                {/*<Route exact path="/profile" render={() => <ProfileContainer/>}/>*/}
                                 <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                                 <Route path="/messages" render={() => <MessagesContainer/>}/>
                                 <Route path="/news" render={() => <News/>}/>

@@ -1,5 +1,4 @@
 import {connect} from "react-redux";
-import Users from "./Users";
 import {AppStateType, UserType} from "../../redux/redux-store";
 import {
     follow,
@@ -18,6 +17,8 @@ import {
     getTotalUsersCount,
     getUsersSelector
 } from "../../redux/users-selectors";
+import {Users} from "./Users";
+
 
 type PathParamsType = {
     userId: string
@@ -47,12 +48,14 @@ type ContainerType = RouteComponentProps<PathParamsType> & UsersContainerType
 class UsersContainer extends React.Component<ContainerType> {
     componentDidMount() {
         //запрашиваем юзеров
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        let{currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
         //запрашиваем юзеров
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        let{pageSize} = this.props
+        this.props.getUsers(pageNumber, pageSize)
     }
 
     render = () =>
@@ -72,19 +75,7 @@ class UsersContainer extends React.Component<ContainerType> {
 }
 
 
-/*const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-}*/
-
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-
     return {
         users: getUsersSelector(state),
         pageSize: getPageSize(state),

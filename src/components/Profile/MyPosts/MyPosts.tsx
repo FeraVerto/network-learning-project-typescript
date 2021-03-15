@@ -5,7 +5,7 @@ import {PostType} from "../../../redux/redux-store";
 import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
-import {Textarea} from "../../common/Preloader/FormsControls/FormsControls";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
 
 export type MyPostsType = {
@@ -16,14 +16,14 @@ export type MyPostsType = {
 
 const maxLength10 = maxLengthCreator(10)
 
-const MyPosts = React.memo((props: MyPostsType) => {
-    let newPosts = props.posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like}/>)
+const MyPosts = React.memo(({posts, addPostAC, isAuth}: MyPostsType) => {
+    let newPosts = posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like}/>)
 
     const onSubmit = (value: PostsFormType) => {
-        props.addPostAC(value.newPostText)
+        addPostAC(value.newPostText)
     }
 
-    if (!props.isAuth) return <Redirect to={"/login"}/>
+    if (!isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={s.posts}>
@@ -64,48 +64,3 @@ export const PostsFormRedux = reduxForm<PostsFormType>({
 
 export default MyPosts
 
-
-/*function perfectRoots(n) {
-    if (!Number.isInteger(n)) {
-        return
-    } else {
-        let sqrt = Math.sqrt(n)
-        if (!Number.isInteger(sqrt)) {
-            return
-        } else {
-            console.log(sqrt)
-            perfectRoots(sqrt)
-        }
-    }
-
-}*/
-/*let num = (a) => {
-    return +a
-}
-let arr = ["1", "2", "3"]
-let toNumberArray = (stringarray) => stringarray.map(num)
-
-toNumberArray(arr)*/
-
-/*numbers[numbers.length - 1] **/
-/*function evenLast(numbers) {
-    return numbers.length === 0
-        ? 0
-        : numbers[numbers.length - 1] *
-        numbers.reduce((num, acc, i) =>
-            i % 2 === 0 ? num + acc : num + 0, 0)
-}
-
-evenLast([2, 3, 4, 5])
-
-
-function sequence(x) {
-    let res = []
-    for (let i = 1; i <= x; i++) {
-        res.push(i)
-    }
-    return res.sort()
-}
-
-sequence(16)*/
-//result = [1, 10, 11, 12, 13, 14, 15, 16, 2, 3, 4, 5, 6, 7, 8, 9]

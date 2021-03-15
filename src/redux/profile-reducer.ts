@@ -1,10 +1,10 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
-const ADD_POST = "ADD_POST"
-const SET_PROFILE_INFO = "SET_PROFILE_INFO"
-const SET_STATUS = "SET_STATUS"
-const UPDATE_STATUS = "UPDATE_STATUS"
+const ADD_POST = "samurai-network/profile/ADD_POST"
+const SET_PROFILE_INFO = "samurai-network/profile/SET_PROFILE_INFO"
+const SET_STATUS = "samurai-network/profile/SET_STATUS"
+const UPDATE_STATUS = "samurai-network/profile/UPDATE_STATUS"
 
 
 export type addPostAC = ReturnType<typeof addPostAC>
@@ -70,23 +70,20 @@ export const updateUserStatus = (status: string) => ({
     status
 } as const)
 
-export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId).then(data => {
-        dispatch(setUserProfile(data))
-    })
+export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
+    let data = await usersAPI.getProfile(userId)
+    dispatch(setUserProfile(data))
 }
 
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId).then(res => {
-        dispatch(setUserStatus(res.data))
-    })
+export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
+    let res = await profileAPI.getStatus(userId)
+    dispatch(setUserStatus(res.data))
 }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status).then(res => {
-        if (res.data.resultCode === 0) {
-            dispatch(updateUserStatus(status))
-        }
-    })
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    let res = await profileAPI.updateStatus(status)
+    if (res.data.resultCode === 0) {
+        dispatch(updateUserStatus(status))
+    }
 }
 

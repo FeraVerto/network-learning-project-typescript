@@ -2,15 +2,15 @@ import React from 'react'
 import s from './FormsControls.module.css'
 
 
-export const FormControl = ({input, meta, child, el, ...props}: any) => {
-    const hasError = meta.error && meta.touched
+export const FormControl = ({input, meta: {error, touched}, child, el, children, ...props}: any) => {
+    const hasError = error && touched
     return (
         <div className={s.formControl + " " + (hasError ? s.error : "")}>
             <div>
-                {props.children}
+                {children}
                 {/*{React.createElement(el, {...input, ...props})}*/}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React from "react"
 import s from './Login.module.sass'
 import {reduxForm, InjectedFormProps} from "redux-form";
 import {Field} from "redux-form";
-import {Input} from "../common/Preloader/FormsControls/FormsControls";
+import {Input} from "../common/FormsControls/FormsControls";
 import {requiredField} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {loginTC} from "../../redux/auth-reducer";
@@ -56,10 +56,10 @@ export type FormDataType = {
     captcha?: boolean
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}: any) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div><Field component={Input}
                         placeholder={"Login"}
                         name={"email"}
@@ -76,7 +76,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any)
                         name={"rememberMe"}/>
                 remember me
             </div>
-            {props.error && <div className={s.formSummaryError}>{props.error}</div>}
+            {error && <div className={s.formSummaryError}>{error}</div>}
             <div>
                 <button>Login</button>
             </div>

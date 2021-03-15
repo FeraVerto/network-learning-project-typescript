@@ -1,16 +1,3 @@
-/*import React from "react";
-import {Profile} from "./Profile";
-
-export class ProfileContainer extends React.Component<any, any> {
-
-    render() {
-        return (
-            <Profile/>
-        )
-    }
-}*/
-
-
 import React from 'react';
 import {getUserProfile, getStatus, updateStatus} from '../../redux/profile-reducer';
 import {connect} from 'react-redux';

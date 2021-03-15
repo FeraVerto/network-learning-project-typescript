@@ -1,4 +1,4 @@
-export const ADD_MESSAGE = "ADD_MESSAGE"
+export const ADD_MESSAGE = "samurai-network/message/ADD_MESSAGE"
 
 
 export type addMessageACType = ReturnType<typeof addMessageAC>

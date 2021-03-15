@@ -6,18 +6,18 @@ import avatar from "./../../assets/image/ufo-2.png"
 
 type HeaderType = authType
 
-const Header = (props: any) => {
+const Header = ({photo, logoutTC, isAuth, login}: any) => {
     return (
         <>
             <div className={s.site_name}>Spacebook</div>
 
             <div className={s.login}>
-                {props.photo.small === ""
+                {photo.small === ""
                     ? <img src={avatar} width="40px" height="40px" alt="avatar"/>
-                    : <img src={props.photo.small} width="40px" height="40px" alt="avatar"/>}
+                    : <img src={photo.small} width="40px" height="40px" alt="avatar"/>}
 
-                {props.isAuth
-                    ? <div>{props.login} - <button onClick={props.logoutTC}>Log out</button></div>
+                {isAuth
+                    ? <div>{login} - <button onClick={logoutTC}>Log out</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </>

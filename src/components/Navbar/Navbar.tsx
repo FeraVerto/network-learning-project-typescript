@@ -2,11 +2,7 @@ import React from "react";
 import s from "./Navbar.module.sass";
 import {MenuItem} from "./MenuItem/MenuItem";
 
-type NavbarType = {
-    /*state: SidebarFriendsType*/
-}
-
-const Navbar: React.FC<NavbarType> = (props) => {
+const Navbar: React.FC = () => {
 
     return (
         <nav className={s.nav}>

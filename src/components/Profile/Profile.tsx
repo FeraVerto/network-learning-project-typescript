@@ -3,14 +3,14 @@ import s from "./Profile.module.sass";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-export const Profile = (props: any) => {
+export const Profile = ({isOwner, profile, status, updateStatus}: any) => {
     return (
         <main className={s.main_profile}>
-            <ProfileInfo {...props}
-                         isOwner={props.isOwner}
-                         profile={props.profile}
-                         status={props.status}
-                         updateStatus={props.updateStatus}
+            <ProfileInfo
+                isOwner={isOwner}
+                profile={profile}
+                status={status}
+                updateStatus={updateStatus}
             />
             <MyPostsContainer/>
         </main>

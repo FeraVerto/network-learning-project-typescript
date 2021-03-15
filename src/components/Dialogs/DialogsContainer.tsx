@@ -2,18 +2,11 @@ import React from "react";
 import {AppStateType, DialogsItemType} from "../../redux/redux-store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
-
 
 type mapStateToPropsType = {
     dialogs: Array<DialogsItemType>
     isAuth: boolean | null
 }
-
-type mapDispatchToPropsType = {
-
-}
-
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
@@ -22,10 +15,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-
-    }
-}
-
-export const DialogsContainer = connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(Dialogs)
+export const DialogsContainer = connect<mapStateToPropsType, null, {}, AppStateType>(mapStateToProps, null)(Dialogs)

@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {getUserAuthData} from "./auth-reducer";
 
-export const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
+export const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
 
 
 export const initialState = {
@@ -28,8 +28,8 @@ const initializedSuccess = () => ({
 } as const)
 
 
-export const initializeApp = () => (dispatch: Dispatch) => {
-    let promise = dispatch(getUserAuthData() as any)
+export const initializeApp = () => async (dispatch: Dispatch) => {
+    let promise = await dispatch(getUserAuthData() as any)
     Promise.all([promise]).then(() =>
         dispatch(initializedSuccess() as any)
     )

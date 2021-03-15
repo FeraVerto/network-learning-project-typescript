@@ -1,8 +1,8 @@
 import React from 'react'
 import s from "./Users.module.sass"
 import {UserType} from "../../redux/redux-store";
-import avatar from './../../assets/image/ufo-2.png'
-import {NavLink} from "react-router-dom";
+import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User/User";
 
 type UsersType = {
     users: Array<UserType>
@@ -15,131 +15,32 @@ type UsersType = {
     followingInProgress: Array<number>
 }
 
-export const Users = React.memo((props: UsersType) => {
+export const Users = ({users, totalUsersCount, pageSize, currentPage, onPageChanged, followingInProgress, unfollow, follow}: UsersType) => {
 
-        let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-        let pages = []
-        for (let i = 1; i < pagesCount; i++) {
-            pages.push(i)
-        }
-
-        return (
-            <div className={s.users}>
-
-                <div className={s.users_paginator}>
-                    {pages.map(p => <span onClick={(e) => props.onPageChanged(p)}
-                                          className={props.currentPage === p ? s.selectPage : s.page}>{p}</span>)}
-                </div>
-
-                <div className={s.users_list}>
-                    {
-                        props.users.map(u =>
-                            <div key={u.id} className={s.user}>
-
-                                <div className={s.user_avatar}>
-                                    <NavLink to={"/profile/" + u.id}>
-                                        <img className={s.avatar}
-                                             src={u.photos.large !== null ? u.photos.large : `${avatar}`}
-                                             alt={u.name}
-                                        />
-                                    </NavLink>
-
-                                </div>
-
-                                <div className={s.button_followed}>
-                                    {u.followed ?
-                                        <button className={s.follow_unfollow_button}
-                                                disabled={props.followingInProgress.some(id => id === u.id)}
-                                                onClick={() => {
-                                                    props.unfollow(u.id)
-                                                }}>
-                                            Unfollow
-                                        </button>
-                                        : <button className={s.follow_unfollow_button}
-                                                  disabled={props.followingInProgress.some(id => id === u.id)}
-                                                  onClick={() => {
-                                                      props.follow(u.id)
-                                                  }}>
-                                            Follow
-                                        </button>
-                                    }
-                                </div>
-
-                                <div className={s.user_info}>
-                                    <div className={s.user_info_name}>
-                                        <div className={s.user_name}>{u.name}</div>
-                                        <div className={s.user_status}>{u.status}</div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        )}
-                </div>
-            </div>
-        )
+    let pagesCount = Math.ceil(totalUsersCount / pageSize)
+    let pages = []
+    for (let i = 1; i < pagesCount; i++) {
+        pages.push(i)
     }
-)
 
-export default Users
+    return (
+        <div className={s.users}>
 
-/*export function Users(props: UsersType) {
+            <Paginator currentPage={currentPage}
+                       onPageChanged={onPageChanged}
+                       totalUsersCount={totalUsersCount}
+                       pageSize={pageSize}/>
 
-const getUsers = () => {
-if (props.users.length === 0) {
-axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-props.setUsers(response.data.items)
-})
+            <div className={s.users_list}>
+                {
+                    users.map(u => <User user={u} key={u.id}
+                                         followingInProgress={followingInProgress}
+                                         unfollow={unfollow}
+                                         follow={follow}/>)
+                }
 
+            </div>
+
+        </div>
+    )
 }
-}
-
-return (
-<div className={s.users}>
-<button onClick={getUsers}>get users</button>
-{
-props.users.map(u =>
-<div key={u.id} className={s.user}>
-<div className={s.user_avatar}>
-<Avatar variant='rounded'
-className={s.avatar}
-src={u.photos.small !== null ? u.photos.small : `${avatar}`}
-alt={u.name}
-
-/>
-{u.followed ?
-<button className={s.follow_unfollow_button}
-onClick={() => props.unfollow(u.id)}>
-Unfollow
-</button>
-: <button className={s.follow_unfollow_button}
-onClick={() => props.follow(u.id)}>
-Follow
-</button>
-}
-</div>
-<div className={s.user_info}>
-<div className={s.user_info_name}>
-<div className={s.user_name}>{u.name}</div>
-<div className={s.user_status}>{u.status}</div>
-</div>
-</div>
-</div>
-)}
-</div>
-)
-}*/
-
-
-/*123321
-let palindromeChainLength = function (n) {
-// let newN = String(n).split("")
-let newN2 = String(n).split("").reverse().join()
-if(n !== newN2) {
-let sum = n + Number(newN2)
-return palindromeChainLength(sum)
-} else {
-return n
-}
-};
-
-palindromeChainLength(44)*/
