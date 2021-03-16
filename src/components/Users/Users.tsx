@@ -17,18 +17,12 @@ type UsersType = {
 
 export const Users = ({users, totalUsersCount, pageSize, currentPage, onPageChanged, followingInProgress, unfollow, follow}: UsersType) => {
 
-    let pagesCount = Math.ceil(totalUsersCount / pageSize)
-    let pages = []
-    for (let i = 1; i < pagesCount; i++) {
-        pages.push(i)
-    }
-
     return (
         <div className={s.users}>
 
             <Paginator currentPage={currentPage}
                        onPageChanged={onPageChanged}
-                       totalUsersCount={totalUsersCount}
+                       totalItemsCount={totalUsersCount}
                        pageSize={pageSize}/>
 
             <div className={s.users_list}>
