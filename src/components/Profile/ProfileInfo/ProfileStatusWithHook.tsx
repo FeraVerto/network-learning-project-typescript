@@ -26,7 +26,7 @@ export const ProfileStatusWithHook = (props: ProfileStatusType) => {
                                onBlur={() => {
                                    setEditMode(!editMode)
                                    props.updateStatus(value)
-                               } }
+                               }}
                                value={value}
                                onChange={onChangeStatus}
                         />
@@ -40,8 +40,6 @@ export const ProfileStatusWithHook = (props: ProfileStatusType) => {
         </div>
     )
 }
-
-
 
 
 /*

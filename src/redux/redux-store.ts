@@ -29,12 +29,10 @@ export type StoreType = Store<AppStateType>
 /*export type StoreType = Store<AppStateType, actionType>*/
 
 //@ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export let store: StoreType = createStore(reducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+/*const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export let store: StoreType = createStore(reducer, composeEnhancers(applyMiddleware(thunkMiddleware)));*/
 //создаем store
-/*
 export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddleware));
-*/
 
 
 /*------------------------------------------------------*/

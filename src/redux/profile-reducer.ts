@@ -5,25 +5,47 @@ const ADD_POST = "samurai-network/profile/ADD_POST"
 const SET_PROFILE_INFO = "samurai-network/profile/SET_PROFILE_INFO"
 const SET_STATUS = "samurai-network/profile/SET_STATUS"
 const UPDATE_STATUS = "samurai-network/profile/UPDATE_STATUS"
+const SAVE_PHOTO = "samurai-network/profile/SAVE_PHOTO"
 
 
 export type addPostAC = ReturnType<typeof addPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setUserStatus = ReturnType<typeof setUserStatus>
 export type updateUserStatus = ReturnType<typeof updateUserStatus>
+export type savePhotoACType = ReturnType<typeof savePhotoAC>
 
 
 let initialState = {
     posts: [
-        {id: 1, message: "Это передача сдохни или умри!", like: 25},
-        {id: 2, message: "Или сдохни", like: 40},
-        {id: 3, message: "Или умри", like: 1}
+        {id: 1, message: "Сегодня был чудесный день!", like: 25},
+        {id: 2, message: "Я покушал и поспал", like: 40},
+        {id: 3, message: "Но не выспался", like: 1}
     ],
-    profile: null,
+    profile: {
+        userId: null,
+        lookingForAJob: false,
+        lookingForAJobDescription: null,
+        fullName: null,
+        contacts: {
+            github: null,
+            vk: null,
+            facebook: null,
+            instagram: null,
+            twitter: null,
+            website: null,
+            youtube: null,
+            mainLink: null
+        },
+        photos: {
+            small: null,
+            large: null
+        }
+    },
+
     status: ""
 }
 
-export function profileReducer(state = initialState, action: addPostAC | setUserProfileType | setUserStatus | updateUserStatus) {
+export function profileReducer(state = initialState, action: addPostAC | setUserProfileType | setUserStatus | updateUserStatus | savePhotoACType) {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -49,6 +71,11 @@ export function profileReducer(state = initialState, action: addPostAC | setUser
                 status: action.status
             }
 
+        case SAVE_PHOTO:
+            return {
+                ...state, profile: {...state.profile, photos: action.photo}
+            }
+
         default:
             return state
     }
@@ -70,6 +97,11 @@ export const updateUserStatus = (status: string) => ({
     status
 } as const)
 
+export const savePhotoAC = (photo: string) => ({
+    type: SAVE_PHOTO,
+    photo
+} as const)
+
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     let data = await usersAPI.getProfile(userId)
     dispatch(setUserProfile(data))
@@ -84,6 +116,13 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     let res = await profileAPI.updateStatus(status)
     if (res.data.resultCode === 0) {
         dispatch(updateUserStatus(status))
+    }
+}
+
+export const savePhoto = (photo: string) => async (dispatch: Dispatch) => {
+    let res = await profileAPI.savePhoto(photo)
+    if (res.data.resultCode === 0) {
+        dispatch(savePhotoAC(res.data.data.photos))
     }
 }
 

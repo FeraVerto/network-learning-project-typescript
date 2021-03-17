@@ -15,4 +15,5 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export const DialogsContainer = connect<mapStateToPropsType, null, {}, AppStateType>(mapStateToProps, null)(Dialogs)
+const DialogsContainer = connect<mapStateToPropsType, null, {}, AppStateType>(mapStateToProps, null)(Dialogs)
+ export default DialogsContainer

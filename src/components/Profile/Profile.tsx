@@ -3,7 +3,8 @@ import s from "./Profile.module.sass";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-export const Profile = ({isOwner, profile, status, updateStatus}: any) => {
+
+export const Profile = ({isOwner, profile, status, updateStatus, savePhoto}: any) => {
     return (
         <main className={s.main_profile}>
             <ProfileInfo
@@ -11,6 +12,7 @@ export const Profile = ({isOwner, profile, status, updateStatus}: any) => {
                 profile={profile}
                 status={status}
                 updateStatus={updateStatus}
+                savePhoto={savePhoto}
             />
             <MyPostsContainer/>
         </main>

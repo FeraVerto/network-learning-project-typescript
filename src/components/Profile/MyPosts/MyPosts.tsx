@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React from "react";
 import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.sass"
 import {PostType} from "../../../redux/redux-store";
