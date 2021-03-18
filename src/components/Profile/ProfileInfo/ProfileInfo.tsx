@@ -2,37 +2,35 @@ import s from "./ProfileInfo.module.sass";
 import React, {useState} from "react";
 import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from "./../../../assets/image/ufo-2.png"
-import {ProfileStatusWithHook} from "./ProfileStatusWithHook";
+import {ProfileStatusWithHook} from "./ProfileInfoStatus/ProfileStatusWithHook";
 import {NavLink} from "react-router-dom";
-import {Field, reduxForm} from "redux-form";
-import {Checkbox, Input} from "../../common/FormsControls/FormsControls";
-import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
-import {CheckBox} from "@material-ui/icons";
-import {PostsForm, PostsFormRedux, PostsFormType} from "../MyPosts/MyPosts";
+import {ProfileType} from "../ProfileContainer";
+import {ProfileInfoFormRedux} from "../ProfileInfoForm/ProfileInfoForm";
+import {ProfileInfoDescription} from "./ProfileInfoDescription/ProfileInfoDescription";
 
 type ProfileInfoType = {
-    profile: any
+    profile: ProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: string
     savePhoto?: (photo: string) => void
 }
 
-const maxLength25 = maxLengthCreator(25)
 
 export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}: ProfileInfoType) => {
     //достаем значения из объекта и складываем в массив
     //фильтруем массив
     //возвращаем разметку со значениями из массива
-    let contact = profile !== null && profile !== undefined && Object
+    /*let contact = profile !== null && profile !== undefined && Object
         .values(profile.contacts)
         .filter(item => item !== null)
         .map((a: any) => {
             return <div key={a} className={s.contact}>
                 <a rel="stylesheet" href={a}>{a} </a>
             </div> //6326
-        })
+        })*/
 
+    console.log("ProfileInfo", profile)
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
             //@ts-ignore
@@ -42,17 +40,24 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}:
 
     let [editMode, setEditMode] = useState<boolean>(false)
 
+    let submitProfileInfoReduxForm = (value: any) => {
+        //add thunk
+    }
+
     if (!profile) return <Preloader/>
 
     return (
         <div>
+
             {
-                editMode ? <ProfileInfoForm contact={contact} onSubmit={() => {
+                editMode
+                    //@ts-ignore
+                    ? <div><ProfileInfoFormRedux contact={profile.contacts} onSubmit={() => {
                     }}/>
+                        <button onClick={() => setEditMode(!editMode)}>Save</button>
+                    </div>
                     : <div className={s.profile}>
-
                         <div className={s.profile_info}>
-
                             <div>
                                 <div className={s.avatar}><img src={profile.photos.large || avatar}
                                                                alt="user avatar"
@@ -60,7 +65,6 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}:
                                                                height="180"/></div>
                                 {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
 
-                                <div className={s.info_name}>{profile.fullName}</div>
                                 <div>
                                     <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
                                 </div>
@@ -70,67 +74,20 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}:
                                 </div>
                             </div>
 
-
-                            <div className={s.info}>
-
-                                {
-                                    !profile.lookingForAJobDescription &&
-                                    <div
-                                        className={s.info_description}>Description: {profile.lookingForAJobDescription}</div>
-                                }
-
-                                {
-                                    !profile.lookingForAJob &&
-                                    <div className={s.info_job}>lookingForAJob: {profile.lookingForAJob}</div>
-
-                                }
-                                <div className={s.info_contacts}>contacts:{contact}</div>
-
-                            </div>
+                            <ProfileInfoDescription profile={profile} contact={profile.contacts}/>
                         </div>
+                        <button onClick={() => setEditMode(!editMode)}>Edit</button>
                     </div>
+
             }
-            <button onClick={() => setEditMode(!editMode)}>Edit</button>
+
         </div>
     )
 }
 
-export const ProfileInfoForm = ({contact, handleSubmit}: any) => {
-    console.log("ProfileInfoForm")
-    return (
-        <form onSubmit={handleSubmit}>
-            <Field component={Input}
-                   name={"fullName"}
-                   placeholder={"Empty"}
-                   validate={[requiredField, maxLength25]}
-            />
 
-            <Field component={Input}
-                   name={"lookingForAJobDescription"}
-                   placeholder={"Empty"}
-                   validate={[requiredField, maxLength25]}
-            />
 
-            <Field component={Checkbox}
-                   name={"lookingForAJob"}
-                   placeholder={"Empty"}
-                   validate={[requiredField, maxLength25]}
-            />
 
-            <div className={s.info_contacts}>contacts:
-                {contact.map((c: string) => <Field component={Input}
-                                                   name={c}
-                                                   placeholder={"Empty"}
-                                                   validate={[requiredField, maxLength25]}
-                />)}
-            </div>
-        </form>
-    )
-}
-
-export const ProfileInfoFormRedux = reduxForm<PostsFormType>({
-    form: 'edit-profile'
-})(ProfileInfoForm)
 
 
 

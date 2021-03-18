@@ -16,7 +16,8 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import {withSuspense} from "./hoc/withSuspense";
-/*import {ProfileContainer} from "./components/Profile/ProfileContainer";*/
+import {Settings} from "./components/Settings/Settings";
+
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -70,6 +71,7 @@ export class App extends React.Component<AppContainerType> {
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
+                                    <Route path="/settings" render={() => <Settings/>}/>
                                     <Route path="/login" component={() => <Login/>}/>
                                     <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
                                 </div>
