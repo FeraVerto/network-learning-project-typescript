@@ -1,5 +1,6 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {ProfileType} from "../components/Profile/ProfileContainer";
 
 const ADD_POST = "samurai-network/profile/ADD_POST"
 const SET_PROFILE_INFO = "samurai-network/profile/SET_PROFILE_INFO"
@@ -123,6 +124,15 @@ export const savePhoto = (photo: string) => async (dispatch: Dispatch) => {
     let res = await profileAPI.savePhoto(photo)
     if (res.data.resultCode === 0) {
         dispatch(savePhotoAC(res.data.data.photos))
+    }
+}
+
+export const updateProfile = (dataForm: ProfileType) => async (dispatch: Dispatch, getState: any) => {
+    let userId = getState().auth.id
+    let res = await profileAPI.updateProfile(dataForm)
+    if (res.data.resultCode === 0) {
+        //@ts-ignore
+        dispatch(getUserProfile(userId))
     }
 }
 

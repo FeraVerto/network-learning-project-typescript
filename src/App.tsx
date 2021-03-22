@@ -71,7 +71,7 @@ export class App extends React.Component<AppContainerType> {
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
-                                    <Route path="/settings" render={() => <Settings/>}/>
+                                    {/*<Route path="/settings" render={() => <Settings/>}/>*/}
                                     <Route path="/login" component={() => <Login/>}/>
                                     <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
                                 </div>

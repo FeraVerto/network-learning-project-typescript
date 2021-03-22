@@ -8,40 +8,28 @@ import {ProfileType} from "../ProfileContainer";
 import {ProfileInfoFormRedux} from "../ProfileInfoForm/ProfileInfoForm";
 import {ProfileInfoDescription} from "./ProfileInfoDescription/ProfileInfoDescription";
 
-type ProfileInfoType = {
+export type ProfileInfoType = {
     profile: ProfileType
     status: string
     updateStatus: (status: string) => void
-    isOwner: string
+    isOwner: boolean
     savePhoto?: (photo: string) => void
+    updateProfile: (dataForm: ProfileType) => void
 }
 
 
-export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}: ProfileInfoType) => {
+export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, updateProfile}: ProfileInfoType) => {
     //достаем значения из объекта и складываем в массив
     //фильтруем массив
     //возвращаем разметку со значениями из массива
-    /*let contact = profile !== null && profile !== undefined && Object
-        .values(profile.contacts)
-        .filter(item => item !== null)
-        .map((a: any) => {
-            return <div key={a} className={s.contact}>
-                <a rel="stylesheet" href={a}>{a} </a>
-            </div> //6326
-        })*/
 
-    console.log("ProfileInfo", profile)
-    const onMainPhotoSelected = (e: any) => {
-        if (e.target.files.length) {
-            //@ts-ignore
-            savePhoto(e.target.files[0])
-        }
-    }
 
     let [editMode, setEditMode] = useState<boolean>(false)
 
-    let submitProfileInfoReduxForm = (value: any) => {
-        //add thunk
+    let submitProfileInfoReduxForm = (dataForm: any) => {
+        console.log("submitProfileInfoReduxForm", dataForm)
+        updateProfile(dataForm)
+        setEditMode(!editMode)
     }
 
     if (!profile) return <Preloader/>
@@ -52,9 +40,14 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}:
             {
                 editMode
                     //@ts-ignore
-                    ? <div><ProfileInfoFormRedux contact={profile.contacts} onSubmit={() => {
-                    }}/>
-                        <button onClick={() => setEditMode(!editMode)}>Save</button>
+                    ? <div><ProfileInfoFormRedux profile={profile}
+                                                 onSubmit={submitProfileInfoReduxForm}
+                                                 isOwner={isOwner}
+                                                 savePhoto={savePhoto}
+                                                 setEditMode={setEditMode}
+                                                 editMode={editMode}
+                    />
+
                     </div>
                     : <div className={s.profile}>
                         <div className={s.profile_info}>
@@ -63,7 +56,7 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}:
                                                                alt="user avatar"
                                                                width="180"
                                                                height="180"/></div>
-                                {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+                                {/*{isOwner && <input type="file" onChange={onMainPhotoSelected}/>}*/}
 
                                 <div>
                                     <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>

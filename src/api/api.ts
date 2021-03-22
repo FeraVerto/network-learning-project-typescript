@@ -1,5 +1,6 @@
 import axios from "axios";
 import {FormDataType} from "../components/Login/Login";
+import {ProfileType} from "../components/Profile/ProfileContainer";
 
 let instance = axios.create({
 
@@ -52,6 +53,11 @@ export const profileAPI = {
         const formData = new FormData()
         formData.append("image", photo)
         return instance.put(`/profile/photo`, formData,{headers: {'Content-Type': 'multipart/form-data'}})
+    },
+
+    updateProfile(dataForm: ProfileType) {
+        console.log("updateProfile", dataForm)
+        return instance.put(`/profile`, dataForm)
     }
 }
 

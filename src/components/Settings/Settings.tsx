@@ -1,22 +1,26 @@
 import React, {useState} from 'react'
-import {useSelector} from "react-redux";
-import {ProfileType} from "../Profile/ProfileContainer";
 import {ProfileInfoFormRedux} from "../Profile/ProfileInfoForm/ProfileInfoForm";
 import {ProfileInfoDescription} from "../Profile/ProfileInfo/ProfileInfoDescription/ProfileInfoDescription";
+import {useSelector} from "react-redux";
+import {ProfileInfoType} from "../Profile/ProfileInfo/ProfileInfo";
 
-export const Settings = () => {
-    let profile = useSelector<ProfileType>(state => state)
+export const Settings = ({savePhoto}: any) => {
+
+    let profileState = useSelector<ProfileInfoType>(state=> state.profile)
+    let isOwnerState = useSelector<ProfileInfoType>(state=> state.isOwner)
+
     let [editMode, setEditMode] = useState(false)
     return (
         <div>
             {
                 editMode
                     ? <div>
-                        <ProfileInfoFormRedux/>
+                       {/* <ProfileInfoFormRedux profile={profileState} isOwner={isOwnerState} savePhoto={savePhoto} onSubmit={() => {
+                        }} />*/}
                         <button onClick={() => setEditMode(!editMode)}>Save</button>
                     </div>
                     : <div>
-                        <ProfileInfoDescription profile={profile}/>
+                        <ProfileInfoDescription profile={profileState}/>
                         <button onClick={() => setEditMode(!editMode)}>Edit</button>
                     </div>
             }
