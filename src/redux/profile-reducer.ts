@@ -1,6 +1,7 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {ProfileType} from "../components/Profile/ProfileContainer";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "samurai-network/profile/ADD_POST"
 const SET_PROFILE_INFO = "samurai-network/profile/SET_PROFILE_INFO"
@@ -133,6 +134,9 @@ export const updateProfile = (dataForm: ProfileType) => async (dispatch: Dispatc
     if (res.data.resultCode === 0) {
         //@ts-ignore
         dispatch(getUserProfile(userId))
+    } else {
+        dispatch(stopSubmit("edit-profile", {_error: res.data.messages[0]}))
+        return Promise.reject(res.data.messages[0])
     }
 }
 

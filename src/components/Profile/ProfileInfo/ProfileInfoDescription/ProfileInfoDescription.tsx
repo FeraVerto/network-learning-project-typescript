@@ -14,34 +14,40 @@ export const ProfileInfoDescription = ({profile}: any) => {
              </div> //6326
          })*/
 
+    console.log("Object.keys(profile.contacts)", Object.keys(profile.contacts))
+    console.log("Object.keys(profile.contacts)", Object.keys(profile.contacts).map(c => profile.contacts[c]))
+
     return (
         <div>
 
             <div className={s.info}>
-                <div className={s.info_name}>fullName: {profile.fullName}</div>
+                <div className={s.info_name}><b>fullName:</b> {profile.fullName}</div>
 
                 {
                     profile.lookingForAJobDescription &&
                     <div
-                        className={s.info_description}>Description: {profile.lookingForAJobDescription}</div>
+                        className={s.info_description}><b>Description:</b> {profile.lookingForAJobDescription}</div>
                 }
 
                 {
                     profile.lookingForAJob &&
-                    <div className={s.info_job}>lookingForAJob: {profile.lookingForAJob}</div>
+                    <div className={s.info_job}><b>lookingForAJob:</b> {profile.lookingForAJob}</div>
 
                 }
 
                 {
                     profile.aboutMe &&
-                    <div className={s.info_job}>AboutMe: {profile.aboutMe}</div>
+                    <div className={s.info_job}><b>AboutMe:</b> {profile.aboutMe}</div>
 
                 }
-                {/*<div className={s.info_contacts}>contacts:{profile.contacts}</div>*/}
 
-                {
-                    Object.keys(profile.contacts).map(c => <div key={"contacts." + c}>{c}</div>)
-                }
+
+                <div>
+                    Contacts:
+                    {
+                        Object.keys(profile.contacts).map(c => <div key={"contacts." + c}>{profile.contacts[c]}</div>)
+                    }
+                </div>
 
 
             </div>

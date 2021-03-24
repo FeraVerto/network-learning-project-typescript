@@ -1,11 +1,9 @@
 import {Field, reduxForm} from "redux-form";
 import {Input, Textarea} from "../../common/FormsControls/FormsControls";
-import {maxLengthCreator} from "../../../utils/validators/validators";
 import React from "react";
 import s from './ProfileInfoForm.module.sass'
 import avatar from "../../../assets/image/ufo-2.png";
 
-const maxLength25 = maxLengthCreator(25)
 
 type ProfileInfoFormType = {
     profile: any
@@ -14,7 +12,7 @@ type ProfileInfoFormType = {
 }
 
 
-export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, setEditMode, editMode}: any) => {
+export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, error}: any) => {
 
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
@@ -23,7 +21,7 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, setE
         }
     }
 
-    console.log("ProfileInfoForm", profile)
+    console.log("error", error)
 
     return (
         <div>
@@ -38,7 +36,6 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, setE
                     <Field component={Input}
                            name={"fullName"}
                            placeholder={"Full name"}
-                           value={profile.fullName}
                     />
                 </span>
 
@@ -46,7 +43,6 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, setE
                     <Field component={Input}
                            name={"lookingForAJobDescription"}
                            placeholder={"Empty"}
-                           value={profile.lookingForAJobDescription}
                     />
                 </div>
 
@@ -54,7 +50,6 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, setE
                     <Field component={Input}
                            name={"lookingForAJob"}
                            placeholder={"Empty"}
-                           value={profile.lookingForAJob}
                            type={"checkbox"}
                     />
                 </div>
@@ -63,21 +58,23 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, setE
                     <Field component={Textarea}
                            name={"aboutMe"}
                            placeholder={"Empty"}
-                           value={profile.aboutMe}
                     />
                 </div>
 
 
                 <div className={s.info_contacts}>contacts:
                     {
-                        Object.keys(profile.contacts).map(c => <div>{c}<Field component={Input}
+                        Object.keys(profile.contacts).map(c => <div>{c}<Field key={c}
+                                                                              component={Input}
                                                                               name={"contacts." + c}
                                                                               placeholder={"Empty"}
-                                                                              value={c}
-                                                                              key={c}
+
                         /></div>)
                     }
                 </div>
+
+                {error && <div className={s.formSummaryError}>{error}</div>}
+
                 <button>Save</button>
             </form>
         </div>

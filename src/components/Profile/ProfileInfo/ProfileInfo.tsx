@@ -14,7 +14,7 @@ export type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto?: (photo: string) => void
-    updateProfile: (dataForm: ProfileType) => void
+    updateProfile: (dataForm: ProfileType) => any
 }
 
 
@@ -23,13 +23,12 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, 
     //фильтруем массив
     //возвращаем разметку со значениями из массива
 
-
     let [editMode, setEditMode] = useState<boolean>(false)
 
+    //более правильное решение: создать флаг в бизнесе и менять
+    //режим редактирования в соответсствии с его значением
     let submitProfileInfoReduxForm = (dataForm: any) => {
-        console.log("submitProfileInfoReduxForm", dataForm)
-        updateProfile(dataForm)
-        setEditMode(!editMode)
+        updateProfile(dataForm).then(() => setEditMode(!editMode))
     }
 
     if (!profile) return <Preloader/>
@@ -40,7 +39,8 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, 
             {
                 editMode
                     //@ts-ignore
-                    ? <div><ProfileInfoFormRedux profile={profile}
+                    ? <div><ProfileInfoFormRedux initialValues={profile}
+                                                 profile={profile}
                                                  onSubmit={submitProfileInfoReduxForm}
                                                  isOwner={isOwner}
                                                  savePhoto={savePhoto}
