@@ -1,10 +1,10 @@
 import s from './ProfileInfoDescription.module.sass'
-import React from "react";
+import React, {useEffect} from "react";
 import {Field} from "redux-form";
 import {Input} from "../../../common/FormsControls/FormsControls";
+import {useSelector} from "react-redux";
 
 export const ProfileInfoDescription = ({profile}: any) => {
-    console.log("Contacts", profile)
     /* let contact = profile !== null && profile !== undefined && Object
          .values(profile.contacts)
          .filter(item => item !== null)
@@ -13,9 +13,6 @@ export const ProfileInfoDescription = ({profile}: any) => {
                  <a rel="stylesheet" href={a}>{a} </a>
              </div> //6326
          })*/
-
-    console.log("Object.keys(profile.contacts)", Object.keys(profile.contacts))
-    console.log("Object.keys(profile.contacts)", Object.keys(profile.contacts).map(c => profile.contacts[c]))
 
     return (
         <div>

@@ -9,6 +9,7 @@ type ProfileInfoFormType = {
     profile: any
     isOwner: boolean
     savePhoto?: (photo: string) => void
+    refreshProfile: () => void
 }
 
 
@@ -21,7 +22,6 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, erro
         }
     }
 
-    console.log("error", error)
 
     return (
         <div>

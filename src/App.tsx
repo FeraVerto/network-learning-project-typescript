@@ -18,7 +18,6 @@ import {Preloader} from "./components/common/Preloader/Preloader";
 import {withSuspense} from "./hoc/withSuspense";
 import {Settings} from "./components/Settings/Settings";
 
-
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
@@ -66,12 +65,12 @@ export class App extends React.Component<AppContainerType> {
                                 <div className="main">
                                     <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
                                     <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
-                                    <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
-                                    <Route path="/messages" render={() => <MessagesContainer/>}/>
+
+
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
-                                    {/*<Route path="/settings" render={() => <Settings/>}/>*/}
+                                    <Route path="/settings" render={() => <Settings/>}/>
                                     <Route path="/login" component={() => <Login/>}/>
                                     <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
                                 </div>
@@ -79,7 +78,8 @@ export class App extends React.Component<AppContainerType> {
                         </Suspense>
 
                         <div className="main_content_friends">
-                            Friends
+                            <Route path="/profile/dialogs" render={withSuspense(DialogsContainer)}/>
+                            <Route path="/profile/messages" render={() => <MessagesContainer/>}/>
                         </div>
                     </main>
                 </div>

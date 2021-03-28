@@ -4,7 +4,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
-export const Profile = ({isOwner, profile, status, updateStatus, savePhoto, updateProfile}: any) => {
+export const Profile = ({isOwner, profile, status, updateStatus, savePhoto, updateProfile, refreshProfile}: any) => {
     return (
         <main className={s.main_profile}>
             <ProfileInfo
@@ -14,6 +14,7 @@ export const Profile = ({isOwner, profile, status, updateStatus, savePhoto, upda
                 updateStatus={updateStatus}
                 savePhoto={savePhoto}
                 updateProfile={updateProfile}
+                refreshProfile={refreshProfile}
             />
             <MyPostsContainer/>
         </main>
