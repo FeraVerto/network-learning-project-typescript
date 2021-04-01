@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
-import {AppStateType, ProfilePageType} from "../../redux/redux-store";
+import {AppStateType, ProfilePageType, ProfileType} from "../../redux/redux-store";
 import {Profile} from "./Profile";
 
 class ProfileContainer extends React.Component<Type> {
@@ -49,30 +49,6 @@ type ParamsType = {
     userId: any
 }
 
-export type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-
-export type PhotosType = {
-    small: string
-    large: string
-}
-
-export type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: PhotosType
-}
 
 type mapStateToPropsType = {
     profile: ProfilePageType

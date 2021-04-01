@@ -1,16 +1,25 @@
 import {Dispatch} from "redux";
 import {getUserAuthData} from "./auth-reducer";
 
-export const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
-
-
-export const initialState = {
-    initialized: false
+//typing
+type InitialStateType = {
+    initialized: boolean
 }
 
 export type initializedSuccessType = ReturnType<typeof initializedSuccess>
+type ActionType = initializedSuccessType
+//typing
 
-export function appReducer(state = initialState, action: initializedSuccessType) {
+export const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
+
+export const initialState: InitialStateType = {
+    initialized: false
+}
+
+//state, action
+//change state
+//new state
+export const appReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -23,6 +32,8 @@ export function appReducer(state = initialState, action: initializedSuccessType)
     }
 }
 
+//create action
+//object {type: INITIALIZED_SUCCESS}
 const initializedSuccess = () => ({
     type: INITIALIZED_SUCCESS
 } as const)

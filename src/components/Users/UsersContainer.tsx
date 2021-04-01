@@ -89,6 +89,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 let WithUrlDataContainerComponent = withRouter(UsersContainer)
 
+//@ts-ignore
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
     {
         follow,

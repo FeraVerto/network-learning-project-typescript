@@ -2,10 +2,10 @@ import React from "react";
 import s from "./Messages.module.sass";
 import {NavLink} from "react-router-dom";
 import Button from '@material-ui/core/Button';
-import {MessageType} from "../../../redux/redux-store";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
+import {MessageType} from "../../../redux/message-reducer";
 
 type MessagesType = {
     messages: Array<MessageType>

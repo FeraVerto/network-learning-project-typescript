@@ -1,8 +1,8 @@
 import React from "react";
-import {addMessageAC} from "../../../redux/message-reducer";
+import {addMessageAC, MessageType} from "../../../redux/message-reducer";
 import Messages from "./Messages";
 import {connect} from "react-redux";
-import {AppStateType, MessageType} from "../../../redux/redux-store";
+import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 
 type mapStateToPropsType = {

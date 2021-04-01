@@ -37,24 +37,6 @@ export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddlewa
 
 /*------------------------------------------------------*/
 
-export type PostType = {
-    id: number
-    message: string
-    like: number
-}
-
-export type DialogsItemType = {
-    id: number
-    name: string
-    lastMessage: string
-    avatar: string
-}
-
-export type MessageType = {
-    id: number
-    name: string
-    textMessage: string
-}
 export type FriendType = {
     id: number,
     name: string,
@@ -66,7 +48,77 @@ export type UsersLocationType = {
     country: string
 }
 
-export type UserType = {
+
+/*---------------------------Profile----------------------------*/
+/*export type PostType = {
+    id: number
+    message: string
+    like: number
+}
+
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export type PhotosType = {
+    small: string
+    large: string
+}
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+}
+
+export type ProfilePageType = {
+    posts: Array<PostType>
+    profile: ProfileType,
+    status: string
+}*/
+
+/*---------------------------Profile----------------------------*/
+
+/*---------------------------Dialogs----------------------------*/
+export type DialogsItemType = {
+    id: number
+    name: string
+    lastMessage: string
+    avatar: string
+}
+
+/*export type MessageType = {
+    id: number
+    name: string
+    textMessage: string
+}*/
+
+export type DialogsPageType = {
+    dialogs: Array<DialogsItemType>
+}
+
+/*export type MessagesPageType = {
+    messages: Array<MessageType>
+}*/
+/*---------------------------Dialogs----------------------------*/
+
+export type SidebarFriendsType = {
+    friends: Array<FriendType>
+}
+
+
+/*---------------------------Users----------------------------*/
+/*export type UserType = {
     id: number
     name: string
     status: string
@@ -77,27 +129,6 @@ export type UserType = {
     followed: boolean
 }
 
-
-/*-------------------------------------------------------*/
-/*Типизируем каждую ветку*/
-export type ProfilePageType = {
-    posts: Array<PostType>
-    profile: any,
-    status: any
-}
-
-export type DialogsPageType = {
-    dialogs: Array<DialogsItemType>
-}
-
-export type MessagesPageType = {
-    messages: Array<MessageType>
-}
-
-export type SidebarFriendsType = {
-    friends: Array<FriendType>
-}
-
 export type UsersType = {
     users: Array<UserType>
     pageSize: number
@@ -105,20 +136,23 @@ export type UsersType = {
     currentPage: number | string
     isFetching: boolean
     followingInProgress: Array<number>
-}
+}*/
 
-export type photoType = {
+/*export type photoType = {
     small: string,
     large: string
-}
+}*/
+/*---------------------------Users----------------------------*/
 
-export type authType = {
+/*---------------------------Auth----------------------------*/
+/*export type authType = {
     id: number | null,
     email: string | null,
     login: string | null,
     isAuth: boolean
     photo: photoType
-}
+}*/
+/*---------------------------Auth----------------------------*/
 
 
 

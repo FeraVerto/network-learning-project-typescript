@@ -4,9 +4,9 @@ import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from "./../../../assets/image/ufo-2.png"
 import {ProfileStatusWithHook} from "./ProfileInfoStatus/ProfileStatusWithHook";
 import {NavLink} from "react-router-dom";
-import {ProfileType} from "../ProfileContainer";
 import {ProfileInfoFormRedux} from "../ProfileInfoForm/ProfileInfoForm";
 import {ProfileInfoDescription} from "./ProfileInfoDescription/ProfileInfoDescription";
+import {ProfileType} from "../../../redux/redux-store";
 
 export type ProfileInfoType = {
     profile: ProfileType
