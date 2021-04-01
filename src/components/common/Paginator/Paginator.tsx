@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
 import s from "../Paginator/Paginator.module.sass"
-/*
-import classNames from "classnames";
-*/
+
 let classNames = require('classnames')
 
-type UsersType = {
+type PropsType = {
     pageSize: number
     totalItemsCount: number
     currentPage: number | string
@@ -13,13 +11,20 @@ type UsersType = {
     portionSize?: number
 }
 
-export const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}: UsersType) => {
+export const Paginator: React.FC<PropsType> = (
+    {
+        totalItemsCount,
+        pageSize,
+        currentPage,
+        onPageChanged,
+        portionSize = 10
+    }) => {
 
     //totalItemsCount -
 
     //pagesCount - все странички
     let pagesCount = Math.ceil(totalItemsCount / pageSize)
-    let pages = []
+    let pages: Array<number> = []
     for (let i = 1; i < pagesCount; i++) {
         pages.push(i)
     }
@@ -35,7 +40,6 @@ export const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged
     let rightPortionPageNumber = portionNumber * portionSize;
 
     return (
-
         <div className={s.users_paginator}>
 
             {

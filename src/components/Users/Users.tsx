@@ -1,10 +1,10 @@
 import React from 'react'
 import s from "./Users.module.sass"
-import {UserType} from "../../redux/redux-store";
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User/User";
+import {UserType} from "../../types/types";
 
-type UsersType = {
+type PropsType = {
     users: Array<UserType>
     follow: (id: number) => void
     unfollow: (id: number) => void
@@ -15,7 +15,17 @@ type UsersType = {
     followingInProgress: Array<number>
 }
 
-export const Users = ({users, totalUsersCount, pageSize, currentPage, onPageChanged, followingInProgress, unfollow, follow}: UsersType) => {
+export const Users: React.FC<PropsType> = (
+    {
+        users,
+        totalUsersCount,
+        pageSize,
+        currentPage,
+        onPageChanged,
+        followingInProgress,
+        unfollow,
+        follow
+    }) => {
 
     return (
         <div className={s.users}>
