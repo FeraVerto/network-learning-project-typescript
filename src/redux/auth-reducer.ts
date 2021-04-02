@@ -1,6 +1,8 @@
-import {authAPI} from "../api/api";
+import {authAPI, ResultCodesEnum} from "../api/api";
 import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 
 //typing
@@ -19,6 +21,10 @@ export type authType = {
 
 export type setUserDataType = ReturnType<typeof setUserData>
 export type setUserPhotoType = ReturnType<typeof setUserPhoto>
+
+type ActionType = setUserDataType | setUserPhotoType
+
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 //typing
 
 export const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
@@ -35,7 +41,7 @@ export const initialState: authType = {
     }
 }
 
-export const authReducer = (state = initialState, action: setUserDataType | setUserPhotoType): authType => {
+export const authReducer = (state = initialState, action: ActionType): authType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -74,12 +80,12 @@ const setUserPhoto = (small: string, large: string) => ({
 //return function
 //dispatch
 //server request, dispatch action creator
-export const getUserAuthData = () => async (dispatch: Dispatch) => {
+export const getUserAuthData = (): ThunkType => async (dispatch: Dispatch) => {
     let res = await authAPI.me()
-    if (res.data.resultCode === 0) {
-        let id = res.data.data.id
-        let email = res.data.data.email
-        let login = res.data.data.login
+    if (res.resultCode === ResultCodesEnum.Success) {
+        let id = res.data.id
+        let email = res.data.email
+        let login = res.data.login
         dispatch(setUserData(id, email, login, true))
     }
 }
@@ -104,21 +110,23 @@ export const getUserPhoto = (userId: string) => (dispatch: Dispatch) => {
 //return function
 //dispatch
 //server request, dispatch action creator
-export const loginTC = (email: string, password: string, rememberMe: boolean, captcha?: boolean) => async (dispatch: Dispatch) => {
-    let response = await authAPI.login(email, password, rememberMe, captcha)
-    if (response.data.resultCode === 0) {
-        dispatch(getUserAuthData() as any)
-    } else {
-        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
-        dispatch(stopSubmit("login", {_error: message}))
+export const loginTC = (email: string, password: string, rememberMe: boolean, captcha?: boolean): ThunkType =>
+    async (dispatch) => {
+        let response = await authAPI.login(email, password, rememberMe, captcha)
+        if (response.data.resultCode === 0) {
+            dispatch(getUserAuthData() as any)
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+            //@ts-ignore
+            dispatch(stopSubmit("login", {_error: message}))
+        }
     }
-}
 
 
 //return function
 //dispatch
 //server request, dispatch action creator
-export const logoutTC = () => async (dispatch: Dispatch) => {
+export const logoutTC = (): ThunkType => async (dispatch) => {
     let response = await authAPI.logout()
     if (response.data.resultCode === 0) {
         dispatch(setUserData(null, null, null, false))

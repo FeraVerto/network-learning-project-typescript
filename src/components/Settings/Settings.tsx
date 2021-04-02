@@ -3,7 +3,7 @@ import {ProfileInfoFormRedux} from "../Profile/ProfileInfoForm/ProfileInfoForm";
 import {ProfileInfoDescription} from "../Profile/ProfileInfo/ProfileInfoDescription/ProfileInfoDescription";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserProfile, updateProfile} from "../../redux/profile-reducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
 
@@ -15,7 +15,7 @@ type PathParamsType = {
 //@ts-ignore
 export const Settings: React.FC<any> = withRouter(({savePhoto, match, history}) => {
 
-        let profileState = useSelector<AppStateType>(state => state.profilePage.profile)
+        let profileState = useSelector<AppStateType, ProfileType>(state => state.profilePage.profile)
         let authorizedUserId = useSelector<AppStateType>(state => state.auth.id)
 
         let [editMode, setEditMode] = useState<boolean>(false)

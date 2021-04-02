@@ -1,5 +1,6 @@
-import {Dispatch} from "redux";
 import {getUserAuthData} from "./auth-reducer";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 //typing
 type InitialStateType = {
@@ -8,6 +9,8 @@ type InitialStateType = {
 
 export type initializedSuccessType = ReturnType<typeof initializedSuccess>
 type ActionType = initializedSuccessType
+
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 //typing
 
 export const INITIALIZED_SUCCESS = 'samurai-network/app/INITIALIZED_SUCCESS'
@@ -39,7 +42,7 @@ const initializedSuccess = () => ({
 } as const)
 
 
-export const initializeApp = () => async (dispatch: Dispatch) => {
+export const initializeApp = (): ThunkType => async (dispatch) => {
     let promise = await dispatch(getUserAuthData() as any)
     Promise.all([promise]).then(() =>
         dispatch(initializedSuccess() as any)

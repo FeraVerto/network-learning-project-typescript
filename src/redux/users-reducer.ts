@@ -1,7 +1,9 @@
-import {usersAPI} from "../api/api";
+import {ResultCodesEnum, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {updateObInArray} from "../utils/object-helpers";
 import {UserType} from "../types/types";
+import {AppStateType} from "./redux-store";
+import {ThunkAction} from "redux-thunk";
 
 //typing
 /*export type UsersType = {
@@ -31,6 +33,7 @@ export type ActionType =
     | toggleFollowingProgressACType
 
 type initialStateType = typeof initialState
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 //typing
 
 export const FOLLOW = "samurai-network/users/FOLLOW"
@@ -159,24 +162,28 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 
 //page: number | string, pageSize: number
 //return function
-//dispatch
+//Dispatch<ActionType>, getState: () => AppStateType
 //server request getUsers, dispatch action creator
-export const requestUsers = (page: number | string, pageSize: number) => async (dispatch: Dispatch) => {
-    dispatch(setToggleIsFetching(true))
-    dispatch(setCurrentPage(page))
-    let data = await usersAPI.getUsers(page, pageSize)
-    dispatch(setUsers(data.items))
-    dispatch(setTotalUsersCount(data.totalCount))
-    dispatch(setToggleIsFetching(false))
-}
+export const requestUsers = (page: number | string, pageSize: number): ThunkType =>
+    async (dispatch, getState) => {
+        dispatch(setToggleIsFetching(true))
+        dispatch(setCurrentPage(page))
+        let data = await usersAPI.getUsers(page, pageSize)
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+        dispatch(setToggleIsFetching(false))
+    }
 
 //id: number, dispatch: Dispatch, apiMethod: any, actionCreator: any
 //server request follow-unfollow, dispatch action creator
-const followUnfollowFlow = async (id: number, dispatch: Dispatch, apiMethod: any, actionCreator: any) => {
+const _followUnfollowFlow = async (id: number,
+                                   dispatch: Dispatch<ActionType>,
+                                   apiMethod: any,
+                                   actionCreator: (userId: number) => followACType | unfollowACType) => {
 
     dispatch(toggleFollowingProgress(true, id))
     let response = await apiMethod(id)
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(actionCreator(id))
     }
     dispatch(toggleFollowingProgress(false, id))
@@ -186,14 +193,15 @@ const followUnfollowFlow = async (id: number, dispatch: Dispatch, apiMethod: any
 //return function
 //dispatch
 //function followUnfollowFlow
-export const follow = (id: number) => async (dispatch: Dispatch) => {
-    followUnfollowFlow(id, dispatch, usersAPI.follow.bind(usersAPI), followSuccess)
-}
+export const follow = (id: number): ThunkType =>
+    async (dispatch) => {
+        _followUnfollowFlow(id, dispatch, usersAPI.follow.bind(usersAPI), followSuccess)
+    }
 
 //id: number
 //return function
 //dispatch
 //function followUnfollowFlow
-export const unfollow = (id: number) => async (dispatch: Dispatch) => {
-    followUnfollowFlow(id, dispatch, usersAPI.unfollow.bind(usersAPI), unfollowSuccess)
+export const unfollow = (id: number): ThunkType => async (dispatch) => {
+    _followUnfollowFlow(id, dispatch, usersAPI.unfollow.bind(usersAPI), unfollowSuccess)
 }

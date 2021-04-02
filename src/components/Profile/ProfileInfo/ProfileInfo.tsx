@@ -77,6 +77,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
                                 </div>
                             </div>
 
+                            {/*//@ts-ignore*/}
                             <ProfileInfoDescription profile={profile} contact={profile.contacts}/>
                         </div>
                         {isOwner && <button onClick={() => setEditMode(!editMode)}>Edit</button>}

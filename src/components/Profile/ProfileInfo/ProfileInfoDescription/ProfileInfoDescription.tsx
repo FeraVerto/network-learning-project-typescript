@@ -1,10 +1,20 @@
 import s from './ProfileInfoDescription.module.sass'
-import React, {useEffect} from "react";
-import {Field} from "redux-form";
-import {Input} from "../../../common/FormsControls/FormsControls";
-import {useSelector} from "react-redux";
+import React from "react";
+import {ProfilePageType, ProfileType} from "../../../../types/types";
 
-export const ProfileInfoDescription = ({profile}: any) => {
+type ProfileInfoDescriptionType = {
+    profile: ProfileType
+}
+
+export const ProfileInfoDescription: React.FC<ProfileInfoDescriptionType> = (
+    props) => {
+    /*userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    aboutMe: string
+    contacts: ContactsType
+    photos: PhotosType*/
     /* let contact = profile !== null && profile !== undefined && Object
          .values(profile.contacts)
          .filter(item => item !== null)
@@ -16,38 +26,38 @@ export const ProfileInfoDescription = ({profile}: any) => {
 
     return (
         <div>
-
+            {props.profile !== null &&
             <div className={s.info}>
-                <div className={s.info_name}><b>fullName:</b> {profile.fullName}</div>
+                <div className={s.info_name}><b>fullName:</b> {props.profile.fullName}</div>
 
                 {
-                    profile.lookingForAJobDescription &&
+                    props.profile.lookingForAJobDescription &&
                     <div
-                        className={s.info_description}><b>Description:</b> {profile.lookingForAJobDescription}</div>
+                        className={s.info_description}><b>Description:</b> {props.profile.lookingForAJobDescription}
+                    </div>
                 }
 
                 {
-                    profile.lookingForAJob &&
-                    <div className={s.info_job}><b>lookingForAJob:</b> {profile.lookingForAJob}</div>
+                    props.profile.lookingForAJob &&
+                    <div className={s.info_job}><b>lookingForAJob:</b> {props.profile.lookingForAJob}</div>
 
                 }
 
                 {
-                    profile.aboutMe &&
-                    <div className={s.info_job}><b>AboutMe:</b> {profile.aboutMe}</div>
+                    props.profile.aboutMe &&
+                    <div className={s.info_job}><b>AboutMe:</b> {props.profile.aboutMe}</div>
 
                 }
 
-
-                <div>
+                {/*<div>
                     Contacts:
                     {
-                        Object.keys(profile.contacts).map(c => <div key={"contacts." + c}>{profile.contacts[c]}</div>)
+                        props.profile &&
+                        Object.keys(props.profile.contacts).map(c => <div key={"contacts." + c}>{props.profile.contacts[c]}</div>)
                     }
-                </div>
+                </div>*/}
 
-
-            </div>
+            </div>}
         </div>
     )
 }

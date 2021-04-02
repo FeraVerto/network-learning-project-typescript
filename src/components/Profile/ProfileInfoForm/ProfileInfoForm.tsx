@@ -17,11 +17,9 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, erro
 
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
-            //@ts-ignore
             savePhoto(e.target.files[0])
         }
     }
-
 
     return (
         <div>
@@ -29,7 +27,7 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, erro
                                            alt="user avatar"
                                            width="180"
                                            height="180"/></div>
-            {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+            <input type="file" onChange={onMainPhotoSelected}/>
 
             <form onSubmit={handleSubmit}>
                 <span className={s.item_form}> fullName:

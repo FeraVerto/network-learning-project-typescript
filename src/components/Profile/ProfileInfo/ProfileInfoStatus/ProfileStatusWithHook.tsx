@@ -5,9 +5,9 @@ type ProfileStatusType = {
     updateStatus: (status: string) => void
 }
 
-export const ProfileStatusWithHook = (props: ProfileStatusType) => {
-    let [editMode, setEditMode] = useState(false)
-    let [value, setValue] = useState(props.status)
+export const ProfileStatusWithHook: React.FC<ProfileStatusType> = (props) => {
+    let [editMode, setEditMode] = useState<boolean>(false)
+    let [value, setValue] = useState<string>(props.status)
 
     let onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target ? e.target.value : "")
