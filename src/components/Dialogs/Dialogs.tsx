@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./Dialogs.module.sass";
 import {DialogsItem} from "./DialogsItem/DialogsItem";
-import {DialogsItemType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {DialogsItemType} from "../../types/types";
 
 type DialogsType = {
     dialogs: Array<DialogsItemType>

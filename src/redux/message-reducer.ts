@@ -5,11 +5,12 @@ export type MessageType = {
     textMessage: string
 }
 
-export type MessagesPageType = {
+/*export type MessagesPageType = {
     messages: Array<MessageType>
-}
+}*/
 
 type initialStateType = typeof initialState
+type ActionType = addMessageType
 //typing
 
 export const ADD_MESSAGE = "samurai-network/message/ADD_MESSAGE"
@@ -23,9 +24,9 @@ let initialState = {
     ] as Array<MessageType>
 }
 
-export type addMessageACType = ReturnType<typeof addMessageAC>
+export type addMessageType = ReturnType<typeof addMessage>
 
-export const messageReducer = (state = initialState, action: addMessageACType): initialStateType => {
+export const messageReducer = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             return {
@@ -41,4 +42,4 @@ export const messageReducer = (state = initialState, action: addMessageACType): 
 //newMessageText: string
 //action creator
 //object
-export const addMessageAC = (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText} as const)
+export const addMessage = (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText} as const)

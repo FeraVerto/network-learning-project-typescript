@@ -5,40 +5,13 @@ type ProfileStatusType = {
     updateStatus: (status: string) => void
 }
 
-/*export const ProfileStatus = (props: ProfileStatusType) => {
-    let [editMode, setEditMode] = useState(false)
-    let [value, setValue] = useState(props.status)
-
-    let onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target ? e.target.value : "")
-    }
-
-    return (
-        <div>
-            {
-                editMode
-                    ? <div>
-                        <input autoFocus={true}
-                               onBlur={() => {
-                                   setEditMode(!editMode)
-                                   props.updateStatus(value)
-                               } }
-                               value={value}
-                               onChange={onChangeStatus}
-                        />
-                    </div>
-                    : <div>
-                        <span onDoubleClick={() => setEditMode(!editMode)}>
-                            {props.status || "No status"}
-                        </span>
-                    </div>
-            }
-        </div>
-    )
-}*/
+type StateType = {
+    editMode: boolean,
+    status: string
+}
 
 
-export class ProfileStatus extends React.Component <ProfileStatusType> {
+export class ProfileStatus extends React.Component <ProfileStatusType, StateType> {
     state = {
         editMode: false,
         status: this.props.status
@@ -93,5 +66,38 @@ export class ProfileStatus extends React.Component <ProfileStatusType> {
         </div>
     }
 }
+
+//Тоже самое только на хуках
+/*export const ProfileStatus = (props: ProfileStatusType) => {
+    let [editMode, setEditMode] = useState(false)
+    let [value, setValue] = useState(props.status)
+
+    let onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target ? e.target.value : "")
+    }
+
+    return (
+        <div>
+            {
+                editMode
+                    ? <div>
+                        <input autoFocus={true}
+                               onBlur={() => {
+                                   setEditMode(!editMode)
+                                   props.updateStatus(value)
+                               } }
+                               value={value}
+                               onChange={onChangeStatus}
+                        />
+                    </div>
+                    : <div>
+                        <span onDoubleClick={() => setEditMode(!editMode)}>
+                            {props.status || "No status"}
+                        </span>
+                    </div>
+            }
+        </div>
+    )
+}*/
 
 

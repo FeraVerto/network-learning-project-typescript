@@ -1,5 +1,5 @@
-import {addPostAC, profileReducer} from "./profile-reducer";
-import {ProfilePageType} from "./redux-store";
+import {addPostAC, ProfilePageType, profileReducer} from "./profile-reducer";
+import {ProfileType} from "../types/types";
 
 
 let state: ProfilePageType;
@@ -11,7 +11,7 @@ beforeEach(() => {
                 {id: 2, message: "Или сдохни", like: 40},
                 {id: 3, message: "Или умри", like: 1}
             ],
-            profile: null,
+            profile: null as ProfileType | null,
             status: ""
         }
     }

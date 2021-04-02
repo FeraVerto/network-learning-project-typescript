@@ -1,11 +1,11 @@
 import React from "react";
 import MyPost from "./Post/MyPost";
 import s from "./MyPosts.module.sass"
-import {PostType} from "../../../redux/redux-store";
 import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
+import {PostType} from "../../../types/types";
 
 
 export type MyPostsType = {

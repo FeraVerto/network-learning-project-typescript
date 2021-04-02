@@ -1,14 +1,12 @@
 import {connect} from "react-redux";
-import {AppStateType, UserType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {
     follow,
-    setCurrentPage,
     unfollow,
     requestUsers
 } from "../../redux/users-reducer";
 import React from "react";
 import {Preloader} from "../common/Preloader/Preloader";
-import {setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {
     getCurrentPage, getFollowingInProgress,
@@ -18,6 +16,7 @@ import {
     getUsersSelector
 } from "../../redux/users-selectors";
 import {Users} from "./Users";
+import {UserType} from "../../types/types";
 
 
 type PathParamsType = {
@@ -26,9 +25,9 @@ type PathParamsType = {
 
 type mapStateToPropsType = {
     users: Array<UserType>
-    pageSize: number
     totalUsersCount: number
     currentPage: number | string
+    pageSize: number
     isFetching: boolean
     followingInProgress: Array<number>
 }
@@ -36,8 +35,6 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
-    setCurrentPage: (pageNumber: number) => void
-    setUserProfile: (userId: number) => void
     getUsers: (currentPage: number | string, pageSize: number) => void
 }
 
@@ -48,13 +45,13 @@ type ContainerType = RouteComponentProps<PathParamsType> & UsersContainerType
 class UsersContainer extends React.Component<ContainerType> {
     componentDidMount() {
         //запрашиваем юзеров
-        let{currentPage, pageSize} = this.props
+        let {currentPage, pageSize} = this.props
         this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
         //запрашиваем юзеров
-        let{pageSize} = this.props
+        let {pageSize} = this.props
         this.props.getUsers(pageNumber, pageSize)
     }
 
@@ -89,13 +86,10 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 let WithUrlDataContainerComponent = withRouter(UsersContainer)
 
-//@ts-ignore
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
     {
         follow,
         unfollow,
-        setCurrentPage,
-        setUserProfile,
         getUsers: requestUsers
     }
 )(WithUrlDataContainerComponent)

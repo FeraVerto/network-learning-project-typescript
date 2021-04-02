@@ -1,8 +1,9 @@
 import React from "react";
-import {addPostAC, PostType} from "../../../redux/profile-reducer";
+import {addPostAC} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
+import {PostType} from "../../../types/types";
 
 type mapStateToPropsType = {
     posts: Array<PostType>

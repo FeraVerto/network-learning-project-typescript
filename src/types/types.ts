@@ -1,3 +1,4 @@
+/*---------------------------Profile----------------------------*/
 export type PhotosType = {
     small: string
     large: string
@@ -27,7 +28,7 @@ export type ProfileType = {
     fullName: string
     contacts: ContactsType
     photos: PhotosType
-}
+} | null
 
 export type UserType = {
     id: number
@@ -36,3 +37,38 @@ export type UserType = {
     photos: PhotosType,
     followed: boolean
 }
+
+export type ProfilePageType = {
+    posts: Array<PostType>
+    profile: ProfileType,
+    status: string
+}
+
+/*---------------------------Profile----------------------------*/
+
+
+
+/*---------------------------Dialogs----------------------------*/
+export type DialogsItemType = {
+    id: number
+    name: string
+    lastMessage: string
+    avatar: string
+}
+
+export type DialogsPageType = {
+    dialogs: Array<DialogsItemType>
+}
+
+/*export type MessageType = {
+    id: number
+    name: string
+    textMessage: string
+}*/
+
+
+
+/*export type MessagesPageType = {
+    messages: Array<MessageType>
+}*/
+/*---------------------------Dialogs----------------------------*/

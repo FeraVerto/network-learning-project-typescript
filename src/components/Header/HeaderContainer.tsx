@@ -1,8 +1,8 @@
 import React from 'react'
 import Header from "./Header";
 import {connect} from "react-redux";
-import {AppStateType, photoType} from "../../redux/redux-store";
-import {getUserPhoto, logoutTC} from "../../redux/auth-reducer";
+import {AppStateType} from "../../redux/redux-store";
+import {getUserPhoto, logoutTC, photoType} from "../../redux/auth-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type ParamsType = {

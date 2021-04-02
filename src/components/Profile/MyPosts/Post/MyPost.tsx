@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./MyPost.module.sass";
-import {PostType} from "../../../../redux/redux-store";
 import {Avatar, Checkbox, FormControlLabel} from "@material-ui/core";
 import {Favorite, FavoriteBorder} from "@material-ui/icons";
+import {PostType} from "../../../../types/types";
 
 
 const MyPost: React.FC<PostType> = (props) => {

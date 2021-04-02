@@ -2,7 +2,7 @@ import React from 'react'
 import s from "../Users.module.sass"
 import avatar from '../../../assets/image/ufo-2.png'
 import {NavLink} from "react-router-dom";
-import {UserType} from "../../../redux/redux-store";
+import {UserType} from "../../../types/types";
 
 type UsersType = {
     user: UserType

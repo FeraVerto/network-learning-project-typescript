@@ -1,7 +1,8 @@
 import React from "react";
-import {AppStateType, DialogsItemType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {DialogsItemType} from "../../types/types";
 
 type mapStateToPropsType = {
     dialogs: Array<DialogsItemType>
@@ -15,5 +16,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const DialogsContainer = connect<mapStateToPropsType, null, {}, AppStateType>(mapStateToProps, null)(Dialogs)
- export default DialogsContainer
+export default connect<mapStateToPropsType, null, {}, AppStateType>(mapStateToProps, null)(Dialogs)

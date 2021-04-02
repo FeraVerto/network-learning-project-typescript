@@ -1,9 +1,8 @@
 import React from "react";
-import {addMessageAC, MessageType} from "../../../redux/message-reducer";
+import {addMessage, MessageType} from "../../../redux/message-reducer";
 import Messages from "./Messages";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {Dispatch} from "redux";
 
 type mapStateToPropsType = {
     messages: Array<MessageType>
@@ -20,12 +19,16 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 }
 
 /*https://stackoverflow.com/questions/49808004/parameter-dispatch-implicitly-has-an-any-type*/
-const mapDispatchToProps = (dispatch: Dispatch) => {
+/*const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         addMessage: (newMessageText: string) => {
             dispatch(addMessageAC(newMessageText));
         }
     }
-}
+}*/
 
-export const MessagesContainer = connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(Messages)
+export const MessagesContainer = connect<mapStateToPropsType, mapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
+    {
+        addMessage
+    }
+)(Messages)

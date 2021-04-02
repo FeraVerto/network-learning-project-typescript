@@ -6,7 +6,7 @@ import {ProfileStatusWithHook} from "./ProfileInfoStatus/ProfileStatusWithHook";
 import {NavLink} from "react-router-dom";
 import {ProfileInfoFormRedux} from "../ProfileInfoForm/ProfileInfoForm";
 import {ProfileInfoDescription} from "./ProfileInfoDescription/ProfileInfoDescription";
-import {ProfileType} from "../../../redux/redux-store";
+import {ProfileType} from "../../../types/types";
 
 export type ProfileInfoType = {
     profile: ProfileType
@@ -19,7 +19,15 @@ export type ProfileInfoType = {
 }
 
 
-export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, updateProfile}: ProfileInfoType) => {
+export const ProfileInfo: React.FC<ProfileInfoType> = (
+    {
+        isOwner,
+        profile,
+        status,
+        updateStatus,
+        savePhoto,
+        updateProfile
+    }) => {
     //достаем значения из объекта и складываем в массив
     //фильтруем массив
     //возвращаем разметку со значениями из массива
@@ -27,7 +35,7 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, 
     let [editMode, setEditMode] = useState<boolean>(false)
     //более правильное решение: создать флаг в бизнесе и менять
     //режим редактирования в соответсствии с его значением
-    let submitProfileInfoReduxForm = (dataForm: any) => {
+    let submitProfileInfoReduxForm = (dataForm: ProfileType) => {
         updateProfile(dataForm).then(() => setEditMode(!editMode))
     }
 
@@ -41,6 +49,7 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, 
                     //@ts-ignore
                     ? <div><ProfileInfoFormRedux initialValues={profile}
                                                  profile={profile}
+                                                 //@ts-ignore
                                                  onSubmit={submitProfileInfoReduxForm}
                                                  isOwner={isOwner}
                                                  savePhoto={savePhoto}

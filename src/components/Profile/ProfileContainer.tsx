@@ -1,13 +1,20 @@
 import React from 'react';
-import {getUserProfile, getStatus, updateStatus, savePhoto, updateProfile} from '../../redux/profile-reducer';
+import {
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    savePhoto,
+    updateProfile
+} from '../../redux/profile-reducer';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
-import {AppStateType, ProfilePageType, ProfileType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {Profile} from "./Profile";
+import {ProfileType} from "../../types/types";
 
-class ProfileContainer extends React.Component<Type> {
+class ProfileContainer extends React.Component<ProfileContainerType> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId;
@@ -26,7 +33,7 @@ class ProfileContainer extends React.Component<Type> {
         this.refreshProfile();
     }
 
-    componentDidUpdate(prevProps: any) {
+    componentDidUpdate(prevProps: Readonly<ProfileContainerType>, prevState: Readonly<{}>, snapshot?: any) {
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile();
         }
@@ -44,14 +51,14 @@ class ProfileContainer extends React.Component<Type> {
     }
 }
 
-
+//typing
 type ParamsType = {
     userId: any
 }
 
 
 type mapStateToPropsType = {
-    profile: ProfilePageType
+    profile: ProfileType | null
     status: string
     authorizedUserId: number | null
 }
@@ -64,6 +71,11 @@ type mapDispatchToPropsType = {
     updateProfile: (dataForm: ProfileType) => void
 }
 
+type ProfileInfoContainerType = mapStateToPropsType & mapDispatchToPropsType
+type ProfileContainerType = RouteComponentProps<ParamsType> & ProfileInfoContainerType
+//typing
+
+
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
@@ -71,10 +83,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         authorizedUserId: state.auth.id
     }
 }
-
-
-type ProfileInfoContainerType = mapStateToPropsType & mapDispatchToPropsType
-type Type = RouteComponentProps<ParamsType> & ProfileInfoContainerType
 
 
 export default compose<React.ComponentType>(

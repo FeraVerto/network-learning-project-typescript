@@ -5,12 +5,6 @@ import {photoType} from "./auth-reducer";
 import {PostType, ProfileType} from "../types/types";
 
 //typing
-/*export type ProfilePageType = {
-    posts: Array<PostType>
-    profile: ProfileType,
-    status: string
-}*/
-
 export type addPostAC = ReturnType<typeof addPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setUserStatus = ReturnType<typeof setUserStatus>

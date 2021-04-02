@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {messageReducer} from "./message-reducer";
@@ -9,7 +9,7 @@ import thunkMiddleware from "redux-thunk";
 import {reducer as formReducer} from 'redux-form';
 import {appReducer} from "./app-reducer";
 
-let reducer = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     messagesPage: messageReducer,
@@ -21,7 +21,7 @@ let reducer = combineReducers({
 })
 
 //типизируем reducers
-export type RootReducerType = typeof reducer
+export type RootReducerType = typeof rootReducer
 //типизируем state
 export type AppStateType = ReturnType<RootReducerType>
 
@@ -32,7 +32,7 @@ export type StoreType = Store<AppStateType>
 /*const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export let store: StoreType = createStore(reducer, composeEnhancers(applyMiddleware(thunkMiddleware)));*/
 //создаем store
-export let store: StoreType = createStore(reducer, applyMiddleware(thunkMiddleware));
+export let store: StoreType = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 
 /*------------------------------------------------------*/
@@ -48,69 +48,6 @@ export type UsersLocationType = {
     country: string
 }
 
-
-/*---------------------------Profile----------------------------*/
-/*export type PostType = {
-    id: number
-    message: string
-    like: number
-}
-
-export type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-
-export type PhotosType = {
-    small: string
-    large: string
-}
-
-export type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: PhotosType
-}
-
-export type ProfilePageType = {
-    posts: Array<PostType>
-    profile: ProfileType,
-    status: string
-}*/
-
-/*---------------------------Profile----------------------------*/
-
-/*---------------------------Dialogs----------------------------*/
-export type DialogsItemType = {
-    id: number
-    name: string
-    lastMessage: string
-    avatar: string
-}
-
-/*export type MessageType = {
-    id: number
-    name: string
-    textMessage: string
-}*/
-
-export type DialogsPageType = {
-    dialogs: Array<DialogsItemType>
-}
-
-/*export type MessagesPageType = {
-    messages: Array<MessageType>
-}*/
-/*---------------------------Dialogs----------------------------*/
 
 export type SidebarFriendsType = {
     friends: Array<FriendType>

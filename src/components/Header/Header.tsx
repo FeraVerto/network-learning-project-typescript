@@ -1,12 +1,14 @@
 import React from "react";
 import s from "./Header.module.sass";
 import {NavLink} from "react-router-dom";
-import {authType} from "../../redux/redux-store";
 import avatar from "./../../assets/image/ufo-2.png"
+import {authType} from "../../redux/auth-reducer";
 
-type HeaderType = authType
+type HeaderType = authType & {
+    logoutTC: () => void
+}
 
-const Header = ({photo, logoutTC, isAuth, login}: any) => {
+const Header: React.FC<HeaderType> = ({photo, logoutTC, isAuth, login}) => {
     return (
         <>
             <div className={s.site_name}>Spacebook</div>
