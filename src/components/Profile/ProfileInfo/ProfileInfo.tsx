@@ -45,7 +45,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
         <div>
 
             {
-                editMode
+                /*editMode
                     //@ts-ignore
                     ? <div><ProfileInfoFormRedux initialValues={profile}
                                                  profile={profile}
@@ -58,31 +58,32 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
 
                     />
 
-                    </div>
-                    : <div className={s.profile}>
-                        <div className={s.profile_info}>
+                    </div>:*/
+                <div className={s.profile}>
+                    <div className={s.profile_info}>
+                        <div>
+                            <div className={s.avatar}><img src={profile.photos.large || avatar}
+                                                           alt="user avatar"
+                                                           width="300"
+                                                           height="300"/></div>
+                            {/*{isOwner && <input type="file" onChange={onMainPhotoSelected}/>}*/}
+
                             <div>
-                                <div className={s.avatar}><img src={profile.photos.large || avatar}
-                                                               alt="user avatar"
-                                                               width="180"
-                                                               height="180"/></div>
-                                {/*{isOwner && <input type="file" onChange={onMainPhotoSelected}/>}*/}
-
-                                <div>
-                                    <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
-                                </div>
-                                <div className={s.button_block}>
-                                    <button className={s.button}><NavLink to={"/dialogs"}>Dialog</NavLink></button>
-                                    <button className={s.button}>Follow</button>
-                                </div>
+                                <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
                             </div>
-
-                            {/*//@ts-ignore*/}
-                            <ProfileInfoDescription profile={profile} contact={profile.contacts}/>
+                            <div className={s.button_block}>
+                                <button className={s.button}><NavLink to={"/messages"}>Dialog</NavLink></button>
+                                <button className={s.button}>Follow</button>
+                            </div>
                         </div>
-                        {isOwner && <button onClick={() => setEditMode(!editMode)}>Edit</button>}
+
+                        {/*//@ts-ignore*/}
+                        <ProfileInfoDescription profile={profile} contact={profile.contacts}/>
 
                     </div>
+                    {/*{isOwner && <button onClick={() => setEditMode(!editMode)}>Edit</button>}*/}
+
+                </div>
 
             }
 

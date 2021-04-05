@@ -7,7 +7,7 @@ import {DialogsItemType} from "../../../types/types";
 
 export const DialogsItem: React.FC<DialogsItemType> = ({id, avatar, name, lastMessage}) => {
     return (
-        <NavLink className={s.link} to={"/profile/messages/" + id}>
+        <NavLink className={s.link} to={"/messages/" + id}>
             <li className={s.item}>
                 <Avatar alt="Remy Sharp" src={avatar}/>
                 <div className={s.message}>

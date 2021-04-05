@@ -27,26 +27,34 @@ export const ProfileInfoDescription: React.FC<ProfileInfoDescriptionType> = (
     return (
         <div>
             {props.profile !== null &&
-            <div className={s.info}>
-                <div className={s.info_name}><b>fullName:</b> {props.profile.fullName}</div>
+            <ul className={s.list}>
+                <li className={s.item}>
+                    {/*<span className={s.item_fullName}>fullName:</span>*/}
+                    <span className={s.item_fullName}><b>{props.profile.fullName}</b></span>
+                </li>
 
                 {
                     props.profile.lookingForAJobDescription &&
-                    <div
-                        className={s.info_description}><b>Description:</b> {props.profile.lookingForAJobDescription}
-                    </div>
+                    <li className={s.item}>
+                        <span>Description:</span>
+                        {props.profile.lookingForAJobDescription}
+                    </li>
                 }
 
                 {
                     props.profile.lookingForAJob &&
-                    <div className={s.info_job}><b>lookingForAJob:</b> {props.profile.lookingForAJob}</div>
-
+                    <li className={s.item}>
+                        <span>lookingForAJob:</span>
+                        {props.profile.lookingForAJob}
+                    </li>
                 }
 
                 {
                     props.profile.aboutMe &&
-                    <div className={s.info_job}><b>AboutMe:</b> {props.profile.aboutMe}</div>
-
+                    <li className={s.item}>
+                        <span>AboutMe:</span>
+                        {props.profile.aboutMe}
+                    </li>
                 }
 
                 {/*<div>
@@ -57,7 +65,7 @@ export const ProfileInfoDescription: React.FC<ProfileInfoDescriptionType> = (
                     }
                 </div>*/}
 
-            </div>}
+            </ul>}
         </div>
     )
 }

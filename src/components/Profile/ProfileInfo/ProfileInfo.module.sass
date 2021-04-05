@@ -1,3 +1,5 @@
+
+
 .profile
   padding-bottom: 30px
   padding-top: 30px
@@ -6,13 +8,14 @@
   color: white
   display: flex
   flex-direction: column
-  border-top: 2px solid rgba(225, 225, 225, 0.4)
+
   border-bottom: 2px solid rgba(225, 225, 225, 0.4)
 
 
   .profile_info
     display: flex
-    max-width: 550px
+    //justify-content: space-between
+    //max-width: 550px
 
   .info
     margin-left: 60px
@@ -23,6 +26,7 @@
     font-weight: bold
     text-transform: uppercase
 
+
   .contact
     word-wrap: break-word
 
@@ -30,19 +34,34 @@
   margin-top: 30px
   display: flex
   flex-direction: column
+  width: 100%
 
   .button
     padding: 10px
-    width: 200px
+    margin-bottom: 10px
     font-size: 15px
     text-transform: uppercase
-    background-color: transparent
-    border: 2px solid rgb(225, 225, 225)
-    color: rgb(225, 225, 225)
+    border: none
+    //rgba(8, 187, 47, 0.4)
+    background-color: rgba(163, 255, 238, 0.6)
+    color: darkblue
+    font-weight: bold
+
+.button:hover
+  background: gold
+  box-shadow: 0 -200px 100px -120px #08bb2f inset
+  animation: background 3s infinite alternate
+
+@keyframes background
+  50%
+    background: skyblue
+    box-shadow: 0 -200px 100px -100px #00008b inset
+    color: #08bb2f
+
 
 .avatar
-  width: 180px
-  height: 180px
+  width: 300px
+  height: 300px
 
   img
     height: 100%

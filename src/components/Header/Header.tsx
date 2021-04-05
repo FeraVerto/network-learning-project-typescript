@@ -11,7 +11,9 @@ type HeaderType = authType & {
 const Header: React.FC<HeaderType> = ({photo, logoutTC, isAuth, login}) => {
     return (
         <>
-            <div className={s.site_name}>Spacebook</div>
+
+            <div className={s.site_name}><span>S</span>pacebook</div>
+
 
             <div className={s.login}>
                 {photo.small === ""

@@ -64,6 +64,8 @@ export class App extends React.Component<AppContainerType> {
                                 <div className="main">
                                     <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
                                     <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
+                                    <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
+                                    <Route path="/messages" render={() => <MessagesContainer/>}/>
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
@@ -75,8 +77,7 @@ export class App extends React.Component<AppContainerType> {
                         </Suspense>
 
                         <div className="main_content_friends">
-                            <Route path="/profile/dialogs" render={withSuspense(DialogsContainer)}/>
-                            <Route path="/profile/messages" render={() => <MessagesContainer/>}/>
+
                         </div>
                     </main>
                 </div>

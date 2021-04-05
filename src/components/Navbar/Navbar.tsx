@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
             <ul className={s.nav_list}>
                 {/*NavLink - не перезагружая страницу, меняем адресную строку*/}
                 <MenuItem to={"/profile"} item={"Profile"}/>
-                <MenuItem to={"/profile/dialogs"} item={"Dialogs"}/>
+                <MenuItem to={"/dialogs"} item={"Dialogs"}/>
                 <MenuItem to={"/news"} item={"News"}/>
                 <MenuItem to={"/music"} item={"Music"}/>
                 <MenuItem to={"/settings"} item={"Settings"}/>

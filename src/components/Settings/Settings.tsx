@@ -59,6 +59,7 @@ export const Settings: React.FC<any> = withRouter(({savePhoto, match, history}) 
                         </div>
                         : <div>
                             <ProfileInfoDescription profile={profileState}/>
+                            {/*{isOwner && <button onClick={() => setEditMode(!editMode)}>Edit</button>}*/}
                             <button onClick={() => setEditMode(!editMode)}>Edit</button>
                         </div>
                 }
