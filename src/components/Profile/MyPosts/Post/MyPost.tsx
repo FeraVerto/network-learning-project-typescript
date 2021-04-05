@@ -2,15 +2,18 @@ import React from "react";
 import s from "./MyPost.module.sass";
 import {Avatar, Checkbox, FormControlLabel} from "@material-ui/core";
 import {Favorite, FavoriteBorder} from "@material-ui/icons";
-import {PostType} from "../../../../types/types";
+import {PhotosType, PostType} from "../../../../types/types";
 
+type MyPostPropsType = {
+    photo?: string
+}
 
-const MyPost: React.FC<PostType> = (props) => {
+const MyPost: React.FC<PostType & MyPostPropsType> = (props) => {
 
     return (
         <div className={s.post_block}>
             <div className={s.post}>
-                <Avatar src="https://www.meme-arsenal.com/memes/3736fb7f61101f1468bcc568ce13dd71.jpg" alt="Аватарка"/>
+                <Avatar src={props.photo} alt="Аватарка"/>
                 <FormControlLabel control={<Checkbox
                     icon={<FavoriteBorder/>}
                     checkedIcon={<Favorite/>}

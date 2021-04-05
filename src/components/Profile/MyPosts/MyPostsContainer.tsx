@@ -3,11 +3,12 @@ import {addPostAC} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {PostType} from "../../../types/types";
+import {PhotosType, PostType} from "../../../types/types";
 
 type mapStateToPropsType = {
     posts: Array<PostType>
     isAuth: boolean | null
+    photo?: string
 }
 
 type mapDispatchToPropsType = {
@@ -17,7 +18,8 @@ type mapDispatchToPropsType = {
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        photo: state.profilePage.profile?.photos.small
     }
 }
 

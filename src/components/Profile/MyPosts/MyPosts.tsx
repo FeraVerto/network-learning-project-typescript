@@ -5,20 +5,22 @@ import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
-import {PostType} from "../../../types/types";
+import {PhotosType, PostType} from "../../../types/types";
 
 
 export type MyPostsType = {
     posts: Array<PostType>
     addPostAC: (formData: string) => void
     isAuth: boolean | null
+    photo?: string
 }
 
 const maxLength10 = maxLengthCreator(10)
 
-const MyPosts = React.memo(({posts, addPostAC, isAuth}: MyPostsType) => {
-    let newPosts = posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like}/>)
+const MyPosts = React.memo(({posts, addPostAC, isAuth, photo}: MyPostsType) => {
+    let newPosts = posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like} photo={photo}/>)
 
+    console.log("photo", photo)
     const onSubmit = (value: PostsFormType) => {
         addPostAC(value.newPostText)
     }
@@ -28,7 +30,7 @@ const MyPosts = React.memo(({posts, addPostAC, isAuth}: MyPostsType) => {
     return (
         <div className={s.posts}>
             <PostsFormRedux onSubmit={onSubmit}/>
-            <div>
+            <div className={s.posts_item}>
                 {newPosts}
             </div>
         </div>
@@ -48,7 +50,7 @@ export const PostsForm: React.FC<InjectedFormProps<PostsFormType>> = (props) => 
                     name={"newPostText"}
                     placeholder={"Empty"}
                     className={s.posts_textarea}
-                    validate={[requiredField, maxLength10]}
+                    //validate={[requiredField, maxLength10]}
                 />
                 <div className={s.button_block}>
                     <button className={s.posts_button}>Add post</button>
