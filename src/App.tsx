@@ -77,11 +77,10 @@ export class App extends React.Component<AppContainerType> {
                         </Suspense>
 
                         <div className="main_content_friends">
-
+                            <FriendsContainer/>
                         </div>
                     </main>
                 </div>
-                <FriendsContainer/>
             </div>
 
         );
