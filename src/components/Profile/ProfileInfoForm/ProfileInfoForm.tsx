@@ -69,9 +69,9 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, erro
                     </div>
 
                     <div className={s.form_block_contacts}>
-                        <div className={s.item_form}>
+                        <div>
                             {
-                                Object.keys(profile.contacts).map(c => <div>{c}<Field key={c}
+                                Object.keys(profile.contacts).map(c => <div className={s.item_form}>{c}<Field key={c}
                                                                                       component={Input}
                                                                                       name={"contacts." + c}
                                                                                       placeholder={"Empty"}
