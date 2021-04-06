@@ -2,9 +2,9 @@
   "files": {
     "static/js/0.797449f6.chunk.js": "/network-learning-project-typescript/static/js/0.797449f6.chunk.js",
     "static/js/0.797449f6.chunk.js.map": "/network-learning-project-typescript/static/js/0.797449f6.chunk.js.map",
-    "main.css": "/network-learning-project-typescript/static/css/main.898dfbff.chunk.css",
-    "main.js": "/network-learning-project-typescript/static/js/main.a10d3594.chunk.js",
-    "main.js.map": "/network-learning-project-typescript/static/js/main.a10d3594.chunk.js.map",
+    "main.css": "/network-learning-project-typescript/static/css/main.8a5d800c.chunk.css",
+    "main.js": "/network-learning-project-typescript/static/js/main.22c2d030.chunk.js",
+    "main.js.map": "/network-learning-project-typescript/static/js/main.22c2d030.chunk.js.map",
     "runtime-main.js": "/network-learning-project-typescript/static/js/runtime-main.accbe4cf.js",
     "runtime-main.js.map": "/network-learning-project-typescript/static/js/runtime-main.accbe4cf.js.map",
     "static/js/3.7a929924.chunk.js": "/network-learning-project-typescript/static/js/3.7a929924.chunk.js",
@@ -20,7 +20,7 @@
     "index.html": "/network-learning-project-typescript/index.html",
     "static/css/4.43453413.chunk.css.map": "/network-learning-project-typescript/static/css/4.43453413.chunk.css.map",
     "static/css/5.5439f468.chunk.css.map": "/network-learning-project-typescript/static/css/5.5439f468.chunk.css.map",
-    "static/css/main.898dfbff.chunk.css.map": "/network-learning-project-typescript/static/css/main.898dfbff.chunk.css.map",
+    "static/css/main.8a5d800c.chunk.css.map": "/network-learning-project-typescript/static/css/main.8a5d800c.chunk.css.map",
     "static/js/0.797449f6.chunk.js.LICENSE.txt": "/network-learning-project-typescript/static/js/0.797449f6.chunk.js.LICENSE.txt",
     "static/js/3.7a929924.chunk.js.LICENSE.txt": "/network-learning-project-typescript/static/js/3.7a929924.chunk.js.LICENSE.txt",
     "static/media/index.css": "/network-learning-project-typescript/static/media/background-moon.ebef9ef6.jpeg",
@@ -30,7 +30,7 @@
   "entrypoints": [
     "static/js/runtime-main.accbe4cf.js",
     "static/js/3.7a929924.chunk.js",
-    "static/css/main.898dfbff.chunk.css",
-    "static/js/main.a10d3594.chunk.js"
+    "static/css/main.8a5d800c.chunk.css",
+    "static/js/main.22c2d030.chunk.js"
   ]
 }
