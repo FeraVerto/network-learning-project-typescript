@@ -10,17 +10,13 @@ import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 
 
-const Login = (props: any) => {
+const Login: React.FC<mapStateToPropsType & mapDispatchToPropsType> = (props) => {
     const onSubmit = (formData: FormDataType) => {
-        let email = formData.email
-        let password = formData.password
-        let rememberMe = formData.rememberMe
-        let captcha = formData.captcha
-        props.loginTC(email, password, rememberMe, captcha)
+        props.loginTC(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if (props.isAuth) {
-        <Redirect to={"/profile"}/>
+        return <Redirect to={"/profile"}/>
     }
 
     return (
@@ -56,7 +52,7 @@ export type FormDataType = {
     captcha?: boolean
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}: any) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
 
     return (
         <form onSubmit={handleSubmit}>

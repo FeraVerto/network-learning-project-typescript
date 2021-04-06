@@ -5,7 +5,8 @@ import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
-import {PhotosType, PostType} from "../../../types/types";
+import {PostType} from "../../../types/types";
+import {Button} from "../../common/Button/Button";
 
 
 export type MyPostsType = {
@@ -15,7 +16,7 @@ export type MyPostsType = {
     photo?: string
 }
 
-const maxLength10 = maxLengthCreator(10)
+const maxLength40 = maxLengthCreator(40)
 
 const MyPosts = React.memo(({posts, addPostAC, isAuth, photo}: MyPostsType) => {
     let newPosts = posts.map(p => <MyPost key={p.id} id={p.id} message={p.message} like={p.like} photo={photo}/>)
@@ -50,10 +51,10 @@ export const PostsForm: React.FC<InjectedFormProps<PostsFormType>> = (props) => 
                     name={"newPostText"}
                     placeholder={"Empty"}
                     className={s.posts_textarea}
-                    //validate={[requiredField, maxLength10]}
+                    validate={[requiredField, maxLength40]}
                 />
                 <div className={s.button_block}>
-                    <button className={s.posts_button}>Add post</button>
+                    <Button style={s.button_size}>Add post</Button>
                 </div>
             </div>
         </form>

@@ -112,11 +112,11 @@ export const getUserPhoto = (userId: string) => (dispatch: Dispatch) => {
 //server request, dispatch action creator
 export const loginTC = (email: string, password: string, rememberMe: boolean, captcha?: boolean): ThunkType =>
     async (dispatch) => {
-        let response = await authAPI.login(email, password, rememberMe, captcha)
-        if (response.data.resultCode === 0) {
+        let data = await authAPI.login(email, password, rememberMe, captcha)
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(getUserAuthData() as any)
         } else {
-            let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+            let message = data.messages.length > 0 ? data.messages[0] : "Some error"
             //@ts-ignore
             dispatch(stopSubmit("login", {_error: message}))
         }
@@ -127,8 +127,8 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
 //dispatch
 //server request, dispatch action creator
 export const logoutTC = (): ThunkType => async (dispatch) => {
-    let response = await authAPI.logout()
-    if (response.data.resultCode === 0) {
+    let data = await authAPI.logout()
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(setUserData(null, null, null, false))
     }
 }

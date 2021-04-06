@@ -3,7 +3,7 @@ import {addPostAC} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {PhotosType, PostType} from "../../../types/types";
+import {PostType} from "../../../types/types";
 
 type mapStateToPropsType = {
     posts: Array<PostType>

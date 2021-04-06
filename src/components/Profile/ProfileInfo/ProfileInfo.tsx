@@ -4,9 +4,10 @@ import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from "./../../../assets/image/ufo-2.png"
 import {ProfileStatusWithHook} from "./ProfileInfoStatus/ProfileStatusWithHook";
 import {NavLink} from "react-router-dom";
-import {ProfileInfoFormRedux} from "../ProfileInfoForm/ProfileInfoForm";
 import {ProfileInfoDescription} from "./ProfileInfoDescription/ProfileInfoDescription";
 import {ProfileType} from "../../../types/types";
+import {Button} from "../../common/Button/Button";
+import m from "./../../common/Button/Button.module.sass"
 
 export type ProfileInfoType = {
     profile: ProfileType
@@ -72,8 +73,9 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
                                 <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
                             </div>
                             <div className={s.button_block}>
-                                <button className={s.button}><NavLink to={"/messages"}>Dialog</NavLink></button>
-                                <button className={s.button}>Follow</button>
+                                <NavLink className={m.button + " " + s.button_block_dialogs}
+                                         to={"/messages"}>Dialog</NavLink>
+                                <Button>Follow</Button>
                             </div>
                         </div>
 

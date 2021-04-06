@@ -1,32 +1,35 @@
 import React from 'react'
 import s from './FormsControls.module.css'
+import {WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 
+type FormControlPropsType = {
+    meta: WrappedFieldMetaProps
+}
 
-export const FormControl = ({input, meta: {error, touched}, child, el, children, ...props}: any) => {
+export const FormControl: React.FC<FormControlPropsType> = ({meta: {error, touched}, children, ...props}) => {
     const hasError = error && touched
     return (
         <div className={s.formControl + " " + (hasError ? s.error : "")}>
             <div>
                 {children}
-                {/*{React.createElement(el, {...input, ...props})}*/}
             </div>
             {hasError && <span>{error}</span>}
         </div>
     )
 }
 
-export const Textarea = (props: any) => {
-    const {input, meta, child, ...restProps} = props
+export const Textarea: React.FC<WrappedFieldProps> = (props) => {
+    const {input, meta, children, ...restProps} = props
     return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
 }
 
-export const Input = (props: any) => {
-    const {input, meta, child, ...restProps} = props
+export const Input: React.FC<WrappedFieldProps> = (props) => {
+    const {input, meta, children, ...restProps} = props
     return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }
 
-export const Checkbox = (props: any) => {
-    const {checkbox, meta, child, ...restProps} = props
-    return <FormControl {...props}><input {...checkbox} {...restProps}/></FormControl>
+export const Checkbox: React.FC<WrappedFieldProps> = (props) => {
+    const {input, meta, children, ...restProps} = props
+    return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }
 
