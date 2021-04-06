@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {loginTC} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
+import {Button} from "../common/Button/Button";
 
 
 const Login: React.FC<mapStateToPropsType & mapDispatchToPropsType> = (props) => {
@@ -20,7 +21,7 @@ const Login: React.FC<mapStateToPropsType & mapDispatchToPropsType> = (props) =>
     }
 
     return (
-        <div>
+        <div className={s.login}>
             <h1 className={s.h1}>Login</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
@@ -55,26 +56,34 @@ export type FormDataType = {
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={s.form} onSubmit={handleSubmit}>
             <div><Field component={Input}
                         placeholder={"Login"}
                         name={"email"}
-                        validate={[requiredField]}/>
+                        validate={[requiredField]}
+                        className={s.item}
+            />
+
             </div>
             <div><Field component={Input}
                         placeholder={"Password"}
                         name={"password"}
                         validate={[requiredField]}
-                        type={"password"}/>
+                        type={"password"}
+                        className={s.item}
+            />
             </div>
+
             <div><Field component={Input}
                         type={"checkbox"}
-                        name={"rememberMe"}/>
+                        name={"rememberMe"}
+                        className={s.item}
+            />
                 remember me
             </div>
             {error && <div className={s.formSummaryError}>{error}</div>}
             <div>
-                <button>Login</button>
+                <Button style={s.button_login}>Login</Button>
             </div>
         </form>
     )
