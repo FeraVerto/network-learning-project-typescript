@@ -3,7 +3,6 @@ import s from "./Messages.module.sass";
 import {NavLink} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormsControls/FormsControls";
-import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 import {MessageType} from "../../../redux/message-reducer";
 import {Button} from "../../common/Button/Button";
 
@@ -11,8 +10,6 @@ type MessagesType = {
     messages: Array<MessageType>
     addMessage: (newMessageText: string) => void
 }
-
-const maxLength50 = maxLengthCreator(50)
 
 const Messages: React.FC<MessagesType> = ({messages, addMessage}) => {
 
@@ -38,7 +35,7 @@ const Messages: React.FC<MessagesType> = ({messages, addMessage}) => {
         <div className={s.dialog_window}>
             <div className={s.dialog_header}>
                 <NavLink to="/dialogs">
-                    {/*<Button variant="contained" color="default">Exit</Button>*/}
+                    <NavLink className={s.button} to={"/dialogs"}>Exit</NavLink>
 
                 </NavLink>
                 <div>Avatar + name</div>
@@ -67,7 +64,6 @@ export const MessagesForm: React.FC<InjectedFormProps<MessagesPropsFormType>> = 
                     className={s.dialog_footer_textarea}
                 />
                 <Button style={s.button_message}>Send</Button>
-                {/*<button className={s.button}>Send</button>*/}
             </div>
         </form>
     )
