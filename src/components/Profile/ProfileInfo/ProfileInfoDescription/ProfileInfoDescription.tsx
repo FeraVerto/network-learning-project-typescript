@@ -1,6 +1,6 @@
 import s from './ProfileInfoDescription.module.sass'
 import React from "react";
-import {ProfilePageType, ProfileType} from "../../../../types/types";
+import {ProfileType} from "../../../../types/types";
 
 type ProfileInfoDescriptionType = {
     profile: ProfileType
@@ -44,7 +44,7 @@ export const ProfileInfoDescription: React.FC<ProfileInfoDescriptionType> = (
                 {
                     props.profile.lookingForAJob &&
                     <li className={s.item}>
-                        <span>lookingForAJob:</span>
+                        <span>looking For A Job:</span>
                         {props.profile.lookingForAJob}
                     </li>
                 }
@@ -52,7 +52,7 @@ export const ProfileInfoDescription: React.FC<ProfileInfoDescriptionType> = (
                 {
                     props.profile.aboutMe &&
                     <li className={s.item}>
-                        <span>AboutMe:</span>
+                        <span>About   Me:</span>
                         {props.profile.aboutMe}
                     </li>
                 }

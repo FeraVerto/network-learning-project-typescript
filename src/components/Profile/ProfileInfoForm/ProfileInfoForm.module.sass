@@ -1,8 +1,41 @@
+.form
+  //height: calc(100vh - 150px)
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  .form_block
+    margin-bottom: 30px
+    display: flex
+    justify-content: space-between
+
+    .form_block_info,
+    .form_block_contacts
+      min-width: 45%
+
+      .item_form_aboutMe
+        height: 300px
+
+      .item_form_job
+        align-self: flex-start
+
+
 .item_form
+  font-weight: bold
   color: white
+  text-transform: uppercase
+
+.item
+  margin-top: 10px
+  width: 100%
+  height: 40px
+  box-sizing: border-box
 
 .info_contacts
   color: white
+
+.item_contact
+  width: 100%
 
 .formSummaryError
   color: red

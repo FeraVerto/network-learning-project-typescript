@@ -3,10 +3,12 @@ import {Input, Textarea} from "../../common/FormsControls/FormsControls";
 import React from "react";
 import s from './ProfileInfoForm.module.sass'
 import avatar from "../../../assets/image/ufo-2.png";
+import {ProfileType} from "../../../types/types";
+import {Button} from "../../common/Button/Button";
 
 
 type ProfileInfoFormType = {
-    profile: any
+    profile: ProfileType
     isOwner: boolean
     savePhoto?: (photo: string) => void
     refreshProfile: () => void
@@ -22,60 +24,71 @@ export const ProfileInfoForm = ({profile, isOwner, handleSubmit, savePhoto, erro
     }
 
     return (
-        <div>
-            <div className={s.avatar}><img src={profile.photos.large || avatar}
+        <>
+            {/*<div className={s.avatar}><img src={profile.photos.large || avatar}
                                            alt="user avatar"
                                            width="180"
                                            height="180"/></div>
-            <input type="file" onChange={onMainPhotoSelected}/>
+            <input type="file" onChange={onMainPhotoSelected}/>*/}
 
-            <form onSubmit={handleSubmit}>
-                <span className={s.item_form}> fullName:
-                    <Field component={Input}
-                           name={"fullName"}
-                           placeholder={"Full name"}
-                    />
-                </span>
+            <form className={s.form} onSubmit={handleSubmit}>
+                <div className={s.form_block}>
+                    <div className={s.form_block_info}>
+                        <div className={s.item_form}> full Name:
+                            <Field component={Input}
+                                   name={"fullName"}
+                                   placeholder={"Full name"}
+                                   className={`${s.item_form_fullName} ${s.item}`}
+                            />
+                        </div>
 
-                <div className={s.item_form}> lookingForAJobDescription:
-                    <Field component={Input}
-                           name={"lookingForAJobDescription"}
-                           placeholder={"Empty"}
-                    />
+                        <div className={s.item_form}> looking For A Job Description:
+                            <Field component={Input}
+                                   name={"lookingForAJobDescription"}
+                                   placeholder={"Empty"}
+                                   className={`${s.item_form_description} ${s.item}`}
+                            />
+                        </div>
+
+                        <div className={s.item_form}> About Me:
+                            <Field component={Textarea}
+                                   name={"aboutMe"}
+                                   placeholder={"Empty"}
+                                   className={`${s.item_form_aboutMe} ${s.item}`}
+                            />
+                        </div>
+
+                        <div className={s.item_form}> looking For A Job:
+                            <Field component={Input}
+                                   name={"lookingForAJob"}
+                                   placeholder={"Empty"}
+                                   type={"checkbox"}
+                                   className={`${s.item_form_job} ${s.item}`}
+                            />
+                        </div>
+                    </div>
+
+                    <div className={s.form_block_contacts}>
+                        <div className={s.item_form}>
+                            {
+                                Object.keys(profile.contacts).map(c => <div>{c}<Field key={c}
+                                                                                      component={Input}
+                                                                                      name={"contacts." + c}
+                                                                                      placeholder={"Empty"}
+                                                                                      className={s.item}
+
+                                /></div>)
+                            }
+                        </div>
+                    </div>
+
+
                 </div>
-
-                <div className={s.item_form}> lookingForAJob:
-                    <Field component={Input}
-                           name={"lookingForAJob"}
-                           placeholder={"Empty"}
-                           type={"checkbox"}
-                    />
-                </div>
-
-                <div className={s.item_form}> AboutMe:
-                    <Field component={Textarea}
-                           name={"aboutMe"}
-                           placeholder={"Empty"}
-                    />
-                </div>
-
-
-                <div className={s.info_contacts}>contacts:
-                    {
-                        Object.keys(profile.contacts).map(c => <div>{c}<Field key={c}
-                                                                              component={Input}
-                                                                              name={"contacts." + c}
-                                                                              placeholder={"Empty"}
-
-                        /></div>)
-                    }
-                </div>
-
+                <Button>Save</Button>
                 {error && <div className={s.formSummaryError}>{error}</div>}
 
-                <button>Save</button>
             </form>
-        </div>
+        </>
 
     )
 }

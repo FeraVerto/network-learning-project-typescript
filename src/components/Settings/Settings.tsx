@@ -6,6 +6,8 @@ import {getUserProfile, updateProfile} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
+import {Button} from "../common/Button/Button";
+import s from "./Settings.module.sass"
 
 
 type PathParamsType = {
@@ -42,25 +44,29 @@ export const Settings: React.FC<any> = withRouter(({savePhoto, match, history}) 
         }
 
         return (
-            <div>
+            <div className={s.settings}>
                 {
                     editMode
-                        /*//@ts-ignore*/
-                        ? <div><ProfileInfoFormRedux initialValues={profileState}
-                                                     isOwner={match.params.userId}
-                                                     profile={profileState}
-                            //@ts-ignore
-                                                     onSubmit={submitProfileInfoReduxForm}
-                                                     savePhoto={savePhoto}
-                                                     setEditMode={setEditMode}
-                                                     editMode={editMode}
-                        />
+                        ? <div className={s.settings_form}>
+                            {/*//@ts-ignore*/}
+                            <ProfileInfoFormRedux initialValues={profileState}
+                                                  isOwner={match.params.userId}
+                                                  profile={profileState}
+                                //@ts-ignore
+                                                  onSubmit={submitProfileInfoReduxForm}
+                                                  savePhoto={savePhoto}
+                                                  setEditMode={setEditMode}
+                                                  editMode={editMode}
+                            />
 
                         </div>
-                        : <div>
-                            <ProfileInfoDescription profile={profileState}/>
+                        : <div className={s.settings_info}>
+                            <div className={s.settings_info_description}>
+                                <ProfileInfoDescription profile={profileState}/>
+                            </div>
+
                             {/*{isOwner && <button onClick={() => setEditMode(!editMode)}>Edit</button>}*/}
-                            <button onClick={() => setEditMode(!editMode)}>Edit</button>
+                            <Button style={s.button_width} onClick={() => setEditMode(!editMode)}>Edit</Button>
                         </div>
                 }
             </div>
