@@ -1,5 +1,4 @@
-import {authType} from "./redux-store";
-import {authReducer, SET_USER_DATA, SET_USER_PHOTO} from "./auth-reducer";
+import {authReducer, authType, SET_USER_DATA, SET_USER_PHOTO} from "./auth-reducer";
 
 let state: authType;
 

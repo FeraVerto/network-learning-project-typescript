@@ -11,7 +11,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {
     getCurrentPage, getFollowingInProgress,
     getIsFetching,
-    getPageSize,
+    getPageSize, getSearchOption,
     getTotalUsersCount,
     getUsersSelector
 } from "../../redux/users-selectors";
@@ -36,7 +36,7 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
-    getUsers: (currentPage: number | string, pageSize: number, term?: string) => void
+    getUsers: (currentPage: number | string, pageSize: number, term?: string, friends?: boolean) => void
 }
 
 type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -53,12 +53,13 @@ class UsersContainer extends React.Component<ContainerType> {
     onPageChanged = (pageNumber: number) => {
         //запрашиваем юзеров
         let {pageSize} = this.props
-        this.props.getUsers(pageNumber, pageSize)
+        this.props.getUsers(pageNumber, pageSize, this.props.searchOption)
     }
 
     onSearch = (term: {term: string}) => {
         this.props.getUsers(1, this.props.pageSize, term.term)
     }
+
 
     render = () =>
         <>
@@ -86,7 +87,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
-        searchOption: state.usersPage.searchOption
+        searchOption: getSearchOption(state)
     }
 }
 

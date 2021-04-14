@@ -14,6 +14,7 @@ import {Preloader} from "./components/common/Preloader/Preloader";
 import {withSuspense} from "./hoc/withSuspense";
 import {Settings} from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
+import {Friends} from "./components/Friends/Friends";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -42,44 +43,42 @@ export class App extends React.Component<AppContainerType> {
 
     render() {
 
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
-
-        return (
-
-            <div className='app-wrapper'>
-                <header className="header">
-                    <HeaderContainer/>
-                </header>
-                <div className="app-wrapper-content">
-                    <main className="content">
-                        <div className="">
-                            <Navbar/>
-                        </div>
-                        <Suspense fallback={<Preloader/>}>
-                            <div className="main_content">
-                                <div className="main">
-                                    <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
-                                    <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
-                                    <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
-                                    <Route path="/messages" render={() => <MessagesContainer/>}/>
-                                    <Route path="/users" render={() => <UsersContainer/>}/>
-                                    <Route path="/settings" render={() => <Settings/>}/>
-                                    <Route path="/login" component={() => <Login/>}/>
-                                    <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
-                                </div>
+        return !this.props.initialized
+            ? <Preloader/>
+            : (
+                <div className='app-wrapper'>
+                    <header className="header">
+                        <HeaderContainer/>
+                    </header>
+                    <div className="app-wrapper-content">
+                        <main className="content">
+                            <div className="">
+                                <Navbar/>
                             </div>
-                        </Suspense>
+                            <Suspense fallback={<Preloader/>}>
+                                <div className="main_content">
+                                    <div className="main">
+                                        <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
+                                        <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
+                                        <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
+                                        <Route path="/friends" component={() => <Friends/>}/>
+                                        <Route path="/messages" render={() => <MessagesContainer/>}/>
+                                        <Route path="/users" render={() => <UsersContainer/>}/>
+                                        <Route path="/settings" render={() => <Settings/>}/>
+                                        <Route path="/login" component={() => <Login/>}/>
+                                        <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
+                                    </div>
+                                </div>
+                            </Suspense>
 
-                        <div className="main_content_friends">
-                            <FriendsContainer/>
-                        </div>
-                    </main>
+                            <div className="main_content_friends">
+                                <FriendsContainer/>
+                            </div>
+                        </main>
+                    </div>
                 </div>
-            </div>
 
-        );
+            );
     }
 }
 

@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
                 {/*NavLink - не перезагружая страницу, меняем адресную строку*/}
                 <MenuItem to={"/profile"} item={"Profile"}/>
                 <MenuItem to={"/dialogs"} item={"Dialogs"}/>
+                <MenuItem to={"/friends"} item={"Friends"}/>
                 <MenuItem to={"/settings"} item={"Settings"}/>
                 <MenuItem to={"/users"} item={"Users"}/>
             </ul>

@@ -1,7 +1,9 @@
 import React from "react";
 import {useFormik} from "formik";
+import s from './UserSearch.module.sass'
+import {Button} from "../../common/Button/Button";
 
-export const Search = (props: any) => {
+export const UserSearch = (props: any) => {
 
     const formik = useFormik({
         initialValues: {
@@ -13,13 +15,17 @@ export const Search = (props: any) => {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className={s.search_form}>
             <input id="term"
                    name="term"
                    type="text"
                    onChange={formik.handleChange}
-                   value={formik.values.term}/>
-            <button>Search</button>
+                   value={formik.values.term}
+                   className={s.search_input}
+            />
+            {/*<button className={s.search_button}>Search</button>*/}
+            <Button style={s.search_button}>Search</Button>
+
         </form>
     )
 }

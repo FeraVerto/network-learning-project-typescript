@@ -49,7 +49,7 @@ export const SET_FILTER = "samurai-network/users/SET_FILTER"
 
 export const initialState = {
     users: [] as Array<UserType>,
-    pageSize: 50,
+    pageSize: 20,
     totalUsersCount: 0,
     currentPage: 2 as number | string,
     isFetching: false,
@@ -179,12 +179,13 @@ export const setFiler = (term? : string) => ({
 //return function
 //Dispatch<ActionType>, getState: () => AppStateType
 //server request getUsers, dispatch action creator
-export const requestUsers = (page: number | string, pageSize: number, term?: string): ThunkType =>
+export const requestUsers = (page: number | string, pageSize: number, term?: string, friends?: boolean): ThunkType =>
     async (dispatch, getState) => {
         dispatch(setToggleIsFetching(true))
         dispatch(setCurrentPage(page))
         dispatch(setFiler(term))
         let data = await usersAPI.getUsers(page, pageSize, term)
+        console.log("requestUsers", data)
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
         dispatch(setToggleIsFetching(false))

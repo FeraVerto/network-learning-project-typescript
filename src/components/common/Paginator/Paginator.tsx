@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import s from "../Paginator/Paginator.module.sass"
+import {Button} from "../Button/Button";
 
 let classNames = require('classnames')
 
@@ -43,9 +44,9 @@ export const Paginator: React.FC<PropsType> = (
 
             {
                 portionNumber > 1 &&
-                <button onClick={() => {
+                <Button onClick={() => {
                     setPortionNumber(portionNumber - 1)
-                }}>PREV</button>
+                }}>PREV</Button>
             }
 
             {pages
@@ -53,22 +54,22 @@ export const Paginator: React.FC<PropsType> = (
                 .map((p) => {
                     return (
                         <div className={s.number}>
-                            <span className={classNames({
+                            <button className={classNames({
                                 [s.selectPage]: currentPage === p
                             }, s.pageNumber)}
                                   key={p}
                                   onClick={() => {
                                       onPageChanged(p);
-                                  }}>{p}</span>
+                                  }}>{p}</button>
                         </div>
                     )
                 })}
 
             {
                 portionCount > portionNumber &&
-                <button onClick={() => {
+                <Button onClick={() => {
                     setPortionNumber(portionNumber + 1)
-                }}>NEXT</button>}
+                }}>NEXT</Button>}
 
         </div>
     )
