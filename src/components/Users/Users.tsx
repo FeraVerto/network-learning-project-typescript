@@ -3,6 +3,7 @@ import s from "./Users.module.sass"
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User/User";
 import {UserType} from "../../types/types";
+import {Search} from "./Search/UserSearch";
 
 type PropsType = {
     users: Array<UserType>
@@ -13,6 +14,8 @@ type PropsType = {
     currentPage: number | string
     onPageChanged: (pageNumber: number) => void
     followingInProgress: Array<number>
+    onSearch: (term: {term: string}) => void
+    search?: string
 }
 
 export const Users: React.FC<PropsType> = (
@@ -24,12 +27,13 @@ export const Users: React.FC<PropsType> = (
         onPageChanged,
         followingInProgress,
         unfollow,
-        follow
+        follow,
+        onSearch
     }) => {
 
     return (
         <div className={s.users}>
-
+            <Search onSearch={onSearch}/>
             <Paginator currentPage={currentPage}
                        onPageChanged={onPageChanged}
                        totalItemsCount={totalUsersCount}

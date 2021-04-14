@@ -22,6 +22,7 @@ export type setCurrentPageACType = ReturnType<typeof setCurrentPage>
 export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
 export type toggleIsFetchingACType = ReturnType<typeof setToggleIsFetching>
 export type toggleFollowingProgressACType = ReturnType<typeof toggleFollowingProgress>
+export type setFilerType = ReturnType<typeof setFiler>
 
 export type ActionType =
     followACType
@@ -31,6 +32,7 @@ export type ActionType =
     | setTotalUsersCountACType
     | toggleIsFetchingACType
     | toggleFollowingProgressACType
+    | setFilerType
 
 type initialStateType = typeof initialState
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
@@ -43,6 +45,7 @@ export const SET_CURRENT_PAGE = "samurai-network/users/SET_CURRENT_PAGE"
 export const SET_TOTAL_USERS_COUNT = "samurai-network/users/SET_TOTAL_USERS_COUNT"
 export const TOGGLE_IS_FETCHING = "samurai-network/users/TOGGLE_IS_FETCHING"
 export const TOGGLE_FOLLOWING_PROGRESS = "samurai-network/users/TOGGLE_FOLLOWING_PROGRESS"
+export const SET_FILTER = "samurai-network/users/SET_FILTER"
 
 export const initialState = {
     users: [] as Array<UserType>,
@@ -50,7 +53,8 @@ export const initialState = {
     totalUsersCount: 0,
     currentPage: 2 as number | string,
     isFetching: false,
-    followingInProgress: [] as Array<number> // array of users id
+    followingInProgress: [] as Array<number>, // array of users id
+    searchOption: '' as string | undefined
 }
 
 export const usersReducer = (state = initialState, action: ActionType): initialStateType => {
@@ -97,6 +101,12 @@ export const usersReducer = (state = initialState, action: ActionType): initialS
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
                     : [...state.followingInProgress.filter(id => id !== action.userId)]
+            }
+
+        case SET_FILTER:
+            return {
+                ...state,
+                searchOption: action.term
             }
         default:
             return state
@@ -160,15 +170,21 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     userId
 } as const)
 
+export const setFiler = (term? : string) => ({
+    type: SET_FILTER,
+    term
+} as const)
+
 //page: number | string, pageSize: number
 //return function
 //Dispatch<ActionType>, getState: () => AppStateType
 //server request getUsers, dispatch action creator
-export const requestUsers = (page: number | string, pageSize: number): ThunkType =>
+export const requestUsers = (page: number | string, pageSize: number, term?: string): ThunkType =>
     async (dispatch, getState) => {
         dispatch(setToggleIsFetching(true))
         dispatch(setCurrentPage(page))
-        let data = await usersAPI.getUsers(page, pageSize)
+        dispatch(setFiler(term))
+        let data = await usersAPI.getUsers(page, pageSize, term)
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
         dispatch(setToggleIsFetching(false))

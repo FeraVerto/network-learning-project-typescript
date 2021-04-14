@@ -2,8 +2,6 @@ import React, {Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Redirect, Route} from "react-router-dom";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
 import {MessagesContainer} from "./components/Dialogs/Messages/MessagesContainer";
 import {FriendsContainer} from "./components/Navbar/Friends/FriendsContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -66,8 +64,6 @@ export class App extends React.Component<AppContainerType> {
                                     <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
                                     <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
                                     <Route path="/messages" render={() => <MessagesContainer/>}/>
-                                    <Route path="/news" render={() => <News/>}/>
-                                    <Route path="/music" render={() => <Music/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
                                     <Route path="/settings" render={() => <Settings/>}/>
                                     <Route path="/login" component={() => <Login/>}/>

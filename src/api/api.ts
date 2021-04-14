@@ -32,8 +32,8 @@ type followUnfollowType = {
 //typing
 
 export const usersAPI = {
-    getUsers(currentPage: string | number, pageSize: number) {
-        return instance.get<getUsersType>(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
+    getUsers(currentPage: string | number = 1, pageSize: number = 12, term?: string) {
+        return instance.get<getUsersType>(`users?page=${currentPage}&count=${pageSize}&term=${term}`).then(response => response.data)
     },
 
     getUsersPage(pageNumber: string | number, pageSize: number) {

@@ -30,12 +30,13 @@ type mapStateToPropsType = {
     pageSize: number
     isFetching: boolean
     followingInProgress: Array<number>
+    searchOption?: string
 }
 
 type mapDispatchToPropsType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
-    getUsers: (currentPage: number | string, pageSize: number) => void
+    getUsers: (currentPage: number | string, pageSize: number, term?: string) => void
 }
 
 type UsersContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -46,13 +47,17 @@ class UsersContainer extends React.Component<ContainerType> {
     componentDidMount() {
         //запрашиваем юзеров
         let {currentPage, pageSize} = this.props
-        this.props.getUsers(currentPage, pageSize)
+        this.props.getUsers(currentPage, pageSize, this.props.searchOption)
     }
 
     onPageChanged = (pageNumber: number) => {
         //запрашиваем юзеров
         let {pageSize} = this.props
         this.props.getUsers(pageNumber, pageSize)
+    }
+
+    onSearch = (term: {term: string}) => {
+        this.props.getUsers(1, this.props.pageSize, term.term)
     }
 
     render = () =>
@@ -67,6 +72,7 @@ class UsersContainer extends React.Component<ContainerType> {
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
                    followingInProgress={this.props.followingInProgress}
+                   onSearch={this.onSearch}
             />
         </>
 }
@@ -79,7 +85,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+        searchOption: state.usersPage.searchOption
     }
 }
 
