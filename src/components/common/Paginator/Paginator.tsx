@@ -43,7 +43,7 @@ export const Paginator: React.FC<PropsType> = (
         <div className={s.users_paginator}>
 
             {
-                portionNumber > 1 &&
+                portionCount > 1 &&
                 <Button onClick={() => {
                     setPortionNumber(portionNumber - 1)
                 }}>PREV</Button>

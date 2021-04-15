@@ -4,7 +4,6 @@ import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User/User";
 import {UserType} from "../../types/types";
 import {UserSearch} from "./Search/UserSearch";
-import {Preloader} from "../common/Preloader/Preloader";
 
 type PropsType = {
     users: Array<UserType>
