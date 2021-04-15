@@ -33,27 +33,25 @@ export const Users: React.FC<PropsType> = (
     }) => {
 
 
-    return !users
-        ? <Preloader/>
-        : (
-            <div className={s.users}>
-                <UserSearch onSearch={onSearch}/>
+    return (
+        <div className={s.users}>
+            <UserSearch onSearch={onSearch}/>
 
-                <div className={s.users_list}>
-                    {
-                        users.map(u => <User user={u} key={u.id}
-                                             followingInProgress={followingInProgress}
-                                             unfollow={unfollow}
-                                             follow={follow}/>)
-                    }
-
-                </div>
-
-                <Paginator currentPage={currentPage}
-                           onPageChanged={onPageChanged}
-                           totalItemsCount={totalUsersCount}
-                           pageSize={pageSize}/>
+            <div className={s.users_list}>
+                {
+                    users.map(u => <User user={u} key={u.id}
+                                         followingInProgress={followingInProgress}
+                                         unfollow={unfollow}
+                                         follow={follow}/>)
+                }
 
             </div>
-        )
+
+            <Paginator currentPage={currentPage}
+                       onPageChanged={onPageChanged}
+                       totalItemsCount={totalUsersCount}
+                       pageSize={pageSize}/>
+
+        </div>
+    )
 }

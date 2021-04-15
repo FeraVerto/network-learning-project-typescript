@@ -23,9 +23,7 @@ export const UserSearch = (props: any) => {
                    value={formik.values.term}
                    className={s.search_input}
             />
-            {/*<button className={s.search_button}>Search</button>*/}
             <Button style={s.search_button}>Search</Button>
-
         </form>
     )
 }
