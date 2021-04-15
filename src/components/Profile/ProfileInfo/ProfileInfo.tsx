@@ -46,20 +46,6 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
         <div>
 
             {
-                /*editMode
-                    //@ts-ignore
-                    ? <div><ProfileInfoFormRedux initialValues={profile}
-                                                 profile={profile}
-                                                 //@ts-ignore
-                                                 onSubmit={submitProfileInfoReduxForm}
-                                                 isOwner={isOwner}
-                                                 savePhoto={savePhoto}
-                                                 setEditMode={setEditMode}
-                                                 editMode={editMode}
-
-                    />
-
-                    </div>:*/
                 <div className={s.profile}>
                     <div className={s.profile_info}>
                         <div>
@@ -67,7 +53,6 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
                                                            alt="user avatar"
                                                            width="300"
                                                            height="300"/></div>
-                            {/*{isOwner && <input type="file" onChange={onMainPhotoSelected}/>}*/}
 
                             <div>
                                 <ProfileStatusWithHook status={status} updateStatus={updateStatus}/>
@@ -83,8 +68,6 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (
                         <ProfileInfoDescription profile={profile} contact={profile.contacts}/>
 
                     </div>
-                    {/*{isOwner && <button onClick={() => setEditMode(!editMode)}>Edit</button>}*/}
-
                 </div>
 
             }
