@@ -5,13 +5,13 @@
     "main.css": "/network-learning-project-typescript/static/css/main.f244cece.chunk.css",
     "main.js": "/network-learning-project-typescript/static/js/main.3ee1c1c9.chunk.js",
     "main.js.map": "/network-learning-project-typescript/static/js/main.3ee1c1c9.chunk.js.map",
-    "runtime-main.js": "/network-learning-project-typescript/static/js/runtime-main.a9b884bd.js",
-    "runtime-main.js.map": "/network-learning-project-typescript/static/js/runtime-main.a9b884bd.js.map",
+    "runtime-main.js": "/network-learning-project-typescript/static/js/runtime-main.02e91732.js",
+    "runtime-main.js.map": "/network-learning-project-typescript/static/js/runtime-main.02e91732.js.map",
     "static/js/3.9739cc82.chunk.js": "/network-learning-project-typescript/static/js/3.9739cc82.chunk.js",
     "static/js/3.9739cc82.chunk.js.map": "/network-learning-project-typescript/static/js/3.9739cc82.chunk.js.map",
     "static/css/4.6e1f2f8c.chunk.css": "/network-learning-project-typescript/static/css/4.6e1f2f8c.chunk.css",
-    "static/js/4.6e053306.chunk.js": "/network-learning-project-typescript/static/js/4.6e053306.chunk.js",
-    "static/js/4.6e053306.chunk.js.map": "/network-learning-project-typescript/static/js/4.6e053306.chunk.js.map",
+    "static/js/4.f837990a.chunk.js": "/network-learning-project-typescript/static/js/4.f837990a.chunk.js",
+    "static/js/4.f837990a.chunk.js.map": "/network-learning-project-typescript/static/js/4.f837990a.chunk.js.map",
     "static/css/5.5439f468.chunk.css": "/network-learning-project-typescript/static/css/5.5439f468.chunk.css",
     "static/js/5.207fe0a2.chunk.js": "/network-learning-project-typescript/static/js/5.207fe0a2.chunk.js",
     "static/js/5.207fe0a2.chunk.js.map": "/network-learning-project-typescript/static/js/5.207fe0a2.chunk.js.map",
@@ -28,7 +28,7 @@
     "static/media/ufo-2.png": "/network-learning-project-typescript/static/media/ufo-2.3c1ecb26.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.a9b884bd.js",
+    "static/js/runtime-main.02e91732.js",
     "static/js/3.9739cc82.chunk.js",
     "static/css/main.f244cece.chunk.css",
     "static/js/main.3ee1c1c9.chunk.js"
