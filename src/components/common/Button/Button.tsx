@@ -6,12 +6,17 @@ type ButtonType = {
     children?: string
     onChange?: () => void
     onClick?: () => void
+    disabled?: boolean
 }
 
-export const Button: React.FC<ButtonType> = ({style, children, onChange, onClick, ...restProps}) => {
-    console.log("Button", style)
+export const Button: React.FC<ButtonType> = ({disabled,style, children, onChange, onClick, ...restProps}) => {
     return (
-        <button className={s.button + " " + style} onChange={onChange} onClick={onClick} {...restProps}>
+        <button className={s.button + " " + style}
+                onChange={onChange}
+                onClick={onClick}
+                disabled={disabled}
+                {...restProps}
+        >
             {children}
         </button>
     )

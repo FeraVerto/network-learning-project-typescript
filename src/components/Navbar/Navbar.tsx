@@ -13,6 +13,7 @@ const Navbar: React.FC = () => {
                 <MenuItem to={"/friends"} item={"Friends"}/>
                 <MenuItem to={"/settings"} item={"Settings"}/>
                 <MenuItem to={"/users"} item={"Users"}/>
+                <MenuItem to={"/chat"} item={"Chat"}/>
             </ul>
         </nav>
     )

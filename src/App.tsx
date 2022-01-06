@@ -18,6 +18,8 @@ import {Friends} from "./components/Friends/Friends";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'))
+const SuspendedChatPage = withSuspense(ChatPage);
 
 
 type AppContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -64,6 +66,7 @@ export class App extends React.Component<AppContainerType> {
                                         <Route path="/friends" component={() => <Friends/>}/>
                                         <Route path="/messages" render={() => <MessagesContainer/>}/>
                                         <Route path="/users" render={() => <UsersContainer/>}/>
+                                        <Route path="/chat" render={() => <SuspendedChatPage/>}/>
                                         <Route path="/settings" render={() => <Settings/>}/>
                                         <Route path="/login" component={() => <Login/>}/>
                                         <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
